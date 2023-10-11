@@ -36,6 +36,7 @@ final themeData = ThemeData(
     primary: AppColors.primary,
   ),
   fontFamily: 'Poppins',
+  visualDensity: VisualDensity.adaptivePlatformDensity,
 );
 
 final themeDataDark = ThemeData(
@@ -47,4 +48,5 @@ final themeDataDark = ThemeData(
     secondary: AppColors.primary,
   ),
   fontFamily: 'Poppins',
+  visualDensity: VisualDensity.adaptivePlatformDensity,
 );
