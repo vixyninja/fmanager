@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fmanager/controllers/controllers.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/core/theme/them.dart';
+import 'package:fmanager/core/theme/them_logic.dart';
 import 'package:fmanager/core/widgets/error_boundary/error_boundary.dart';
-import 'package:fmanager/routes/key.dart';
-import 'package:fmanager/routes/routes.dart';
 import 'package:get/get.dart';
 
 class App extends StatefulWidget {
@@ -15,7 +13,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final ThemeController themeController = Get.put(ThemeController());
+  final ThemeLogic themeController = Get.put(ThemeLogic());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

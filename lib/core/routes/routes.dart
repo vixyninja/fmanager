@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fmanager/routes/key.dart';
-import 'package:fmanager/views/auth/login/login.dart';
+import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/views/authentication/auth_view.dart';
 import 'package:fmanager/views/main/bottom.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +11,6 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
         settings: setting,
         routeName: RouteKeys.bottomNavigation,
         page: () => const BottomNavigation(),
-        binding: null,
       );
     case RouteKeys.loginScreen:
       return GetPageRoute(
@@ -19,7 +18,7 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
         routeName: RouteKeys.loginScreen,
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 300),
-        page: () => const LoginScreen(),
+        page: () => const AuthView(),
         title: 'Login',
       );
     default:
@@ -30,7 +29,6 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
             child: Text('Route not found: ${setting.name}'),
           ),
         ),
-        binding: null,
       );
   }
 };
