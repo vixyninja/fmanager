@@ -52,9 +52,6 @@ class _AppState extends State<App> {
       initialRoute: RouteKeys.loginScreen,
       transitionDuration: const Duration(milliseconds: 300),
       defaultTransition: Transition.fade,
-      locale: Languages.locale,
-      fallbackLocale: Languages.fallbackLocale,
-      translations: Languages(),
     );
   }
 
