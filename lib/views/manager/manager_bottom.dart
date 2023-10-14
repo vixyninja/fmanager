@@ -1,42 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fmanager/utils/asset_manager.dart';
-import 'package:fmanager/views/main/contact/contact/contact.dart';
-import 'package:fmanager/views/main/history/history/history.dart';
-import 'package:fmanager/views/main/home/home/home.dart';
-import 'package:fmanager/views/main/setting/setting/setting.dart';
+import 'package:fmanager/views/manager/function.dart';
 
-List<Map<String, dynamic>> _bottomNavigationItems = [
-  {
-    'icon': AssetManager.getIconPath(IconManager.bottomHomeIcon),
-    'label': 'Home',
-    'screen': const HomeScreen(),
-  },
-  {
-    'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),
-    'label': 'History',
-    'screen': const HistoryScreen(),
-  },
-  {
-    'icon': AssetManager.getIconPath(IconManager.bottomContactIcon),
-    'label': 'Contact',
-    'screen': const ContactScreen(),
-  },
-  {
-    'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),
-    'label': 'Setting',
-    'screen': const SettingScreen(),
-  },
-];
-
-class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+class ManagerBottomNavigation extends StatefulWidget {
+  const ManagerBottomNavigation({super.key});
 
   @override
-  State<BottomNavigation> createState() => _BottomNavigationState();
+  State<ManagerBottomNavigation> createState() => _ManagerBottomNavigationState();
 }
 
-class _BottomNavigationState extends State<BottomNavigation> {
+class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
   int _currentIndex = 0;
   late PageController _pageController;
 
@@ -75,7 +48,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          for (final screen in _bottomNavigationItems)
+          for (final screen in managerBottomNavigation)
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 screen['icon'] as String,
@@ -106,7 +79,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         pageSnapping: true,
         physics: const PageScrollPhysics(),
         clipBehavior: Clip.none,
-        children: _bottomNavigationItems.map((screen) => screen['screen'] as Widget).toList(),
+        children: managerBottomNavigation.map((screen) => screen['screen'] as Widget).toList(),
       ),
     );
   }

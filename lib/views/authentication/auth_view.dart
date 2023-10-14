@@ -18,26 +18,13 @@ class AuthView extends GetView<AuthLogic> {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () {
-                controller.signInWithGoogle();
+              onPressed: () async {
+                print('ASDASDASDASDAS ');
+
+                await controller.signInWithGoogle();
               },
               child: const Text('Sign In Google'),
             ),
-            GetBuilder<AuthLogic>(
-              builder: (controller) {
-                print(controller.isLogin.obs);
-                if (controller.isLogin) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      controller.signOutGoogle();
-                    },
-                    child: const Text('Sign Out Google'),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            )
           ],
         ),
       ),

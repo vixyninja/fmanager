@@ -1,5 +1,6 @@
 class RouteKeys {
-  static const String loginScreen = '/loginScreen';
+  static const String authScreen = '/authScreen';
 
-  static const String bottomNavigation = '/bottomNavigation';
+  static const String managerBottom = '/managerBottom';
+  static const String teacherBottom = '/teacherBottom';
 }

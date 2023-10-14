@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fmanager/core/app/binding.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/core/theme/them.dart';
 import 'package:fmanager/core/theme/them_logic.dart';
 import 'package:fmanager/core/widgets/error_boundary/error_boundary.dart';
+import 'package:fmanager/core/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class App extends StatefulWidget {
@@ -13,9 +15,12 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final ThemeLogic themeController = Get.put(ThemeLogic());
   @override
   Widget build(BuildContext context) {
+    AppBinding().dependencies();
+
+    final ThemeLogic themeController = Get.find<ThemeLogic>();
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FManager',
@@ -25,11 +30,7 @@ class _AppState extends State<App> {
           const MaterialScrollBehavior().copyWith(scrollbars: false, physics: const BouncingScrollPhysics()),
       themeMode: getThemeMode(themeController.theme),
       onUnknownRoute: (RouteSettings settings) => MaterialPageRoute<void>(
-        settings: settings,
-        builder: (BuildContext context) => Scaffold(
-          body: ErrorBoundary(errorMessage: 'Route not found: ${settings.name}'),
-        ),
-      ),
+          settings: settings, builder: (BuildContext context) => const Scaffold(body: ErrorBoundary())),
       builder: (BuildContext context, Widget? child) {
         Widget error = const Text('...rendering error...');
         if (widget is Scaffold || widget is BottomNavigationBar) {
@@ -46,12 +47,17 @@ class _AppState extends State<App> {
           }
           return ErrorBoundary(errorMessage: errorDetails.exception.toString());
         };
-        return child!;
+        return Stack(
+          children: [
+            child!,
+            const LoadingView(),
+          ],
+        );
       },
       onGenerateRoute: onGenerateRoute,
-      initialRoute: RouteKeys.loginScreen,
+      initialRoute: RouteKeys.authScreen,
       transitionDuration: const Duration(milliseconds: 300),
-      defaultTransition: Transition.fade,
+      defaultTransition: Transition.topLevel,
     );
   }
 

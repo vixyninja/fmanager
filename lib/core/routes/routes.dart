@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/core/widgets/error_boundary/error_boundary.dart';
 import 'package:fmanager/views/authentication/auth_view.dart';
-import 'package:fmanager/views/main/bottom.dart';
+import 'package:fmanager/views/manager/manager_bottom.dart';
+import 'package:fmanager/views/teacher/teacher_bottom.dart';
 import 'package:get/get.dart';
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings setting) {
   switch (setting.name) {
-    case RouteKeys.bottomNavigation:
+    case RouteKeys.teacherBottom:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.bottomNavigation,
-        page: () => const BottomNavigation(),
+        routeName: RouteKeys.teacherBottom,
+        page: () => const TeacherBottomNavigation(),
       );
-    case RouteKeys.loginScreen:
+    case RouteKeys.managerBottom:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.loginScreen,
-        transition: Transition.fadeIn,
-        transitionDuration: const Duration(milliseconds: 300),
+        routeName: RouteKeys.managerBottom,
+        page: () => const ManagerBottomNavigation(),
+      );
+    case RouteKeys.authScreen:
+      return GetPageRoute(
+        settings: setting,
+        routeName: RouteKeys.authScreen,
         page: () => const AuthView(),
-        title: 'Login',
       );
     default:
-      return GetPageRoute(
-        settings: setting,
-        page: () => Scaffold(
-          body: Center(
-            child: Text('Route not found: ${setting.name}'),
-          ),
-        ),
-      );
+      return GetPageRoute(settings: setting, page: () => const ErrorBoundary());
   }
 };

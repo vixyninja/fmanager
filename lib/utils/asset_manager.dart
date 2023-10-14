@@ -35,7 +35,6 @@ class FontManager {
 class IconManager {
   static const String bottomHomeIcon = 'bottom/ic_home.svg';
   static const String bottomHistoryIcon = 'bottom/ic_history.svg';
-  static const String bottomContactIcon = 'bottom/ic_contact.svg';
   static const String bottomSettingIcon = 'bottom/ic_setting.svg';
 }
 
