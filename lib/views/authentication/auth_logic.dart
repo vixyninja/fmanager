@@ -4,37 +4,28 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthLogic extends GetxController {
-  late final GoogleSignIn googleSignIn;
-  late final FirebaseAuth firebaseAuth;
-  RxBool isLogin = false.obs;
+  final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  late Rx<User?> user = Rx<User?>(null);
 
-  static const bool isTeacher = true;
+  // !! Change this to true if you want to test teacher screen
+  static const bool isTeacher = false;
 
-  @override
-  void onInit() {
-    super.onInit();
-    googleSignIn = GoogleSignIn(scopes: ['email']);
-    firebaseAuth = FirebaseAuth.instance;
-    ever(isLogin, (_) {
-      if (isLogin.value) {
-        switch (isTeacher) {
-          case true:
-            Get.offAllNamed(RouteKeys.teacherBottom);
-            break;
-          case false:
-            Get.offAllNamed(RouteKeys.managerBottom);
-            break;
+  setStateScreen() async {
+    try {
+      user.value = firebaseAuth.currentUser;
+      if (user.value != null) {
+        if (isTeacher) {
+          await Get.offAllNamed(RouteKeys.teacherBottom);
+        } else {
+          await Get.offAllNamed(RouteKeys.managerBottom);
         }
       } else {
-        Get.offAllNamed(RouteKeys.authScreen);
+        await Get.offAllNamed(RouteKeys.authScreen);
       }
-    });
-  }
-
-  @override
-  onReady() {
-    super.onReady();
-    isLogin.value = firebaseAuth.currentUser != null;
+    } catch (e) {
+      printError(info: e.toString());
+    }
   }
 
   Future<void> signInWithGoogle() async {
@@ -45,7 +36,11 @@ class AuthLogic extends GetxController {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      await firebaseAuth.signInWithCredential(credential);
+      await firebaseAuth.signInWithCredential(credential).then((value) async {
+        user.value = value.user;
+        await setStateScreen();
+        return value;
+      });
     } catch (e) {
       print(e.toString());
     }
@@ -54,7 +49,10 @@ class AuthLogic extends GetxController {
   Future<void> signOutGoogle() async {
     try {
       await googleSignIn.signOut();
-      await firebaseAuth.signOut();
+      await firebaseAuth.signOut().whenComplete(() async {
+        user.value = null;
+        await setStateScreen();
+      });
     } catch (e) {
       print(e.toString());
     }

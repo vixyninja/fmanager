@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/widgets/widget.dart';
 import 'package:fmanager/views/manager/function.dart';
 
 class ManagerBottomNavigation extends StatefulWidget {
@@ -11,35 +12,11 @@ class ManagerBottomNavigation extends StatefulWidget {
 
 class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
   int _currentIndex = 0;
-  late PageController _pageController;
 
-  void _onPageChanged(int index) {
+  void _navigateTo(int index) {
     setState(() {
       _currentIndex = index;
     });
-  }
-
-  void _navigateTo(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeInOut,
-    );
-  }
-
-  @override
-  void initState() {
-    _pageController = PageController(
-      initialPage: _currentIndex,
-      keepPage: true,
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override
@@ -73,12 +50,12 @@ class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
         selectedItemColor: theme.colorScheme.primary,
         selectedFontSize: 12,
       ),
-      body: PageView(
-        onPageChanged: _onPageChanged,
-        controller: _pageController,
-        pageSnapping: true,
-        physics: const PageScrollPhysics(),
-        clipBehavior: Clip.none,
+      body: LazyIndexStack(
+        index: _currentIndex,
+        alignment: Alignment.bottomCenter,
+        sizing: StackFit.expand,
+        unloadWidget: const SizedBox.shrink(),
+        textDirection: TextDirection.ltr,
         children: managerBottomNavigation.map((screen) => screen['screen'] as Widget).toList(),
       ),
     );

@@ -7,7 +7,7 @@ List<Map<String, dynamic>> managerBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHomeIcon),
     'label': 'Home',
-    'screen': const ManagerHomeView(),
+    'screen': ManagerHomeView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),

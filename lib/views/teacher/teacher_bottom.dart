@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fmanager/core/widgets/widget.dart';
 import 'package:fmanager/views/teacher/function.dart';
-import 'package:fmanager/views/teacher/teacher_binding.dart';
 
 class TeacherBottomNavigation extends StatefulWidget {
   const TeacherBottomNavigation({super.key});
@@ -13,36 +12,11 @@ class TeacherBottomNavigation extends StatefulWidget {
 
 class _TeacherBottomNavigationState extends State<TeacherBottomNavigation> {
   int _currentIndex = 0;
-  late PageController _pageController;
 
-  void _onPageChanged(int index) {
+  void _navigateTo(int index) {
     setState(() {
       _currentIndex = index;
     });
-  }
-
-  void _navigateTo(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeInOut,
-    );
-  }
-
-  @override
-  void initState() {
-    TeacherBinding().dependencies();
-    _pageController = PageController(
-      initialPage: _currentIndex,
-      keepPage: true,
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override

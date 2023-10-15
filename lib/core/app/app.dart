@@ -18,9 +18,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     AppBinding().dependencies();
-
     final ThemeLogic themeController = Get.find<ThemeLogic>();
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FManager',
@@ -47,12 +45,7 @@ class _AppState extends State<App> {
           }
           return ErrorBoundary(errorMessage: errorDetails.exception.toString());
         };
-        return Stack(
-          children: [
-            child!,
-            const LoadingView(),
-          ],
-        );
+        return child!;
       },
       onGenerateRoute: onGenerateRoute,
       initialRoute: RouteKeys.authScreen,
