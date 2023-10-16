@@ -36,6 +36,16 @@ class IconManager {
   static const String bottomHomeIcon = 'bottom/ic_home.svg';
   static const String bottomHistoryIcon = 'bottom/ic_history.svg';
   static const String bottomSettingIcon = 'bottom/ic_setting.svg';
+
+  static const String icBack = 'teacher/ic_back.svg';
+  static const String icBell = 'teacher/ic_bell.svg';
+  static const String icCamera = 'teacher/ic_camera.svg';
+  static const String icEdit = 'teacher/ic_edit.svg';
+  static const String icLogout = 'teacher/ic_logout.svg';
+  static const String icNext = 'teacher/ic_next.svg';
+  static const String icRateEmpty = 'teacher/ic_rate_empty.svg';
+  static const String icRate = 'teacher/ic_rate.svg';
+  static const String icUser = 'teacher/ic_user.svg';
 }
 
 class ImageManager {}

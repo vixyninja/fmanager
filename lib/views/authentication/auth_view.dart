@@ -9,15 +9,17 @@ class AuthView extends GetView<AuthLogic> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => authController.signInWithGoogle(),
-          child: const Text('Sign In Google'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('Login'),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () => authController.signInWithGoogle(),
+            child: const Text('Sign In Google'),
+          ),
         ),
       ),
     );

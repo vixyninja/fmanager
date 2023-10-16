@@ -10,6 +10,7 @@ class ThemeLogic extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    setThemeState('light');
     getThemeState();
   }
 

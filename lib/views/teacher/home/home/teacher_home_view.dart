@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/widgets/widget.dart';
+import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/teacher/home/home/teacher_home_logic.dart';
 import 'package:get/get.dart';
@@ -31,6 +34,12 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                 },
                 child: const Text('Get Todo'),
               ),
+              FeatureButton(
+                leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
+                title: 'Báo cáo sự cố',
+                onPressed: () {},
+              ),
+              // const BaseHeader(),
             ],
           ),
         ),
