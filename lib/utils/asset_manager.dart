@@ -33,9 +33,15 @@ class FontManager {
 }
 
 class IconManager {
+  // Bottom icon
   static const String bottomHomeIcon = 'bottom/ic_home.svg';
   static const String bottomHistoryIcon = 'bottom/ic_history.svg';
   static const String bottomSettingIcon = 'bottom/ic_setting.svg';
+
+  // Common icon
+  static const String notificationIcon = 'common/ic_notification.svg';
+  static const String editIcon = 'common/ic_edit.svg';
+  static const String unionIcon = 'common/ic_union.svg';
 }
 
 class ImageManager {}

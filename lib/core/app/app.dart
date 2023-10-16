@@ -24,11 +24,13 @@ class _AppState extends State<App> {
       title: 'FManager',
       darkTheme: themeDataDark,
       theme: themeData,
-      scrollBehavior:
-          const MaterialScrollBehavior().copyWith(scrollbars: false, physics: const BouncingScrollPhysics()),
+      scrollBehavior: const MaterialScrollBehavior()
+          .copyWith(scrollbars: false, physics: const BouncingScrollPhysics()),
       themeMode: getThemeMode(themeController.theme),
       onUnknownRoute: (RouteSettings settings) => MaterialPageRoute<void>(
-          settings: settings, builder: (BuildContext context) => const Scaffold(body: ErrorBoundary())),
+          settings: settings,
+          builder: (BuildContext context) =>
+              const Scaffold(body: ErrorBoundary())),
       builder: (BuildContext context, Widget? child) {
         Widget error = const Text('...rendering error...');
         if (widget is Scaffold || widget is BottomNavigationBar) {

@@ -8,7 +8,8 @@ import 'package:fmanager/views/teacher/teacher_binding.dart';
 import 'package:fmanager/views/teacher/teacher_bottom.dart';
 import 'package:get/get.dart';
 
-Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings setting) {
+Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
+    (RouteSettings setting) {
   switch (setting.name) {
     case RouteKeys.teacherBottom:
       return GetPageRoute(

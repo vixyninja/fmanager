@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fmanager/core/core.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,10 @@ class AuthView extends GetView<AuthLogic> {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => authController.signInWithGoogle(),
+          // onPressed: () => authController.signInWithGoogle(),
+          onPressed: () => {
+            Navigator.of(context).pushNamed(RouteKeys.managerBottom),
+          },
           child: const Text('Sign In Google'),
         ),
       ),

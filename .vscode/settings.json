@@ -1,10 +1,4 @@
 {
-  "cSpell.words": [
-    "cupertino",
-    "fluttertoast",
-    "fmanager",
-    "Getx",
-    "prefs",
-    "scrollbars"
-  ]
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
