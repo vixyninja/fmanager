@@ -5,7 +5,7 @@ import 'package:fmanager/core/app/binding.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/core/theme/them.dart';
 import 'package:fmanager/core/theme/them_logic.dart';
-import 'package:fmanager/core/widgets/widget.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:get/get.dart';
 

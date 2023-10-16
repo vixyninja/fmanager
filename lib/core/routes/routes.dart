@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fmanager/core/routes/key.dart';
-import 'package:fmanager/core/widgets/error_boundary/error_boundary.dart';
+import 'package:fmanager/views/widgets/error_boundary/error_boundary.dart';
 import 'package:fmanager/views/authentication/auth_view.dart';
 import 'package:fmanager/views/manager/manager_binding.dart';
 import 'package:fmanager/views/manager/manager_bottom.dart';

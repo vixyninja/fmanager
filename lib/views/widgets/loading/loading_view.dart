@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fmanager/core/widgets/loading/loading_logic.dart';
+import 'package:fmanager/views/widgets/loading/loading_logic.dart';
 import 'package:get/get.dart';
 
 class LoadingView extends GetView<LoadingLogic> {
