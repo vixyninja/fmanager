@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fmanager/core/widgets/widget.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:fmanager/views/manager/function.dart';
 
 class ManagerBottomNavigation extends StatefulWidget {

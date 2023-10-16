@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fmanager/core/routes/key.dart';
-import 'package:fmanager/core/widgets/loading/loading_logic.dart';
+import 'package:fmanager/views/widgets/loading/loading_logic.dart';
 import 'package:fmanager/main.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthLogic extends GetxController {
   final LoadingLogic loadingLogic = Get.find<LoadingLogic>();
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+  
   final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
   late Rx<User?> user = Rx<User?>(null);
 
