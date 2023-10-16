@@ -1,52 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:fmanager/core/theme/colors.dart';
+import 'package:fmanager/core/theme/dark_color.dart';
+import 'package:fmanager/core/theme/font.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 
-const TextTheme textTheme = TextTheme(
-  displaySmall: TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
+final ThemeData themeData = ThemeData(
+  useMaterial3: true,
+  textTheme: textTheme,
+  colorScheme: ColorScheme.light(
+    background: LightColors.backgroundColor,
+    primary: LightColors.primaryColor,
   ),
-  displayMedium: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
+  iconButtonTheme: const IconButtonThemeData(
+    style: ButtonStyle(
+      visualDensity: VisualDensity.compact,
+    ),
   ),
-  displayLarge: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-  ),
-  labelSmall: TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
-  ),
-  labelMedium: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-  ),
-  labelLarge: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.transparent,
+    surfaceTintColor: Colors.transparent,
   ),
 );
 
-final themeData = ThemeData(
+final ThemeData themeDataDark = ThemeData(
   useMaterial3: true,
-  primaryColor: AppColors.primary,
-  textTheme: textTheme,
-  colorScheme: const ColorScheme.light(
-    primary: AppColors.primary,
+  textTheme: textThemeDark,
+  colorScheme: ColorScheme.dark(
+    background: DarkColors.backgroundColor,
+    primary: DarkColors.primaryColor,
   ),
-  fontFamily: 'Poppins',
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-);
-
-final themeDataDark = ThemeData(
-  useMaterial3: true,
-  primaryColor: AppColors.primary,
-  textTheme: textTheme,
-  colorScheme: const ColorScheme.dark(
-    primary: AppColors.primary,
-    secondary: AppColors.primary,
+  iconButtonTheme: const IconButtonThemeData(
+    style: ButtonStyle(
+      visualDensity: VisualDensity.compact,
+    ),
   ),
-  fontFamily: 'Poppins',
-  visualDensity: VisualDensity.adaptivePlatformDensity,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.transparent,
+    surfaceTintColor: Colors.transparent,
+  ),
 );

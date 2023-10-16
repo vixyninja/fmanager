@@ -2,6 +2,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
   "cSpell.words": [
+    "appbar",
     "cupertino",
     "dartz",
     "fluttertoast",
@@ -11,6 +12,7 @@
     "screenutil",
     "scrollbars",
     "Todos",
-    "Unauthorised"
+    "Unauthorised",
+    "unfocus"
   ]
 }
