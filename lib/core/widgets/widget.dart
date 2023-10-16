@@ -3,3 +3,4 @@ export 'loading/loading.dart';
 export 'lazy_index_stack/lazy_index_stack.dart';
 export 'feature_button/feature_button.dart';
 export 'base_header/base_header.dart';
+export 'base_circle_avatar/base_circle_avatar.dart';

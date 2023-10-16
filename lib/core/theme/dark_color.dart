@@ -6,6 +6,7 @@ class DarkColors {
 
   // BACKGROUND
   static const Color backgroundColor = Colors.black;
+  static const Color onBackgroundColor = Colors.white;
 
   // SHADOW
   static const Color shadowColor = Colors.grey;

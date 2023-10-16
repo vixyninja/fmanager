@@ -46,6 +46,8 @@ class IconManager {
   static const String icRateEmpty = 'teacher/ic_rate_empty.svg';
   static const String icRate = 'teacher/ic_rate.svg';
   static const String icUser = 'teacher/ic_user.svg';
+  static const String icEarth = 'teacher/ic_earth.svg';
+  static const String icFeed = 'teacher/ic_feed.svg';
 }
 
 class ImageManager {}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fmanager/core/widgets/widget.dart';
@@ -15,33 +16,84 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              const Text('TeacherHomeView'),
-              ElevatedButton(
-                onPressed: () async {
-                  await authLogic.signOutGoogle();
-                },
-                child: const Text('Logout'),
+    final ThemeData themeData = Theme.of(context);
+
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(45, 83, 129, 1),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Future.delayed(const Duration(seconds: 1), () {});
+        },
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              backgroundColor: const Color.fromRGBO(45, 83, 129, 1),
+              expandedHeight: 50.h,
+            ),
+            SliverSafeArea(
+              sliver: SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 6.h),
+                  child: BaseHeader(
+                    onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
+                    onTapSuffixIcon: () => Get.defaultDialog(),
+                    onTapTitle: () => Get.snackbar('Title', 'Title'),
+                    pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
+                    title: 'Huỳnh Hồng Vỹ',
+                  ),
+                ),
               ),
-              24.verticalSpace,
-              ElevatedButton(
-                onPressed: () async {
-                  teacherLogic.onCallApi();
-                },
-                child: const Text('Get Todo'),
-              ),
-              FeatureButton(
-                leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
-                title: 'Báo cáo sự cố',
-                onPressed: () {},
-              ),
-              // const BaseHeader(),
-            ],
-          ),
+            ),
+            SliverFillViewport(
+              delegate: SliverChildListDelegate([
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
+                    ),
+                    color: themeData.colorScheme.background,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      27.verticalSpace,
+                      Text(
+                        'Dịch vụ trực tuyến',
+                        style: themeData.textTheme.displayLarge!.copyWith(
+                          color: themeData.colorScheme.onBackground,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                      24.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: FeatureButton(
+                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
+                          title: 'Báo cáo sự cố',
+                          onPressed: () {},
+                        ),
+                      ),
+                      20.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: FeatureButton(
+                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
+                          title: 'Yêu cầu hỗ trợ CNTT',
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+          ],
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         ),
       ),
     );
