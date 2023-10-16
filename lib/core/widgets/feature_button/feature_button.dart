@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fmanager/utils/asset_manager.dart';
 
 class FeatureButton extends StatelessWidget {
   const FeatureButton({
@@ -27,7 +25,7 @@ class FeatureButton extends StatelessWidget {
       type: MaterialType.card,
       surfaceTintColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 400),
-      color: Colors.grey.shade300,
+      color: Colors.grey.shade200,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: onPressed,
@@ -42,9 +40,7 @@ class FeatureButton extends StatelessWidget {
                 top: 0,
                 bottom: 0,
                 left: 22,
-                child: SvgPicture.asset(
-                  AssetManager.getIconPath(IconManager.icEdit),
-                ),
+                child: leading,
               ),
               Positioned.fill(
                 bottom: 0,

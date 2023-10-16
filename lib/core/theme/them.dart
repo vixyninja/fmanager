@@ -8,6 +8,7 @@ final ThemeData themeData = ThemeData(
   textTheme: textTheme,
   colorScheme: ColorScheme.light(
     background: LightColors.backgroundColor,
+    onBackground: LightColors.onBackgroundColor,
     primary: LightColors.primaryColor,
   ),
   iconButtonTheme: const IconButtonThemeData(
@@ -26,6 +27,7 @@ final ThemeData themeDataDark = ThemeData(
   textTheme: textThemeDark,
   colorScheme: ColorScheme.dark(
     background: DarkColors.backgroundColor,
+    onBackground: DarkColors.onBackgroundColor,
     primary: DarkColors.primaryColor,
   ),
   iconButtonTheme: const IconButtonThemeData(
