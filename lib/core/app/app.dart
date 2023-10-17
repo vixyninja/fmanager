@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fmanager/core/app/binding.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/core/theme/them.dart';
 import 'package:fmanager/core/theme/them_logic.dart';
-import 'package:fmanager/views/widgets/widget.dart';
 import 'package:fmanager/utils/utils.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class App extends StatefulWidget {
@@ -19,9 +18,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    AppBinding().dependencies();
-    final ThemeLogic themeController = Get.find<ThemeLogic>();
-
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       ensureScreenSize: true,
@@ -35,7 +31,7 @@ class _AppState extends State<App> {
           theme: themeData,
           scrollBehavior:
               const MaterialScrollBehavior().copyWith(scrollbars: false, physics: const BouncingScrollPhysics()),
-          themeMode: getThemeMode(themeController.theme),
+          themeMode: getThemeMode(Get.find<ThemeLogic>().theme),
           onUnknownRoute: (RouteSettings settings) => MaterialPageRoute<void>(
               settings: settings, builder: (BuildContext context) => const Scaffold(body: ErrorBoundary())),
           builder: (BuildContext context, Widget? child) {
@@ -62,11 +58,12 @@ class _AppState extends State<App> {
           defaultTransition: Transition.topLevel,
           onInit: () {
             SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              statusBarColor: themeController.theme == 'dark' ? Colors.black : Colors.white,
-              statusBarBrightness: themeController.theme == 'dark' ? Brightness.light : Brightness.dark,
-              statusBarIconBrightness: themeController.theme == 'dark' ? Brightness.light : Brightness.dark,
-              systemNavigationBarColor: themeController.theme == 'dark' ? Colors.black : Colors.white,
-              systemNavigationBarIconBrightness: themeController.theme == 'dark' ? Brightness.light : Brightness.dark,
+              statusBarColor: Get.find<ThemeLogic>().theme == 'dark' ? Colors.black : Colors.white,
+              statusBarBrightness: Get.find<ThemeLogic>().theme == 'dark' ? Brightness.light : Brightness.dark,
+              statusBarIconBrightness: Get.find<ThemeLogic>().theme == 'dark' ? Brightness.light : Brightness.dark,
+              systemNavigationBarColor: Get.find<ThemeLogic>().theme == 'dark' ? Colors.black : Colors.white,
+              systemNavigationBarIconBrightness:
+                  Get.find<ThemeLogic>().theme == 'dark' ? Brightness.light : Brightness.dark,
             ));
           },
         ),

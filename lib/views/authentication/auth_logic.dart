@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/widgets/loading/loading_logic.dart';
-import 'package:fmanager/main.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthLogic extends GetxController {
   final LoadingLogic loadingLogic = Get.find<LoadingLogic>();
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-  
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
+
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: Get.find<FirebaseApp>());
   late Rx<User?> user = Rx<User?>(null);
 
   // !! Change this to true if you want to test teacher screen
@@ -42,13 +43,13 @@ class AuthLogic extends GetxController {
         idToken: googleSignInAuthentication.idToken,
       );
       await firebaseAuth.signInWithCredential(credential).then((value) async {
-        print('User IdToken: ${await firebaseAuth.currentUser!.getIdToken()}');
+        MyLogger().i('User IdToken: ${await firebaseAuth.currentUser!.getIdToken()}');
         user.value = value.user;
         setStateScreen();
         return value;
       });
     } catch (e) {
-      print(e.toString());
+      MyLogger().e(e.toString());
     } finally {
       Future.delayed(const Duration(seconds: 2), () {
         loadingLogic.hideLoading();
@@ -65,7 +66,7 @@ class AuthLogic extends GetxController {
         setStateScreen();
       });
     } catch (e) {
-      print(e.toString());
+      MyLogger().e(e.toString());
     } finally {
       Future.delayed(const Duration(seconds: 2), () {
         loadingLogic.hideLoading();
