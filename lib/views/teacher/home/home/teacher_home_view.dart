@@ -26,14 +26,14 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
         },
         child: CustomScrollView(
           slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: const Color.fromRGBO(45, 83, 129, 1),
-              expandedHeight: 50.h,
+            const SliverAppBar(
+              backgroundColor: Color.fromRGBO(45, 83, 129, 1),
+              toolbarHeight: kBottomNavigationBarHeight,
             ),
             SliverSafeArea(
               sliver: SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 6.h),
+                  padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
                   child: BaseHeader(
                     onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
                     onTapSuffixIcon: () => Get.defaultDialog(),

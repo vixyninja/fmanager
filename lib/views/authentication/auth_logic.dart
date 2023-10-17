@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/main.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/widgets/loading/loading_logic.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ class AuthLogic extends GetxController {
   final LoadingLogic loadingLogic = Get.find<LoadingLogic>();
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: Get.find<FirebaseApp>());
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
   late Rx<User?> user = Rx<User?>(null);
 
   // !! Change this to true if you want to test teacher screen
