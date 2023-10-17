@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fmanager/views/widgets/widget.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
+import 'package:fmanager/views/common/common.dart';
 import 'package:fmanager/views/teacher/home/home/teacher_home_logic.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class TeacherHomeView extends GetView<TeacherHomeLogic> {
@@ -82,7 +82,12 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                         child: FeatureButton(
                           leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
                           title: 'Yêu cầu hỗ trợ CNTT',
-                          onPressed: () {},
+                          onPressed: () => CommonBottomSheet.show(
+                            Container(
+                              height: 300.h,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ],
