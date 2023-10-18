@@ -189,9 +189,7 @@ class FirebaseMessagingSer extends GetxService {
     String bigText,
     bool showBigPicture,
   ) async {
-    if (RegExpConstants.isValidUrl(
-      bigText,
-    )) {
+    if (RegExpConstants.isValidUrl(bigText) && showBigPicture) {
       final String bigPicturePath = await _downloadAndSaveFile(bigText, 'notification');
       final FilePathAndroidBitmap filePathAndroidBitmap = FilePathAndroidBitmap(bigPicturePath);
       return BigPictureStyleInformation(

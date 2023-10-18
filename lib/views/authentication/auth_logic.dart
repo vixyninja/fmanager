@@ -12,6 +12,7 @@ class AuthLogic extends GetxController {
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
   late Rx<User?> user = Rx<User?>(null);
+  late Rx<Map<String, String>> place = Rx<Map<String, String>>({'name': '', 'id': ''});
 
   // !! Change this to true if you want to test teacher screen
   static const bool isTeacher = true;
@@ -73,4 +74,6 @@ class AuthLogic extends GetxController {
       });
     }
   }
+
+  selectPlace(Map<String, String> item) => place.value = item;
 }
