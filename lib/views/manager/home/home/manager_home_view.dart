@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fmanager/core/theme/colors.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/manager/home/home/manager_home_logic.dart';
 import 'package:fmanager/views/manager/home/home/utils/constants.dart';
@@ -18,7 +17,7 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(color: AppColors.primary),
+        decoration: const BoxDecoration(color: Colors.white),
         child: Column(
           children: <Widget>[
             _buildHeaderContent(),

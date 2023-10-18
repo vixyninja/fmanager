@@ -9,23 +9,26 @@ import 'package:fmanager/views/teacher/teacher_bottom.dart';
 import 'package:fmanager/views/widgets/error_boundary/error_boundary.dart';
 import 'package:get/get.dart';
 
-Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
-    (RouteSettings setting) {
+Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings setting) {
   switch (setting.name) {
     case RouteKeys.teacherBottom:
       return GetPageRoute(
-        settings: setting,
-        routeName: RouteKeys.teacherBottom,
-        page: () => const TeacherBottomNavigation(),
-        binding: TeacherBinding(),
-      );
+          settings: setting,
+          routeName: RouteKeys.teacherBottom,
+          page: () => const TeacherBottomNavigation(),
+          bindings: [
+            AuthBinding(),
+            TeacherBinding(),
+          ]);
     case RouteKeys.managerBottom:
       return GetPageRoute(
-        settings: setting,
-        routeName: RouteKeys.managerBottom,
-        page: () => const ManagerBottomNavigation(),
-        binding: ManagerBinding(),
-      );
+          settings: setting,
+          routeName: RouteKeys.managerBottom,
+          page: () => const ManagerBottomNavigation(),
+          bindings: [
+            AuthBinding(),
+            ManagerBinding(),
+          ]);
     case RouteKeys.authScreen:
       return GetPageRoute(
         settings: setting,

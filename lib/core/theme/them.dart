@@ -12,6 +12,8 @@ final ThemeData themeData = ThemeData(
     primary: LightColors.primaryColor,
     secondary: LightColors.secondary,
     onSecondary: LightColors.onSecondary,
+    surface: LightColors.surfaceColor,
+    onSurface: LightColors.onSurfaceColor,
   ),
   iconButtonTheme: const IconButtonThemeData(
     style: ButtonStyle(
@@ -33,6 +35,8 @@ final ThemeData themeDataDark = ThemeData(
     primary: DarkColors.primaryColor,
     secondary: DarkColors.secondary,
     onSecondary: DarkColors.onSecondary,
+    surface: DarkColors.surfaceColor,
+    onSurface: DarkColors.onSurfaceColor,
   ),
   iconButtonTheme: const IconButtonThemeData(
     style: ButtonStyle(
