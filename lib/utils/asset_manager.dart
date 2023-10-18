@@ -33,6 +33,7 @@ class FontManager {
 }
 
 class IconManager {
+  // Bottom icon
   static const String bottomHomeIcon = 'bottom/ic_home.svg';
   static const String bottomHistoryIcon = 'bottom/ic_history.svg';
   static const String bottomSettingIcon = 'bottom/ic_setting.svg';
@@ -48,6 +49,10 @@ class IconManager {
   static const String icUser = 'teacher/ic_user.svg';
   static const String icEarth = 'teacher/ic_earth.svg';
   static const String icFeed = 'teacher/ic_feed.svg';
+  // Common icon
+  static const String notificationIcon = 'common/ic_notification.svg';
+  static const String editIcon = 'common/ic_edit.svg';
+  static const String unionIcon = 'common/ic_union.svg';
 }
 
 class ImageManager {

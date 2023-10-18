@@ -44,3 +44,8 @@ app.*.map.json
 /android/app/release
 
 .vscode/settings.json
+#vscode
+.vscode
+
+#prettierrc
+.prettierrc
