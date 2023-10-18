@@ -19,87 +19,82 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(45, 83, 129, 1),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          Future.delayed(const Duration(seconds: 1), () {});
-        },
-        child: CustomScrollView(
-          slivers: <Widget>[
-            const SliverAppBar(
-              backgroundColor: Color.fromRGBO(45, 83, 129, 1),
-              toolbarHeight: kBottomNavigationBarHeight,
-            ),
-            SliverSafeArea(
-              sliver: SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
-                  child: BaseHeader(
-                    onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
-                    onTapSuffixIcon: () => Get.defaultDialog(),
-                    onTapTitle: () => Get.snackbar('Title', 'Title'),
-                    pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
-                    title: 'Huỳnh Hồng Vỹ',
-                  ),
+      backgroundColor: themeData.colorScheme.secondary,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: themeData.colorScheme.secondary,
+            toolbarHeight: kBottomNavigationBarHeight,
+          ),
+          SliverSafeArea(
+            sliver: SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
+                child: BaseHeader(
+                  onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
+                  onTapSuffixIcon: () => Get.defaultDialog(),
+                  onTapTitle: () => Get.snackbar('Title', 'Title'),
+                  pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
+                  title: 'Huỳnh Hồng Vỹ',
                 ),
               ),
             ),
-            SliverFillViewport(
-              delegate: SliverChildListDelegate([
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24.r),
-                      topRight: Radius.circular(24.r),
-                    ),
-                    color: themeData.colorScheme.background,
+          ),
+          SliverFillViewport(
+            delegate: SliverChildListDelegate([
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24.r),
+                    topRight: Radius.circular(24.r),
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      27.verticalSpace,
-                      Text(
-                        'Dịch vụ trực tuyến',
-                        style: themeData.textTheme.displayLarge!.copyWith(
-                          color: themeData.colorScheme.onBackground,
-                          fontSize: 20.sp,
-                        ),
+                  color: themeData.colorScheme.background,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    27.verticalSpace,
+                    Text(
+                      'Dịch vụ trực tuyến',
+                      style: themeData.textTheme.displayLarge!.copyWith(
+                        color: themeData.colorScheme.onBackground,
+                        fontSize: 20.sp,
                       ),
-                      24.verticalSpace,
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: FeatureButton(
-                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
-                          title: 'Báo cáo sự cố',
-                          onPressed: () {},
-                        ),
+                    ),
+                    24.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: FeatureButton(
+                        leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
+                        title: 'Báo cáo sự cố',
+                        onPressed: () {},
                       ),
-                      20.verticalSpace,
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: FeatureButton(
-                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
-                          title: 'Yêu cầu hỗ trợ CNTT',
-                          onPressed: () => CommonBottomSheet.show(
-                            Container(
-                              height: 300.h,
-                              color: Colors.white,
-                            ),
+                    ),
+                    20.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: FeatureButton(
+                        leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
+                        title: 'Yêu cầu hỗ trợ CNTT',
+                        onPressed: () => CommonBottomSheet.show(
+                          Container(
+                            height: 300.h,
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ]),
-            ),
-          ],
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        ),
+              ),
+            ]),
+          ),
+        ],
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       ),
     );
   }
