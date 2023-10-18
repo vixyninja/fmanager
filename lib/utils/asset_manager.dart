@@ -56,4 +56,7 @@ class IconManager {
   static const String icFeed = 'teacher/ic_feed.svg';
 }
 
-class ImageManager {}
+class ImageManager {
+  static const String imgLogo = 'img_logo.png';
+  static const String imgGoogle = 'img_google.png';
+}

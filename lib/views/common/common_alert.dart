@@ -7,7 +7,6 @@ class CommonAlert {
       widget,
       transitionCurve: Curves.easeInOut,
       transitionDuration: const Duration(milliseconds: 300),
-      useSafeArea: true,
       barrierDismissible: true,
       barrierColor: const Color(0x80000000),
     );
