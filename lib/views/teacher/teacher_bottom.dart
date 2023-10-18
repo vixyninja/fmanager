@@ -32,7 +32,7 @@ class _TeacherBottomNavigationState extends State<TeacherBottomNavigation> {
               ),
               activeIcon: SvgPicture.asset(
                 screen['icon'] as String,
-                color: theme.primaryColor,
+                colorFilter: ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
               ),
               tooltip: screen['label'] as String,
               backgroundColor: theme.colorScheme.background,

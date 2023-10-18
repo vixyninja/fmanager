@@ -25,7 +25,7 @@ class FeatureButton extends StatelessWidget {
       type: MaterialType.card,
       surfaceTintColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 400),
-      color: Colors.grey.shade200,
+      color: themeData.colorScheme.surface,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: onPressed,
