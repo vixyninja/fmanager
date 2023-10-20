@@ -38,11 +38,6 @@ class IconManager {
   static const String bottomHistoryIcon = 'bottom/ic_history.svg';
   static const String bottomSettingIcon = 'bottom/ic_setting.svg';
 
-  // Common icon
-  static const String notificationIcon = 'common/ic_notification.svg';
-  static const String editIcon = 'common/ic_edit.svg';
-  static const String unionIcon = 'common/ic_union.svg';
-
   static const String icBack = 'teacher/ic_back.svg';
   static const String icBell = 'teacher/ic_bell.svg';
   static const String icCamera = 'teacher/ic_camera.svg';
@@ -54,6 +49,8 @@ class IconManager {
   static const String icUser = 'teacher/ic_user.svg';
   static const String icEarth = 'teacher/ic_earth.svg';
   static const String icFeed = 'teacher/ic_feed.svg';
+  static const String icUnion = 'teacher/ic_union.svg';
+  static const String icNotification = 'teacher/ic_notification.svg';
 }
 
 class ImageManager {

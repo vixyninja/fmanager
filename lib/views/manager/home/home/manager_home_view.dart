@@ -11,46 +11,49 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
 
   final ManagerHomeLogic managerLogic = Get.find<ManagerHomeLogic>();
   final AuthLogic authLogic = Get.find<AuthLogic>();
+
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(color: Colors.white),
+        decoration: BoxDecoration(color: theme.colorScheme.secondary),
         child: Column(
           children: <Widget>[
-            _buildHeaderContent(),
-            _buildBottomContent(),
+            _buildHeaderContent(theme),
+            _buildBottomContent(theme),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeaderContent() {
-    return const Flexible(
+  Widget _buildHeaderContent(ThemeData theme) {
+    return Flexible(
       flex: 2,
       child: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Align(
           alignment: Alignment.bottomCenter,
-          child: Header(),
+          child: Header(theme: theme),
         ),
       ),
     );
   }
 
-  Widget _buildBottomContent() {
+  Widget _buildBottomContent(ThemeData theme) {
     return Flexible(
       flex: 6,
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          color: theme.colorScheme.background,
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
           ),
@@ -61,12 +64,12 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 24),
-              const Text(
+              Text(
                 'Dịch vụ trực tuyến',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Colors.black,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 24),
@@ -78,6 +81,7 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
                     child: CardOption(
                       title: options[index]['title'],
                       iconPath: options[index]['iconPath'],
+                      theme: theme,
                     ),
                   ),
                 ),

@@ -7,7 +7,8 @@ class ManagerBottomNavigation extends StatefulWidget {
   const ManagerBottomNavigation({super.key});
 
   @override
-  State<ManagerBottomNavigation> createState() => _ManagerBottomNavigationState();
+  State<ManagerBottomNavigation> createState() =>
+      _ManagerBottomNavigationState();
 }
 
 class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
@@ -32,7 +33,8 @@ class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
               ),
               activeIcon: SvgPicture.asset(
                 screen['icon'] as String,
-                colorFilter: ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                    theme.colorScheme.primary, BlendMode.srcIn),
               ),
               tooltip: screen['label'] as String,
               backgroundColor: theme.colorScheme.background,
@@ -56,7 +58,9 @@ class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
         sizing: StackFit.expand,
         unloadWidget: const SizedBox.shrink(),
         textDirection: TextDirection.ltr,
-        children: managerBottomNavigation.map((screen) => screen['screen'] as Widget).toList(),
+        children: managerBottomNavigation
+            .map((screen) => screen['screen'] as Widget)
+            .toList(),
       ),
     );
   }

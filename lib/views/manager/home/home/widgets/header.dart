@@ -3,7 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fmanager/utils/utils.dart';
 
 class Header extends StatefulWidget {
-  const Header({super.key});
+  const Header({
+    super.key,
+    required this.theme,
+  });
+
+  final ThemeData theme;
 
   @override
   State<Header> createState() => _HeaderState();
@@ -31,18 +36,19 @@ class _HeaderState extends State<Header> {
               ),
             ),
           ),
-          const Text(
+          Text(
             'Harry Tomson Rui',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: widget.theme.colorScheme.surface,
             ),
           ),
           SvgPicture.asset(
-            AssetManager.getIconPath(IconManager.notificationIcon),
+            AssetManager.getIconPath(IconManager.icNotification),
             width: 24,
             height: 24,
+            color: widget.theme.colorScheme.surface,
           ),
         ],
       ),
