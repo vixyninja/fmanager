@@ -6,17 +6,17 @@ import 'package:fmanager/views/teacher/setting/setting/teacher_setting_view.dart
 List<Map<String, dynamic>> teacherBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHomeIcon),
-    'label': 'Home',
+    'label': 'Trang chủ',
     'screen': TeacherHomeView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),
-    'label': 'History',
-    'screen': const TeacherHistoryView(),
+    'label': 'Lịch sử',
+    'screen': TeacherHistoryView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),
-    'label': 'Setting',
+    'label': 'Cài đặt',
     'screen': TeacherSettingView(),
   },
 ];

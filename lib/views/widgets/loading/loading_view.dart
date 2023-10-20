@@ -12,6 +12,7 @@ class LoadingView extends GetView<LoadingLogic> {
     return Obx(
       () {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               child!,

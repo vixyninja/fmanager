@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fmanager/views/widgets/widget.dart';
 import 'package:fmanager/views/teacher/function.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 
 class TeacherBottomNavigation extends StatefulWidget {
   const TeacherBottomNavigation({super.key});
