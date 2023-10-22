@@ -7,10 +7,12 @@ class CardOption extends StatefulWidget {
     super.key,
     required this.title,
     required this.iconPath,
+    required this.theme,
   });
 
   final String title;
   final String iconPath;
+  final ThemeData theme;
 
   @override
   State<CardOption> createState() => _CardOptionState();
@@ -43,10 +45,10 @@ class _CardOptionState extends State<CardOption> {
             const SizedBox(width: 32),
             Text(
               widget.title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                color: widget.theme.colorScheme.onSurface,
               ),
             ),
           ],

@@ -61,6 +61,7 @@ class IconManager {
   static const String notificationIcon = 'common/ic_notification.svg';
   static const String editIcon = 'common/ic_edit.svg';
   static const String unionIcon = 'common/ic_union.svg';
+  static const String icUnion = 'teacher/ic_union.svg';
 }
 
 class ImageManager {

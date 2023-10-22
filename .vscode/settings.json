@@ -21,4 +21,20 @@
   ],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "cSpell.words": [
+    "appbar",
+    "cupertino",
+    "dartz",
+    "fluttertoast",
+    "fmanager",
+    "Getx",
+    "mipmap",
+    "prefs",
+    "RGBO",
+    "screenutil",
+    "scrollbars",
+    "Todos",
+    "Unauthorised",
+    "unfocus"
+  ]
 }

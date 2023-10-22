@@ -39,7 +39,6 @@ flutter:
     - assets/icons/bottom/
     - assets/icons/teacher/
     - assets/images/
-    - assets/icons/common/
     - assets/anim/
   fonts:
     - family: Poppins
