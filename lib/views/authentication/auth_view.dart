@@ -4,6 +4,7 @@ import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/authentication/function.dart';
 import 'package:fmanager/views/common/common_alert.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -232,6 +233,15 @@ class AuthView extends GetView<AuthLogic> {
                                     ],
                                   ),
                                 ),
+                                Obx(() => Text(
+                                      controller.isTeacher.value ? 'Giáo viên' : 'Quản lý',
+                                      style: themeData.textTheme.displayLarge!.copyWith(color: Colors.grey),
+                                    )),
+                                Obx(
+                                  () => BaseSwitch(
+                                      value: controller.isTeacher.value,
+                                      onChanged: (value) => controller.isTeacher.value = !value),
+                                )
                               ],
                             ),
                           ),

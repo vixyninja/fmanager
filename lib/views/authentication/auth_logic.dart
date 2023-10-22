@@ -15,13 +15,13 @@ class AuthLogic extends GetxController {
   late Rx<Map<String, String>> place = Rx<Map<String, String>>({'name': '', 'id': ''});
 
   // !! Change this to true if you want to test teacher screen
-  static const bool isTeacher = false;
+  RxBool isTeacher = RxBool(false);
 
   setStateScreen() {
     try {
       user.value = firebaseAuth.currentUser;
       if (user.value != null) {
-        if (isTeacher) {
+        if (isTeacher.value) {
           Get.offAllNamed(RouteKeys.teacherBottom);
         } else {
           Get.offAllNamed(RouteKeys.managerBottom);

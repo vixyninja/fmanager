@@ -77,7 +77,8 @@ class ManagerSettingView extends GetView<ManagerSettingLogic> {
                           title: 'Chỉnh sửa tài khoản',
                           onTap: () {},
                           suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icUser)),
-                          prefixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNext)),
+                          prefixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNext),
+                              colorFilter: ColorFilter.mode(themeData.colorScheme.onBackground, BlendMode.srcIn)),
                         ),
                         20.verticalSpace,
                         ItemSetting(

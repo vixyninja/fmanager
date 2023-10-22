@@ -78,20 +78,17 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
                           title: 'Chỉnh sửa tài khoản',
                           onTap: () {},
                           suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icUser)),
-                          prefixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNext)),
+                          prefixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNext),
+                              colorFilter: ColorFilter.mode(themeData.colorScheme.onBackground, BlendMode.srcIn)),
                         ),
                         20.verticalSpace,
                         ItemSetting(
                             title: 'Tắt thông báo',
                             onTap: () => controller.changeNotification(!controller.onNotification.value),
                             suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
-                            prefixIcon: Obx(() => Switch(
+                            prefixIcon: Obx(() => BaseSwitch(
                                   value: controller.onNotification.value,
-                                  onChanged: (value) {
-                                    controller.changeNotification(value);
-                                  },
-                                  activeColor: themeData.colorScheme.secondary,
-                                  activeTrackColor: themeData.colorScheme.secondary.withOpacity(0.5),
+                                  onChanged: (value) => controller.changeNotification(!value),
                                 ))),
                         20.verticalSpace,
                         GetBuilder<ThemeLogic>(
@@ -99,13 +96,9 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
                             return ItemSetting(
                               title: 'Giao diện nền',
                               suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
-                              prefixIcon: Switch(
+                              prefixIcon: BaseSwitch(
                                 value: controller.theme == 'dark',
-                                onChanged: (value) {
-                                  controller.setThemeState(value ? 'dark' : 'light');
-                                },
-                                activeColor: themeData.colorScheme.secondary,
-                                activeTrackColor: themeData.colorScheme.secondary.withOpacity(0.5),
+                                onChanged: (value) => controller.setThemeState(!value ? 'dark' : 'light'),
                               ),
                               onTap: () => controller.setThemeState(controller.theme == 'dark' ? 'light' : 'dark'),
                             );
