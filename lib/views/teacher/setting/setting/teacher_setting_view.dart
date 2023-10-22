@@ -5,7 +5,6 @@ import 'package:fmanager/core/theme/them_logic.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/teacher/setting/setting/teacher_setting_logic.dart';
-import 'package:fmanager/views/teacher/setting/setting/widgets/widgets.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 

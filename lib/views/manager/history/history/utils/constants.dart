@@ -6,8 +6,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 1,
@@ -16,8 +15,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 2,
@@ -26,8 +24,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 3,
@@ -36,8 +33,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 4,
@@ -46,8 +42,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 5,
@@ -56,8 +51,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 6,
@@ -66,8 +60,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 7,
@@ -76,8 +69,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 8,
@@ -86,8 +78,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 9,
@@ -96,8 +87,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 10,
@@ -106,8 +96,7 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
   {
     'id': 11,
@@ -116,7 +105,6 @@ List<Map<String, dynamic>> histories = [
     'date': '01-02-2023',
     'hour': '10:01 pm',
     'room': 'T1101',
-    'image':
-        'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
+    'image': 'https://www.phanmemninja.com/wp-content/uploads/2023/06/avatar-facebook-anime-cute-1.jpeg',
   },
 ];

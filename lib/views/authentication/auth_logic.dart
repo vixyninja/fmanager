@@ -15,7 +15,7 @@ class AuthLogic extends GetxController {
   late Rx<Map<String, String>> place = Rx<Map<String, String>>({'name': '', 'id': ''});
 
   // !! Change this to true if you want to test teacher screen
-  static const bool isTeacher = true;
+  static const bool isTeacher = false;
 
   setStateScreen() {
     try {

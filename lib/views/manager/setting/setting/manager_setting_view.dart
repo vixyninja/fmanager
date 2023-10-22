@@ -1,113 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/theme/them_logic.dart';
+import 'package:fmanager/utils/asset_manager.dart';
+import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/manager/setting/setting/manager_setting_logic.dart';
-import 'package:fmanager/views/manager/setting/setting/utils/constatns.dart';
-import 'package:fmanager/views/manager/setting/setting/widgets/card_bottom.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class ManagerSettingView extends GetView<ManagerSettingLogic> {
-  const ManagerSettingView({Key? key}) : super(key: key);
+  ManagerSettingView({Key? key}) : super(key: key);
+
+  final AuthLogic authLogic = Get.find<AuthLogic>();
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.secondary,
+      backgroundColor: Colors.orange,
+      body: CustomScrollView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        slivers: [
+          const SliverAppBar(
+            backgroundColor: Colors.orange,
+            toolbarHeight: kBottomNavigationBarHeight,
           ),
-          child: Column(
-            children: <Widget>[
-              _buildTopContent(theme),
-              _buildBottomContent(theme),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTopContent(ThemeData theme) {
-    return Flexible(
-      flex: 3,
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: const EdgeInsets.only(bottom: 48),
-        decoration: const BoxDecoration(
-          color: Colors.transparent,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              width: 80,
-              height: 80,
-              child: CircleAvatar(
-                radius: 999,
-                backgroundImage: NetworkImage(
-                  user['image'],
+          SliverFillRemaining(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                27.verticalSpace,
+                BaseCircleAvatar(
+                  width: 80.w,
+                  height: 80.h,
+                  onTap: () {},
                 ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              user['name'],
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: theme.colorScheme.surface,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              user['phone'],
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: theme.colorScheme.surface,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomContent(ThemeData theme) {
-    return Flexible(
-      flex: 4,
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: theme.colorScheme.background,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(24),
-            topRight: Radius.circular(24),
-          ),
-        ),
-        child: Column(
-          children: <Widget>[
-            Wrap(
-              children: List.generate(
-                optionsSetting.length,
-                (index) => Container(
-                  padding: const EdgeInsets.only(top: 32),
-                  child: CardBottom(
-                    theme: theme,
-                    title: optionsSetting[index]['title'],
-                    iconPath: optionsSetting[index]['iconPath'],
+                7.verticalSpace,
+                Text(
+                  'Synx',
+                  style: themeData.textTheme.displayLarge!.copyWith(
+                    color: themeData.colorScheme.background,
+                    fontSize: 20.sp,
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
+                7.verticalSpace,
+                Text(
+                  '0123456789',
+                  style: themeData.textTheme.displayMedium!.copyWith(
+                    color: themeData.colorScheme.background,
+                    fontSize: 18.sp,
+                  ),
+                ),
+                50.verticalSpace,
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
+                      ),
+                      color: themeData.colorScheme.background,
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        ItemSetting(
+                          title: 'Chỉnh sửa tài khoản',
+                          onTap: () {},
+                          suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icUser)),
+                          prefixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNext)),
+                        ),
+                        20.verticalSpace,
+                        ItemSetting(
+                            title: 'Tắt thông báo',
+                            onTap: () => controller.changeNotification(!controller.onNotification.value),
+                            suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
+                            prefixIcon: Obx(() => BaseSwitch(
+                                  value: controller.onNotification.value,
+                                  onChanged: (value) => controller.changeNotification(!value),
+                                ))),
+                        20.verticalSpace,
+                        GetBuilder<ThemeLogic>(
+                          builder: (controller) {
+                            return ItemSetting(
+                              title: 'Giao diện nền',
+                              suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
+                              prefixIcon: BaseSwitch(
+                                value: controller.theme == 'dark',
+                                onChanged: (value) => controller.setThemeState(!value ? 'dark' : 'light'),
+                              ),
+                              onTap: () => controller.setThemeState(controller.theme == 'dark' ? 'light' : 'dark'),
+                            );
+                          },
+                        ),
+                        20.verticalSpace,
+                        ItemSetting(
+                          title: 'Đăng xuất',
+                          onTap: () => authLogic.signOutGoogle(),
+                          suffixIcon: SvgPicture.asset(
+                            AssetManager.getIconPath(IconManager.icLogout),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

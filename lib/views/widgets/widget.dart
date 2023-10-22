@@ -6,3 +6,5 @@ export 'base_header/base_header.dart';
 export 'base_circle_avatar/base_circle_avatar.dart';
 export 'problem_item/problem_item.dart';
 export 'base_button/base_button.dart';
+export 'base_switch/base_switch.dart';
+export 'item_setting/item_setting.dart';

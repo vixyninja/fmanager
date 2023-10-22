@@ -12,7 +12,7 @@ List<Map<String, dynamic>> teacherBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),
     'label': 'Lịch sử',
-    'screen': TeacherHistoryView(),
+    'screen': const TeacherHistoryView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),

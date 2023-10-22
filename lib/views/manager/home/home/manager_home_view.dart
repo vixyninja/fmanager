@@ -1,94 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/manager/home/home/manager_home_logic.dart';
-import 'package:fmanager/views/manager/home/home/utils/constants.dart';
-import 'package:fmanager/views/manager/home/home/widgets/card_option.dart';
-import 'package:fmanager/views/manager/home/home/widgets/header.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class ManagerHomeView extends GetView<ManagerHomeLogic> {
   ManagerHomeView({Key? key}) : super(key: key);
 
-  final ManagerHomeLogic managerLogic = Get.find<ManagerHomeLogic>();
+  final ManagerHomeLogic teacherLogic = Get.find<ManagerHomeLogic>();
   final AuthLogic authLogic = Get.find<AuthLogic>();
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(color: theme.colorScheme.secondary),
-        child: Column(
-          children: <Widget>[
-            _buildHeaderContent(theme),
-            _buildBottomContent(theme),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeaderContent(ThemeData theme) {
-    return Flexible(
-      flex: 2,
-      child: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Header(theme: theme),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomContent(ThemeData theme) {
-    return Flexible(
-      flex: 6,
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: theme.colorScheme.background,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(24),
-            topRight: Radius.circular(24),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(height: 24),
-              Text(
-                'Dịch vụ trực tuyến',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: theme.colorScheme.onSurface,
-                ),
+      backgroundColor: Colors.orange,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
+              child: BaseHeader(
+                onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
+                onTapSuffixIcon: () => Get.defaultDialog(),
+                onTapTitle: () => Get.snackbar('Title', 'Title'),
+                pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
+                title: 'Synx',
+                colorTitle: themeData.colorScheme.onPrimary,
+                colorSuffixIcon: themeData.colorScheme.onPrimary,
               ),
-              const SizedBox(height: 24),
-              Wrap(
-                children: List.generate(
-                  options.length,
-                  (index) => Container(
-                    margin: const EdgeInsets.only(bottom: 24),
-                    child: CardOption(
-                      title: options[index]['title'],
-                      iconPath: options[index]['iconPath'],
-                      theme: theme,
+            ),
+          ),
+          SliverFillViewport(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
                     ),
+                    color: themeData.colorScheme.background,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      27.verticalSpace,
+                      Text(
+                        'Dịch vụ trực tuyến',
+                        style: themeData.textTheme.displayLarge!.copyWith(
+                          color: themeData.colorScheme.onBackground,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                      24.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: FeatureButton(
+                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
+                          title: 'Sự cố cần hỗ trợ',
+                          onPressed: () {},
+                        ),
+                      ),
+                      20.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: FeatureButton(
+                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
+                          title: 'Tính sẵn sàng phòng học',
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       ),
     );
   }

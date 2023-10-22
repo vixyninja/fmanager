@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/views/manager/history/history/manager_history_logic.dart';
-import 'package:fmanager/views/manager/history/history/utils/constants.dart';
-import 'package:fmanager/views/manager/history/history/widgets/card_history.dart';
+import 'package:fmanager/views/widgets/problem_item/problem_item.dart';
 import 'package:get/get.dart';
 
 class ManagerHistoryView extends GetView<ManagerHistoryLogic> {
@@ -9,32 +9,46 @@ class ManagerHistoryView extends GetView<ManagerHistoryLogic> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+      backgroundColor: Colors.orange,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
-            children: <Widget>[
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => Container(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: CardHistory(
-                      title: histories[index]['title'],
-                      creator: histories[index]['creator'],
-                      date: histories[index]['date'],
-                      hour: histories[index]['hour'],
-                      room: histories[index]['room'],
-                      image: histories[index]['image'],
-                      theme: theme,
-                    ),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 16.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24.r),
+                    topRight: Radius.circular(24.r),
                   ),
-                  itemCount: histories.length,
+                  color: themeData.colorScheme.background,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    27.verticalSpace,
+                    ListView.builder(
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.only(top: 10.r, left: 16.r, right: 16.r),
+                          child: ProblemItem(
+                            title: 'A',
+                            subTitle: '$index',
+                            onTap: () {},
+                          ),
+                        );
+                      },
+                      itemCount: 10,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                    ),
+                    27.verticalSpace,
+                  ],
                 ),
               ),
             ],

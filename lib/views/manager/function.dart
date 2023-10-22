@@ -6,17 +6,17 @@ import 'package:fmanager/views/manager/setting/setting/manager_setting_view.dart
 List<Map<String, dynamic>> managerBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHomeIcon),
-    'label': 'Home',
+    'label': 'Trang chủ',
     'screen': ManagerHomeView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),
-    'label': 'History',
+    'label': 'Lịch sử',
     'screen': const ManagerHistoryView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),
-    'label': 'Setting',
-    'screen': const ManagerSettingView(),
+    'label': 'Cài đặt',
+    'screen': ManagerSettingView(),
   },
 ];
