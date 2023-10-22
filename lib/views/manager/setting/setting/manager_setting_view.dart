@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/manager/setting/setting/manager_setting_logic.dart';
 import 'package:fmanager/views/manager/setting/setting/utils/constatns.dart';
+import 'package:fmanager/views/manager/setting/setting/widgets/card_bottom.dart';
 import 'package:get/get.dart';
 
 class ManagerSettingView extends GetView<ManagerSettingLogic> {
@@ -93,48 +92,23 @@ class ManagerSettingView extends GetView<ManagerSettingLogic> {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            _buildBottomItem(theme),
+            Wrap(
+              children: List.generate(
+                optionsSetting.length,
+                (index) => Container(
+                  padding: const EdgeInsets.only(top: 32),
+                  child: CardBottom(
+                    theme: theme,
+                    title: optionsSetting[index]['title'],
+                    iconPath: optionsSetting[index]['iconPath'],
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildBottomItem(ThemeData theme) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Material(
-          color: Colors.grey.shade50,
-          borderRadius: BorderRadius.circular(12),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: InkWell(
-              child: SvgPicture.asset(
-                width: 32,
-                height: 32,
-                AssetManager.getIconPath(optionsSetting[0]['iconPath']),
-              ),
-            ),
-          ),
-        ),
-        Text(
-          optionsSetting[0]['title'],
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
-            color: theme.colorScheme.onSurface,
-          ),
-        ),
-        SvgPicture.asset(
-          width: 24,
-          height: 24,
-          AssetManager.getIconPath(IconManager.icNext),
-        ),
-      ],
     );
   }
 }
