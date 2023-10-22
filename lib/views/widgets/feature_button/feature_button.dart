@@ -18,14 +18,14 @@ class FeatureButton extends StatelessWidget {
     final themeData = Theme.of(context);
 
     return Material(
-      elevation: 4,
+      elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
       type: MaterialType.card,
       surfaceTintColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 400),
-      color: themeData.colorScheme.surface,
+      color: themeData.colorScheme.background,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: onPressed,

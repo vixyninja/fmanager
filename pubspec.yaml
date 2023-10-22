@@ -26,6 +26,7 @@ dependencies:
   path_provider: ^2.1.1
   http: ^1.1.0
   timelines: ^0.1.0
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +40,7 @@ flutter:
     - assets/icons/teacher/
     - assets/images/
     - assets/icons/common/
+    - assets/anim/
   fonts:
     - family: Poppins
       fonts:

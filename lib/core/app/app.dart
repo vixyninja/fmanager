@@ -50,22 +50,15 @@ class _AppState extends State<App> {
               }
               return ErrorBoundary(errorMessage: errorDetails.exception.toString());
             };
+
+            // Set status bar color
+
             return LoadingView(child: child);
           },
           onGenerateRoute: onGenerateRoute,
           initialRoute: RouteKeys.authScreen,
           transitionDuration: const Duration(milliseconds: 300),
           defaultTransition: Transition.topLevel,
-          onInit: () {
-            SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              statusBarColor: Get.find<ThemeLogic>().theme == 'dark' ? Colors.black : Colors.white,
-              statusBarBrightness: Get.find<ThemeLogic>().theme == 'dark' ? Brightness.light : Brightness.dark,
-              statusBarIconBrightness: Get.find<ThemeLogic>().theme == 'dark' ? Brightness.light : Brightness.dark,
-              systemNavigationBarColor: Get.find<ThemeLogic>().theme == 'dark' ? Colors.black : Colors.white,
-              systemNavigationBarIconBrightness:
-                  Get.find<ThemeLogic>().theme == 'dark' ? Brightness.light : Brightness.dark,
-            ));
-          },
         ),
       ),
     );

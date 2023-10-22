@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/history/history/teacher_history_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
@@ -13,24 +12,15 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: themeData.colorScheme.secondary,
+      backgroundColor: Colors.orange,
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 52.h, bottom: 32.h),
-                child: BaseHeader(
-                  onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
-                  onTapSuffixIcon: () => Get.defaultDialog(),
-                  onTapTitle: () => Get.snackbar('Title', 'Title'),
-                  pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
-                  title: 'Huỳnh Hồng Vỹ',
-                ),
-              ),
               Container(
+                margin: EdgeInsets.only(top: 16.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24.r),
@@ -39,6 +29,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
                   color: themeData.colorScheme.background,
                 ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     27.verticalSpace,
                     Text(
@@ -48,6 +39,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
                         fontSize: 20.sp,
                       ),
                     ),
+                    27.verticalSpace,
                     ListView.builder(
                       itemBuilder: (context, index) {
                         return Container(
@@ -63,6 +55,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                     ),
+                    27.verticalSpace,
                   ],
                 ),
               ),

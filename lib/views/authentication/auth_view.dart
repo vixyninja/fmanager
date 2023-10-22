@@ -5,6 +5,7 @@ import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/authentication/function.dart';
 import 'package:fmanager/views/common/common_alert.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class AuthView extends GetView<AuthLogic> {
   AuthView({Key? key}) : super(key: key);
@@ -16,9 +17,7 @@ class AuthView extends GetView<AuthLogic> {
 
     return Obx(
       () => Material(
-        color: item['id'] == authLogic.place.value['id']
-            ? themeData.colorScheme.secondary
-            : themeData.colorScheme.onSecondary,
+        color: item['id'] == authLogic.place.value['id'] ? Colors.blue : themeData.colorScheme.background,
         borderRadius: BorderRadius.all(Radius.circular(8.r)),
         child: InkWell(
           onTap: () {
@@ -38,11 +37,10 @@ class AuthView extends GetView<AuthLogic> {
               children: [
                 Text(item['name'] ?? '',
                     style: themeData.textTheme.displayMedium!.copyWith(
-                      color:
-                          item['id'] == authLogic.place.value['id'] ? Colors.white : themeData.colorScheme.onBackground,
+                      color: item['id'] == authLogic.place.value['id'] ? themeData.colorScheme.onTertiary : Colors.grey,
                     )),
                 Divider(
-                  color: item['id'] == authLogic.place.value['id'] ? Colors.white : Colors.grey,
+                  color: item['id'] == authLogic.place.value['id'] ? themeData.colorScheme.onTertiary : Colors.grey,
                   height: 2,
                 )
               ],
@@ -64,7 +62,7 @@ class AuthView extends GetView<AuthLogic> {
             borderRadius: BorderRadius.all(
               Radius.circular(12.r),
             ),
-            color: themeData.colorScheme.onSecondary,
+            color: themeData.colorScheme.background,
           ),
           margin: EdgeInsets.all(32.r),
           child: Container(
@@ -106,17 +104,17 @@ class AuthView extends GetView<AuthLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: themeData.colorScheme.onSecondary,
+      backgroundColor: themeData.colorScheme.background,
       body: RefreshIndicator(
         onRefresh: () async {
           Future.delayed(const Duration(seconds: 1), () {});
         },
         child: CustomScrollView(
           slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: themeData.colorScheme.secondary,
+            const SliverAppBar(
+              backgroundColor: Colors.orange,
               automaticallyImplyLeading: false,
-              bottom: const PreferredSize(
+              bottom: PreferredSize(
                 preferredSize: Size.fromHeight(0),
                 child: SizedBox(),
               ),
@@ -127,25 +125,40 @@ class AuthView extends GetView<AuthLogic> {
                   Stack(
                     children: [
                       Container(
-                        height: 250,
+                        height: 250.h,
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(24.r),
                             bottomRight: Radius.circular(24.r),
                           ),
-                          color: themeData.colorScheme.secondary,
+                          color: Colors.orange,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: LottieBuilder.asset(
+                          AssetManager.getAnimPath(AnimManager.animDashboard),
+                          repeat: true,
+                          reverse: true,
+                          animate: true,
+                          alignment: Alignment.topCenter,
+                          filterQuality: FilterQuality.high,
+                          frameRate: FrameRate.max,
+                          width: 200.h,
+                          height: 200.h,
                         ),
                       ),
                       Center(
                         child: Material(
-                          elevation: 2,
+                          elevation: 10,
                           borderRadius: BorderRadius.circular(24.r),
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 37.w),
                             height: 500.h,
                             width: 300.w,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.brown.shade50,
                               borderRadius: BorderRadius.all(Radius.circular(24.r)),
                             ),
                             child: Column(

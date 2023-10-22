@@ -20,14 +20,14 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: themeData.colorScheme.secondary,
+      backgroundColor: Colors.orange,
       body: CustomScrollView(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         slivers: [
-          SliverAppBar(
-            backgroundColor: themeData.colorScheme.secondary,
+          const SliverAppBar(
+            backgroundColor: Colors.orange,
             toolbarHeight: kBottomNavigationBarHeight,
           ),
           SliverFillRemaining(
@@ -38,19 +38,25 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
               children: [
                 27.verticalSpace,
                 BaseCircleAvatar(
-                  width: 81.w,
-                  height: 81.h,
+                  width: 80.w,
+                  height: 80.h,
                   onTap: () {},
                 ),
                 7.verticalSpace,
                 Text(
                   'Huynh Hong Vy',
-                  style: themeData.textTheme.displayLarge!.copyWith(color: Colors.white),
+                  style: themeData.textTheme.displayLarge!.copyWith(
+                    color: themeData.colorScheme.background,
+                    fontSize: 20.sp,
+                  ),
                 ),
                 7.verticalSpace,
                 Text(
                   '0396855834',
-                  style: themeData.textTheme.displayMedium!.copyWith(color: Colors.white),
+                  style: themeData.textTheme.displayMedium!.copyWith(
+                    color: themeData.colorScheme.background,
+                    fontSize: 18.sp,
+                  ),
                 ),
                 50.verticalSpace,
                 Expanded(

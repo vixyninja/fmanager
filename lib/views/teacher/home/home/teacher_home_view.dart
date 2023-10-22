@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
-import 'package:fmanager/views/common/common.dart';
 import 'package:fmanager/views/teacher/home/home/teacher_home_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
@@ -19,7 +18,7 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: themeData.colorScheme.secondary,
+      backgroundColor: Colors.orange,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
@@ -31,6 +30,8 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                 onTapTitle: () => Get.snackbar('Title', 'Title'),
                 pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
                 title: 'Huỳnh Hồng Vỹ',
+                colorTitle: themeData.colorScheme.onPrimary,
+                colorSuffixIcon: themeData.colorScheme.onPrimary,
               ),
             ),
           ),
@@ -73,12 +74,7 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                         child: FeatureButton(
                           leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
                           title: 'Yêu cầu hỗ trợ CNTT',
-                          onPressed: () => CommonBottomSheet.show(
-                            Container(
-                              height: 300.h,
-                              color: Colors.white,
-                            ),
-                          ),
+                          onPressed: () {},
                         ),
                       ),
                     ],

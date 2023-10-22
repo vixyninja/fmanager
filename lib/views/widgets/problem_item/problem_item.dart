@@ -13,13 +13,13 @@ class ProblemItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Material(
-      elevation: 4,
+      elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
       surfaceTintColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 400),
-      color: themeData.colorScheme.surface,
+      color: themeData.colorScheme.background,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       type: MaterialType.card,
       child: InkWell(

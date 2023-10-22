@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 
 // ignore: constant_identifier_names
 const String IMAGE_URL = 'https://res.cloudinary.com/dhwzs1m4l/image/upload/v1697453686/notion-avatar_sxmijk.png';
@@ -57,7 +58,7 @@ class BaseCircleAvatar extends StatelessWidget {
             child: InkWell(
               onTap: onTap,
               borderRadius: BorderRadius.circular(99),
-              highlightColor: Colors.grey.withOpacity(0.3),
+              highlightColor: LightColors.highlightColor,
             ),
           ),
         )

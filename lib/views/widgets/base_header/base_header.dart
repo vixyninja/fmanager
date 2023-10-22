@@ -18,24 +18,25 @@ class BaseHeader extends StatelessWidget {
     this.colorSuffixIcon,
   });
 
-  final String? pathSuffixIcon;
-  final VoidCallback? onTapSuffixIcon;
-  final Color? colorSuffixIcon;
-  final String? urlAvatar;
-  final VoidCallback? onTapAvatarIcon;
   final String? title;
-  final VoidCallback? onTapTitle;
   final Color? colorTitle;
   final double? height;
   final double? width;
+  final String? pathSuffixIcon;
+  final Color? colorSuffixIcon;
+  final String? urlAvatar;
+  final VoidCallback? onTapSuffixIcon;
+  final VoidCallback? onTapAvatarIcon;
+  final VoidCallback? onTapTitle;
 
   Widget suffixIcon(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return IconButton(
       onPressed: onTapSuffixIcon,
       icon: SvgPicture.asset(
         pathSuffixIcon!,
         colorFilter: ColorFilter.mode(
-          colorSuffixIcon ?? Colors.white,
+          colorSuffixIcon ?? theme.colorScheme.onBackground,
           BlendMode.srcIn,
         ),
       ),
@@ -44,6 +45,7 @@ class BaseHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Row(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +62,8 @@ class BaseHeader extends StatelessWidget {
           onTap: onTapTitle,
           child: Text(
             title ?? '',
-            style: Theme.of(context).textTheme.displayLarge!.copyWith(color: colorTitle ?? Colors.white),
+            style:
+                Theme.of(context).textTheme.displayLarge!.copyWith(color: colorTitle ?? theme.colorScheme.onBackground),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
