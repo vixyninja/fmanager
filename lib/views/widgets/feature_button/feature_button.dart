@@ -26,7 +26,7 @@ class FeatureButton extends StatelessWidget {
       surfaceTintColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 400),
       color: themeData.colorScheme.background,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      shadowColor: themeData.colorScheme.shadow,
       child: InkWell(
         onTap: onPressed,
         borderRadius: BorderRadius.circular(12),

@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthLogic>(() => AuthLogic());
+    Get.put<AuthLogic>(AuthLogic());
   }
 }

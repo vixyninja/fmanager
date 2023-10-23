@@ -45,8 +45,8 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
                         return Container(
                           margin: EdgeInsets.only(top: 10.r, left: 16.r, right: 16.r),
                           child: ProblemItem(
-                            title: 'A',
-                            subTitle: '$index',
+                            title: 'Su co ve quat may Su co ve quat may Su co ve quat may Su co ve quat may ',
+                            subTitle: 'Nguyen Van A AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
                             onTap: () => controller.navigateToProblemRequest(),
                           ),
                         );

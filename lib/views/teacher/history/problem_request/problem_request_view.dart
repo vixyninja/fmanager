@@ -49,7 +49,11 @@ class ProblemRequestView extends GetView<ProblemRequestLogic> {
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.r),
-                    child: const ProblemItem(title: 'Sự cố 1', subTitle: 'Nguyen Van A'),
+                    child: const ProblemItem(
+                        title:
+                            'Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1',
+                        subTitle:
+                            'Nguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van A'),
                   ),
                   20.verticalSpace,
                   Text('Trạng thái yêu cầu', style: themeData.textTheme.displayLarge!),

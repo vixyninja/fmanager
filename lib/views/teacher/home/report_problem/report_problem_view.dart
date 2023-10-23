@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_logic.dart';
+import 'package:fmanager/views/widgets/base_button/base_button.dart';
 import 'package:get/get.dart';
 
 class ReportProblemView extends GetView<ReportProblemLogic> {
@@ -13,18 +16,18 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: themeData.colorScheme.secondary,
+      backgroundColor: themeData.colorScheme.background,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Báo cáo sự cố',
-          style: themeData.textTheme.displayLarge!.copyWith(color: Colors.white, fontSize: 20.sp),
+          style: themeData.textTheme.displayLarge!.copyWith(color: themeData.colorScheme.background, fontSize: 20.sp),
         ),
         centerTitle: true,
         elevation: 0.0,
         automaticallyImplyLeading: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios, color: themeData.colorScheme.background),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -32,7 +35,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
         titleTextStyle: themeData.textTheme.displayLarge!.copyWith(color: Colors.white, fontSize: 20.sp),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         decoration: BoxDecoration(
           color: themeData.colorScheme.background,
         ),
@@ -42,7 +45,6 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              40.verticalSpace,
               TextFormField(
                 decoration: InputDecoration(
                   constraints: BoxConstraints(maxHeight: 50.h),
@@ -72,17 +74,16 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                 ),
                 style: themeData.textTheme.displayLarge!.copyWith(
                   fontSize: 16.sp,
-                  color: themeData.colorScheme.secondary,
+                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 autocorrect: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                clipBehavior: Clip.none,
-                controller: controller.roomController,
+                controller: controller.problemController,
                 enableSuggestions: true,
-                cursorColor: themeData.colorScheme.secondary,
+                cursorColor: Colors.black,
               ),
               16.verticalSpace,
               TextFormField(
@@ -114,17 +115,16 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                 ),
                 style: themeData.textTheme.displayLarge!.copyWith(
                   fontSize: 16.sp,
-                  color: themeData.colorScheme.secondary,
+                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 autocorrect: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                clipBehavior: Clip.none,
                 controller: controller.problemController,
                 enableSuggestions: true,
-                cursorColor: themeData.colorScheme.secondary,
+                cursorColor: Colors.black,
               ),
               16.verticalSpace,
               TextFormField(
@@ -155,7 +155,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                 ),
                 style: themeData.textTheme.displayLarge!.copyWith(
                   fontSize: 16.sp,
-                  color: themeData.colorScheme.secondary,
+                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
                 textInputAction: TextInputAction.next,
@@ -163,29 +163,59 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: controller.descriptionController,
                 enableSuggestions: true,
-                cursorColor: themeData.colorScheme.secondary,
+                cursorColor: Colors.black,
                 minLines: 5,
                 maxLines: 5,
                 keyboardType: TextInputType.multiline,
                 scrollPhysics: const BouncingScrollPhysics(),
               ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: themeData.colorScheme.background,
-                  backgroundColor: themeData.colorScheme.secondary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    side: BorderSide(color: themeData.colorScheme.secondary),
+              16.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey.shade200,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        child: Center(child: SvgPicture.asset(AssetManager.getIconPath(IconManager.icCamera)))),
                   ),
-                  minimumSize: Size(double.infinity, 48.h),
-                  animationDuration: const Duration(milliseconds: 500),
+                  10.horizontalSpace,
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey.shade200,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        child: Center(child: SvgPicture.asset(AssetManager.getIconPath(IconManager.icImage)))),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              BaseButton(
+                type: ButtonType.primary,
+                child: Center(
+                  child: Text(
+                    'Gửi yêu cầu',
+                    style: themeData.textTheme.displayLarge!.copyWith(
+                      color: themeData.colorScheme.background,
+                    ),
+                  ),
                 ),
-                child: Text(
-                  'Gửi yêu cầu',
-                  style: themeData.textTheme.displayLarge!.copyWith(color: Colors.white),
-                ),
+                onPressed: () {},
               ),
               20.verticalSpace,
             ],

@@ -3,6 +3,6 @@ import 'package:get/get.dart';
 
 class TeacherHistoryLogic extends GetxController {
   navigateToProblemRequest() {
-    Get.toNamed(RouteKeys.problemRequestScreen);
+    Get.toNamed(RouteKeys.teacherProblemRequestScreen);
   }
 }

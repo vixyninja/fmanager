@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 
 class TeacherHomeLogic extends GetxController {
   navigateToRequestProblem() {
-    Get.toNamed(RouteKeys.reportProblemScreen);
+    Get.toNamed(RouteKeys.teacherReportProblemScreen);
+  }
+
+  navigateToListNotification() {
+    Get.toNamed(RouteKeys.teacherNotificationScreen);
   }
 }

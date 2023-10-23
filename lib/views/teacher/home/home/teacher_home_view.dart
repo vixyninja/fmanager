@@ -26,7 +26,7 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
               padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
               child: BaseHeader(
                 onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
-                onTapSuffixIcon: () => Get.defaultDialog(),
+                onTapSuffixIcon: () => controller.navigateToListNotification(),
                 onTapTitle: () => Get.snackbar('Title', 'Title'),
                 pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
                 title: 'Huỳnh Hồng Vỹ',

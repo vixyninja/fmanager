@@ -8,7 +8,9 @@ clean:
 	@flutter clean
 	@echo "Done"
 
-build:
+build-release:
+	@echo "Clear old build release"
+	@rm -rf build
 	@echo "Building..."
 	@flutter build apk --release
 	@echo "Done"

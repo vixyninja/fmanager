@@ -5,6 +5,7 @@ import 'package:fmanager/views/authentication/auth_view.dart';
 import 'package:fmanager/views/manager/manager_binding.dart';
 import 'package:fmanager/views/manager/manager_bottom.dart';
 import 'package:fmanager/views/teacher/history/problem_request/problem_request_view.dart';
+import 'package:fmanager/views/teacher/home/list_notification/list_notification_view.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_view.dart';
 import 'package:fmanager/views/teacher/teacher_binding.dart';
 import 'package:fmanager/views/teacher/teacher_bottom.dart';
@@ -19,7 +20,6 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
           routeName: RouteKeys.teacherBottom,
           page: () => const TeacherBottomNavigation(),
           bindings: [
-            AuthBinding(),
             TeacherBinding(),
           ]);
     case RouteKeys.managerBottom:
@@ -28,7 +28,6 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
           routeName: RouteKeys.managerBottom,
           page: () => const ManagerBottomNavigation(),
           bindings: [
-            AuthBinding(),
             ManagerBinding(),
           ]);
     case RouteKeys.authScreen:
@@ -38,17 +37,23 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
         page: () => AuthView(),
         binding: AuthBinding(),
       );
-    case RouteKeys.problemRequestScreen:
+    case RouteKeys.teacherProblemRequestScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.problemRequestScreen,
+        routeName: RouteKeys.teacherProblemRequestScreen,
         page: () => ProblemRequestView(),
       );
-    case RouteKeys.reportProblemScreen:
+    case RouteKeys.teacherReportProblemScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.reportProblemScreen,
+        routeName: RouteKeys.teacherReportProblemScreen,
         page: () => ReportProblemView(),
+      );
+    case RouteKeys.teacherNotificationScreen:
+      return GetPageRoute(
+        settings: setting,
+        routeName: RouteKeys.teacherNotificationScreen,
+        page: () => const ListNotificationView(),
       );
     default:
       return GetPageRoute(settings: setting, page: () => const ErrorBoundary());

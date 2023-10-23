@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class LoadingLogic extends GetxController {
-  RxBool isLoading = false.obs;
+  RxBool isLoading = RxBool(false);
 
   void showLoading() {
     isLoading.value = true;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/core/theme/them.dart';
 import 'package:fmanager/core/theme/them_logic.dart';
 import 'package:fmanager/utils/utils.dart';
+import 'package:fmanager/views/authentication/auth_binding.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
@@ -59,6 +59,7 @@ class _AppState extends State<App> {
           initialRoute: RouteKeys.authScreen,
           transitionDuration: const Duration(milliseconds: 300),
           defaultTransition: Transition.topLevel,
+          initialBinding: AuthBinding(),
         ),
       ),
     );
@@ -74,7 +75,7 @@ class _AppState extends State<App> {
         themeMode = ThemeMode.dark;
         break;
       default:
-        themeMode = ThemeMode.system;
+        themeMode = ThemeMode.light;
         break;
     }
     return themeMode;

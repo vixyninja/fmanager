@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:fmanager/utils/utils.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class ThemeLogic extends GetxController {
-  final GetStorage storage = GetStorage();
-
-  var theme = 'system';
+  var theme = 'light';
 
   @override
   void onInit() {
     super.onInit();
-    // setThemeState('light');
     getThemeState();
   }
 
   void getThemeState() {
-    if (storage.read('theme') != null) {
-      return setThemeState(storage.read('theme'));
+    if (StorageManager.read(StorageKeys.theme.toString()) != null) {
+      return setThemeState(StorageManager.read(StorageKeys.theme.toString()));
     }
-    setThemeState('system');
+    setThemeState('light');
   }
 
   void setThemeState(String value) {
     theme = value;
-    storage.write('theme', value);
+    StorageManager.write(StorageKeys.theme.toString(), value);
 
     switch (value) {
       case 'light':
@@ -32,11 +29,8 @@ class ThemeLogic extends GetxController {
       case 'dark':
         Get.changeThemeMode(ThemeMode.dark);
         break;
-      case 'system':
-        Get.changeThemeMode(ThemeMode.system);
-        break;
       default:
-        Get.changeThemeMode(ThemeMode.system);
+        Get.changeThemeMode(ThemeMode.light);
         break;
     }
     update();

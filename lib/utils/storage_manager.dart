@@ -1,5 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 
+enum StorageKeys { theme, user, biometric, place }
+
 class StorageManager {
   StorageManager(this._box);
 

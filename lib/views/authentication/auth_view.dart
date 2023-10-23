@@ -18,14 +18,14 @@ class AuthView extends GetView<AuthLogic> {
 
     return Obx(
       () => Material(
-        color: item['id'] == authLogic.place.value['id'] ? Colors.blue : themeData.colorScheme.background,
+        color: item['id'] == authLogic.place.value ? Colors.orange : themeData.colorScheme.background,
         borderRadius: BorderRadius.all(Radius.circular(8.r)),
         child: InkWell(
           onTap: () {
-            if (item['id'] == authLogic.place.value['id']) {
-              authLogic.place.value = {'id': '', 'name': ''};
+            if (item['id'] == authLogic.place.value) {
+              authLogic.place('');
             } else {
-              authLogic.place.value = item;
+              authLogic.place(item['id']!);
             }
           },
           borderRadius: BorderRadius.all(Radius.circular(8.r)),
@@ -38,10 +38,10 @@ class AuthView extends GetView<AuthLogic> {
               children: [
                 Text(item['name'] ?? '',
                     style: themeData.textTheme.displayMedium!.copyWith(
-                      color: item['id'] == authLogic.place.value['id'] ? themeData.colorScheme.onTertiary : Colors.grey,
+                      color: item['id'] == authLogic.place.value ? Colors.white : Colors.grey,
                     )),
                 Divider(
-                  color: item['id'] == authLogic.place.value['id'] ? themeData.colorScheme.onTertiary : Colors.grey,
+                  color: item['id'] == authLogic.place.value ? Colors.white : Colors.grey,
                   height: 2,
                 )
               ],
@@ -189,14 +189,16 @@ class AuthView extends GetView<AuthLogic> {
                                             ),
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 16.h,
-                                                horizontal:
-                                                    controller.place.value['name']!.compareTo('') == 0 ? 42.w : 16.w),
+                                                horizontal: controller.place.value.compareTo('') == 0 ? 42.w : 16.w),
                                             visualDensity: VisualDensity.compact,
                                           ),
                                           child: Text(
-                                            controller.place.value['name']!.compareTo('') == 0
+                                            controller.place.value.compareTo('') == 0
                                                 ? 'Chọn cơ sở'
-                                                : controller.place.value['name'] ?? '',
+                                                : staticPlace
+                                                    .firstWhere(
+                                                        (element) => element['id'] == controller.place.value)['name']
+                                                    .toString(),
                                             style: const TextStyle(color: Colors.grey),
                                           ),
                                         ),
@@ -241,7 +243,8 @@ class AuthView extends GetView<AuthLogic> {
                                   () => BaseSwitch(
                                       value: controller.isTeacher.value,
                                       onChanged: (value) => controller.isTeacher.value = !value),
-                                )
+                                ),
+                                20.verticalSpace,
                               ],
                             ),
                           ),

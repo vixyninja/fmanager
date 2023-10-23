@@ -43,7 +43,6 @@ class _BaseButtonState extends State<BaseButton> {
               : useColor(themeData, LightColors.buttonTextColorDisabled, DarkColors.buttonTextColorDisabled),
         ),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        visualDensity: VisualDensity.compact,
       ),
       child: widget.child,
     );
@@ -94,7 +93,6 @@ class _BaseButtonState extends State<BaseButton> {
                   themeData, LightColors.buttonSecondaryTextColorDisabled, DarkColors.buttonSecondaryTextColorDisabled),
         ),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        visualDensity: VisualDensity.compact,
       ),
       child: widget.child,
     );

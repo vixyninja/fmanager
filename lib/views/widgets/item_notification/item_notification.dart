@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 
-class ProblemItem extends StatelessWidget {
-  const ProblemItem({super.key, required this.title, required this.subTitle, this.onTap});
+class ItemNotification extends StatelessWidget {
+  const ItemNotification({super.key, required this.title, required this.subTitle, this.onTap});
 
   final String title;
   final String subTitle;
@@ -33,58 +32,37 @@ class ProblemItem extends StatelessWidget {
             color: Colors.transparent,
           ),
           height: 110.h,
-          child: Row(
+          child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: BaseCircleAvatar(),
-              ),
-              16.horizontalSpace,
               Expanded(
+                child: Text(
+                  title,
+                  style: themeData.textTheme.displayLarge,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  textDirection: TextDirection.ltr,
                   children: [
-                    Expanded(
+                    Flexible(
                       child: Text(
-                        // title.length > 30 ? '${title.substring(0, 30)}...' : title.toString(),
-                        title,
-                        style: themeData.textTheme.displayLarge,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text.rich(
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        TextSpan(
-                          text: 'Người tiếp nhận: ',
-                          style: themeData.textTheme.displayMedium,
-                          children: [
-                            TextSpan(
-                              text: subTitle,
-                              style: themeData.textTheme.displayMedium!.copyWith(
-                                color: themeData.colorScheme.onBackground,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Sự cố thiết bị - Phòng: T1101',
+                        'Người đăng: $subTitle',
                         style: themeData.textTheme.displayMedium,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Expanded(
+                    Flexible(
                       child: Text(
                         '08/02/2023 | 09:02 am',
                         style: themeData.textTheme.displayMedium,

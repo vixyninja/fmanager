@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 class TeacherSettingView extends GetView<TeacherSettingLogic> {
   TeacherSettingView({Key? key}) : super(key: key);
 
-  final TeacherSettingLogic teacherLogic = Get.find<TeacherSettingLogic>();
   final AuthLogic authLogic = Get.find<AuthLogic>();
 
   @override
@@ -95,12 +94,28 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
                           builder: (controller) {
                             return ItemSetting(
                               title: 'Giao diện nền',
-                              suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
+                              suffixIcon: Icon(Icons.dark_mode_outlined, size: 24.r, color: Colors.black),
                               prefixIcon: BaseSwitch(
                                 value: controller.theme == 'dark',
                                 onChanged: (value) => controller.setThemeState(!value ? 'dark' : 'light'),
                               ),
                               onTap: () => controller.setThemeState(controller.theme == 'dark' ? 'light' : 'dark'),
+                            );
+                          },
+                        ),
+                        20.verticalSpace,
+                        GetBuilder<AuthLogic>(
+                          init: authLogic,
+                          builder: (controller) {
+                            return ItemSetting(
+                              title: 'Vân tay',
+                              onTap: () {
+                                controller.enableBiometric = !controller.enableBiometric;
+                              },
+                              prefixIcon: BaseSwitch(
+                                  value: controller.enableBiometric,
+                                  onChanged: (value) => controller.enableBiometric = !value),
+                              suffixIcon: Icon(Icons.security_outlined, size: 24.r, color: Colors.black),
                             );
                           },
                         ),
