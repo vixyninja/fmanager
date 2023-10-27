@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/core/theme/light_color.dart';
 
 // ignore: constant_identifier_names
-const String IMAGE_URL = 'https://res.cloudinary.com/dhwzs1m4l/image/upload/v1697453686/notion-avatar_sxmijk.png';
+const String IMAGE_URL =
+    'https://res.cloudinary.com/dhwzs1m4l/image/upload/v1697453686/notion-avatar_sxmijk.png';
 
 class BaseCircleAvatar extends StatelessWidget {
   const BaseCircleAvatar({
@@ -36,9 +37,10 @@ class BaseCircleAvatar extends StatelessWidget {
             borderRadius: BorderRadius.circular(99),
             child: CachedNetworkImage(
               imageUrl: imageUrl ?? IMAGE_URL,
-              width: width ?? 48.w,
-              height: height ?? 48.h,
-              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+              width: width ?? 32.w,
+              height: height ?? 32.h,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) {
                 return const Icon(Icons.error);
               },

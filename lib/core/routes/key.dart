@@ -5,4 +5,6 @@ class RouteKeys {
   static const String teacherBottom = '/teacherBottom';
   static const String problemRequestScreen = '/problemRequestScreen';
   static const String reportProblemScreen = '/reportProblemScreen';
+
+  static const String managerProblemScreen = '/manager_problem_screen';
 }

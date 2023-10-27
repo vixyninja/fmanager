@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/core.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/manager/home/home/manager_home_logic.dart';
@@ -23,7 +24,8 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
+              padding: EdgeInsets.only(
+                  left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
               child: BaseHeader(
                 onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
                 onTapSuffixIcon: () => Get.defaultDialog(),
@@ -63,16 +65,19 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: FeatureButton(
-                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
+                          leading: SvgPicture.asset(
+                              AssetManager.getIconPath(IconManager.icEdit)),
                           title: 'Sự cố cần hỗ trợ',
-                          onPressed: () {},
+                          onPressed: () =>
+                              Get.toNamed(RouteKeys.managerProblemScreen),
                         ),
                       ),
                       20.verticalSpace,
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: FeatureButton(
-                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
+                          leading: SvgPicture.asset(
+                              AssetManager.getIconPath(IconManager.icEarth)),
                           title: 'Tính sẵn sàng phòng học',
                           onPressed: () {},
                         ),
