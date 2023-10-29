@@ -39,10 +39,11 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
                   width: 80.w,
                   height: 80.h,
                   onTap: () {},
+                  imageUrl: authLogic.userModel!.url.toString(),
                 ),
                 7.verticalSpace,
                 Text(
-                  'Huynh Hong Vy',
+                  authLogic.userModel!.name.toString(),
                   style: themeData.textTheme.displayLarge!.copyWith(
                     color: themeData.colorScheme.background,
                     fontSize: 20.sp,
@@ -50,7 +51,9 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
                 ),
                 7.verticalSpace,
                 Text(
-                  '0396855834',
+                  authLogic.userModel?.phoneNumber == ''
+                      ? 'Chưa có số điện thoại'
+                      : authLogic.userModel!.phoneNumber.toString(),
                   style: themeData.textTheme.displayMedium!.copyWith(
                     color: themeData.colorScheme.background,
                     fontSize: 18.sp,

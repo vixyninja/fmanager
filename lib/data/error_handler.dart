@@ -1,17 +1,18 @@
+import 'package:dio/dio.dart';
 import 'package:fmanager/data/error_exceptions.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
 
 class ErrorHandler {
   static returnErrorToString(Response response) {
     switch (response.statusCode) {
       case 400:
-        throw BadRequestException(response.body.toString());
+        return throw BadRequestException('Bad Request');
       case 401:
+        return throw UnauthorisedException('Unauthorised');
       case 403:
-        throw UnauthorisedException(response.body.toString());
+        return throw FetchDataException('Forbidden');
       case 500:
       default:
-        throw FetchDataException('Error in Server with StatusCode : ${response.statusCode}');
+        return throw FetchDataException('Error in Server with StatusCode : ${response.statusCode}');
     }
   }
 }

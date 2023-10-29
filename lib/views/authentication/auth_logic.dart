@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/data/data.dart';
 import 'package:fmanager/main.dart';
+import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/common/common_alert.dart';
 import 'package:fmanager/views/widgets/loading/loading_logic.dart';
@@ -22,6 +25,11 @@ class AuthLogic extends GetxController {
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
   final LocalAuthentication auth = LocalAuthentication();
+
+  // Repository
+  late UserModel? userModel;
+  final ApiServices apiServices = Get.find<ApiServices>();
+  final UserRepository userRepository = Get.find<UserRepository>();
 
   late Rx<User?> user = Rx<User?>(null);
 
@@ -70,24 +78,6 @@ class AuthLogic extends GetxController {
     }
   }
 
-  void setStateScreen() {
-    try {
-      user.value = firebaseAuth.currentUser;
-      if (user.value != null) {
-        if (isTeacher.value) {
-          Get.offAllNamed(RouteKeys.teacherBottom);
-        } else {
-          Get.offAllNamed(RouteKeys.managerBottom);
-        }
-      } else {
-        Get.offAllNamed(RouteKeys.authScreen);
-      }
-    } catch (e) {
-      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
-      printError(info: e.toString());
-    }
-  }
-
   Future<void> signInWithGoogle() async {
     if (place.value == '') {
       CommonAlert.showSnackBar('Thông báo', 'Vui lòng chọn cơ sở', position: SnackPosition.TOP);
@@ -101,13 +91,20 @@ class AuthLogic extends GetxController {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      await firebaseAuth.signInWithCredential(credential).then((value) async {
-        MyLogger().i('User IdToken: ${await firebaseAuth.currentUser!.getIdToken()}');
-        user.value = value.user;
-        StorageManager.write(StorageKeys.place.toString(), place.value.toString());
-        setStateScreen();
-        return value;
-      });
+      await firebaseAuth.signInWithCredential(credential);
+      final String? idToken = await firebaseAuth.currentUser!.getIdToken();
+      final Either<Exception, TokenModel> either =
+          await userRepository.loginGoogleGolang(idToken: idToken!, position: place.value);
+      either.fold(
+        (l) {
+          CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+        },
+        (r) async {
+          await StorageManager.write(StorageKeys.accessToken.toString(), r.accessToken.toString());
+          await StorageManager.write(StorageKeys.refreshToken.toString(), r.refreshToken.toString());
+          await getMyProfile();
+        },
+      );
     } catch (e) {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
     } finally {
@@ -117,19 +114,44 @@ class AuthLogic extends GetxController {
     }
   }
 
+  Future<void> getMyProfile() async {
+    try {
+      final Either<Exception, UserModel> either = await userRepository.getMyProfile();
+      either.fold(
+        (l) {
+          CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+        },
+        (r) {
+          if (RoleEnum.TEACHER.toString() == r.role.toString()) {
+            isTeacher.value = true;
+            userModel = r;
+            Get.offAllNamed(RouteKeys.teacherBottom);
+          } else {
+            userModel = r;
+            isTeacher.value = false;
+            Get.offAllNamed(RouteKeys.managerBottom);
+          }
+        },
+      );
+    } catch (e) {
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+    }
+  }
+
   Future<void> signOutGoogle() async {
     loadingLogic.showLoading();
     try {
       await googleSignIn.signOut();
       await firebaseAuth.signOut().whenComplete(() {
-        user.value = null;
-        setStateScreen();
+        userModel = UserModel.createEmptyInstance();
+        Get.offAllNamed(RouteKeys.authScreen);
       });
       enableBiometric = false;
       place.value = '';
       StorageManager.clearKey(StorageKeys.biometric.toString());
       StorageManager.clearKey(StorageKeys.place.toString());
     } catch (e) {
+      print(e.toString());
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () {

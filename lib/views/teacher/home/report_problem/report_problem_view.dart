@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_logic.dart';
 import 'package:fmanager/views/widgets/base_button/base_button.dart';
@@ -10,6 +11,8 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
   ReportProblemView({super.key});
 
   final ReportProblemLogic logic = Get.put<ReportProblemLogic>(ReportProblemLogic());
+
+  List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
   @override
   Widget build(BuildContext context) {
@@ -77,54 +80,22 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
+                onChanged: (value) => controller.onSearchRoom(value),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 autocorrect: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: controller.problemController,
+                controller: controller.roomController,
                 enableSuggestions: true,
                 cursorColor: Colors.black,
               ),
               16.verticalSpace,
-              TextFormField(
-                decoration: InputDecoration(
-                  constraints: BoxConstraints(maxHeight: 50.h),
-                  filled: true,
-                  fillColor: Colors.grey.shade200,
-                  hintText: 'Sự cố gặp phải',
-                  hintStyle: themeData.textTheme.displayMedium!.copyWith(
-                    fontSize: 16.sp,
-                    color: Colors.grey.shade500,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: const BorderSide(
-                      width: 0.5,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                  isDense: true,
-                ),
-                style: themeData.textTheme.displayLarge!.copyWith(
-                  fontSize: 16.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                autocorrect: true,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: controller.problemController,
-                enableSuggestions: true,
-                cursorColor: Colors.black,
+              DropdownMenu<CategoryModel>(
+                initialSelection: controller.categories.first,
+                onSelected: (CategoryModel? value) {},
+                dropdownMenuEntries: controller.categories.map<DropdownMenuEntry<CategoryModel>>((CategoryModel value) {
+                  return DropdownMenuEntry<CategoryModel>(value: value, label: value.categoryName);
+                }).toList(),
               ),
               16.verticalSpace,
               TextFormField(
@@ -185,6 +156,8 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                           ),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           visualDensity: VisualDensity.compact,
+                          foregroundColor: themeData.colorScheme.surface,
+                          elevation: 1,
                         ),
                         child: Center(child: SvgPicture.asset(AssetManager.getIconPath(IconManager.icCamera)))),
                   ),
@@ -199,6 +172,8 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                           ),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           visualDensity: VisualDensity.compact,
+                          elevation: 1,
+                          foregroundColor: themeData.colorScheme.surface,
                         ),
                         child: Center(child: SvgPicture.asset(AssetManager.getIconPath(IconManager.icImage)))),
                   ),
@@ -207,6 +182,8 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
               const Spacer(),
               BaseButton(
                 type: ButtonType.primary,
+                elevation: 2,
+                onPressed: () {},
                 child: Center(
                   child: Text(
                     'Gửi yêu cầu',
@@ -215,7 +192,6 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                     ),
                   ),
                 ),
-                onPressed: () {},
               ),
               20.verticalSpace,
             ],

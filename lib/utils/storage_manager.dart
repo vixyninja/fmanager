@@ -1,6 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
-enum StorageKeys { theme, user, biometric, place }
+enum StorageKeys { theme, accessToken, refreshToken, biometric, place }
 
 class StorageManager {
   StorageManager(this._box);
@@ -19,7 +19,7 @@ class StorageManager {
   }
 
   static Future<void> write(String key, dynamic value) async {
-    _instance!._box.write(key, value);
+    await _instance!._box.write(key, value);
   }
 
   static T? read<T>(String key, [T? defaultValue]) {
@@ -27,10 +27,10 @@ class StorageManager {
   }
 
   static Future<void> clearKey(String key) async {
-    _instance!._box.remove(key);
+    await _instance!._box.remove(key);
   }
 
   static Future<void> clearAll() async {
-    _instance!._box.erase();
+    await _instance!._box.erase();
   }
 }
