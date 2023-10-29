@@ -9,23 +9,24 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class AuthView extends GetView<AuthLogic> {
-  AuthView({Key? key}) : super(key: key);
+  const AuthView({Key? key}) : super(key: key);
 
-  final AuthLogic authLogic = Get.find<AuthLogic>();
+  @override
+  AuthLogic get controller => Get.find<AuthLogic>();
 
   Widget _buildItemPlace(BuildContext context, Map<String, String> item) {
     final ThemeData themeData = Theme.of(context);
 
     return Obx(
       () => Material(
-        color: item['id'] == authLogic.place.value ? Colors.orange : themeData.colorScheme.background,
+        color: item['id'] == controller.place.value ? Colors.orange : themeData.colorScheme.background,
         borderRadius: BorderRadius.all(Radius.circular(8.r)),
         child: InkWell(
           onTap: () {
-            if (item['id'] == authLogic.place.value) {
-              authLogic.place('');
+            if (item['id'] == controller.place.value) {
+              controller.place('');
             } else {
-              authLogic.place(item['id']!);
+              controller.place(item['id']!);
             }
           },
           borderRadius: BorderRadius.all(Radius.circular(8.r)),
@@ -38,10 +39,10 @@ class AuthView extends GetView<AuthLogic> {
               children: [
                 Text(item['name'] ?? '',
                     style: themeData.textTheme.displayMedium!.copyWith(
-                      color: item['id'] == authLogic.place.value ? Colors.white : Colors.grey,
+                      color: item['id'] == controller.place.value ? Colors.white : Colors.grey,
                     )),
                 Divider(
-                  color: item['id'] == authLogic.place.value ? Colors.white : Colors.grey,
+                  color: item['id'] == controller.place.value ? Colors.white : Colors.grey,
                   height: 2,
                 )
               ],

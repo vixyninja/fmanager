@@ -12,10 +12,12 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
   const ReportProblemView({super.key});
 
   @override
+  ReportProblemLogic get controller => Get.put<ReportProblemLogic>(ReportProblemLogic());
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
 
-    Get.put<ReportProblemLogic>(ReportProblemLogic());
     Get.put<FeedBackRepository>(FeedbackRepositoryImpl(apiServices: Get.find<ApiServices>()));
 
     return Scaffold(

@@ -17,6 +17,6 @@ List<Map<String, dynamic>> teacherBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),
     'label': 'Cài đặt',
-    'screen': TeacherSettingView(),
+    'screen': const TeacherSettingView(),
   },
 ];

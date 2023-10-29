@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class LoadingLogic extends GetxController {
   RxBool isLoading = RxBool(false);
+  RxString loadingTitle = RxString('');
 
   void showLoading() {
     isLoading.value = true;
@@ -9,5 +10,10 @@ class LoadingLogic extends GetxController {
 
   void hideLoading() {
     isLoading.value = false;
+  }
+
+  void showLoadingWithTitle({required String title}) {
+    loadingTitle.value = title;
+    isLoading.value = true;
   }
 }

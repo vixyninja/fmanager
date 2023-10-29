@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<ThemeLogic>(ThemeLogic());
-    Get.put<LoadingLogic>(LoadingLogic());
-    Get.put<ApiServices>(ApiServices());
+    Get.put<LoadingLogic>(LoadingLogic(), permanent: true);
+    Get.put<ApiServices>(ApiServices(), permanent: true);
+    Get.put<ThemeLogic>(ThemeLogic(), permanent: true);
   }
 }

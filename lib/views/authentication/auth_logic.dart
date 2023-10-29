@@ -1,13 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/core/core.dart';
 import 'package:fmanager/data/data.dart';
 import 'package:fmanager/main.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/common/common_alert.dart';
-import 'package:fmanager/views/widgets/loading/loading_logic.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
@@ -20,8 +19,7 @@ enum SupportState {
   unsupported,
 }
 
-class AuthLogic extends GetxController {
-  final LoadingLogic loadingLogic = Get.find<LoadingLogic>();
+class AuthLogic extends BaseController {
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: firebaseApp);
   final LocalAuthentication auth = LocalAuthentication();
@@ -83,7 +81,7 @@ class AuthLogic extends GetxController {
       CommonAlert.showSnackBar('Thông báo', 'Vui lòng chọn cơ sở', position: SnackPosition.TOP);
       return;
     }
-    loadingLogic.showLoading();
+    showLoadingWithTitle('Đang đăng nhập với Google ...');
     try {
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
@@ -139,7 +137,7 @@ class AuthLogic extends GetxController {
   }
 
   Future<void> signOutGoogle() async {
-    loadingLogic.showLoading();
+    showLoading();
     try {
       await googleSignIn.signOut();
       await firebaseAuth.signOut().whenComplete(() {
@@ -154,7 +152,7 @@ class AuthLogic extends GetxController {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () {
-        loadingLogic.hideLoading();
+        hideLoading();
       });
     }
   }

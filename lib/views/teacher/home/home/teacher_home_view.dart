@@ -8,14 +8,15 @@ import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class TeacherHomeView extends GetView<TeacherHomeLogic> {
-  TeacherHomeView({Key? key}) : super(key: key);
+  const TeacherHomeView({Key? key}) : super(key: key);
 
-  final TeacherHomeLogic teacherLogic = Get.find<TeacherHomeLogic>();
-  final AuthLogic authLogic = Get.find<AuthLogic>();
+  @override
+  TeacherHomeLogic get controller => Get.find<TeacherHomeLogic>();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final AuthLogic authLogic = Get.find<AuthLogic>();
 
     return Scaffold(
       backgroundColor: Colors.orange,

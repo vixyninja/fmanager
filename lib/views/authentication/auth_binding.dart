@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<UserRepository>(UserRepositoryImpl(apiServices: Get.find<ApiServices>()));
-    Get.put<AuthLogic>(AuthLogic());
+    Get.put<UserRepository>(UserRepositoryImpl(apiServices: Get.find<ApiServices>()), permanent: true);
+    Get.put<AuthLogic>(AuthLogic(), permanent: true);
   }
 }

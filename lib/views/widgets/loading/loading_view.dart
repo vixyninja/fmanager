@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/views/widgets/loading/loading_logic.dart';
 import 'package:get/get.dart';
 
@@ -19,10 +20,25 @@ class LoadingView extends GetView<LoadingLogic> {
               if (controller.isLoading.value)
                 Container(
                   color: Colors.black.withOpacity(0.5),
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
-                      strokeWidth: 5,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+                          strokeWidth: 5,
+                        ),
+                        4.verticalSpace,
+                        Text(
+                          controller.loadingTitle.value,
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

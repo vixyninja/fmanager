@@ -1,7 +1,7 @@
-import 'package:fmanager/core/routes/key.dart';
+import 'package:fmanager/core/core.dart';
 import 'package:get/get.dart';
 
-class TeacherHistoryLogic extends GetxController {
+class TeacherHistoryLogic extends BaseController {
   navigateToProblemRequest() {
     Get.toNamed(RouteKeys.teacherProblemRequestScreen);
   }

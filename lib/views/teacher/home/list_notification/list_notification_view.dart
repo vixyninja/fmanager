@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmanager/views/teacher/home/list_notification/list_notification_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
+import 'package:get/get.dart';
 
-class ListNotificationView extends StatefulWidget {
+class ListNotificationView extends GetView<ListNotificationLogic> {
   const ListNotificationView({super.key});
 
   @override
-  State<ListNotificationView> createState() => _ListNotificationViewState();
-}
+  ListNotificationLogic get controller => Get.put(ListNotificationLogic());
 
-class _ListNotificationViewState extends State<ListNotificationView> {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);

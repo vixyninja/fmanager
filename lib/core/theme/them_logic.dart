@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fmanager/core/core.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:get/get.dart';
 
-class ThemeLogic extends GetxController {
+class ThemeLogic extends BaseController {
   var theme = 'light';
 
   @override
@@ -11,7 +12,7 @@ class ThemeLogic extends GetxController {
     getThemeState();
   }
 
-  void getThemeState() {
+  getThemeState() {
     if (StorageManager.read(StorageKeys.theme.toString()) != null) {
       return setThemeState(StorageManager.read(StorageKeys.theme.toString()));
     }
@@ -19,6 +20,7 @@ class ThemeLogic extends GetxController {
   }
 
   void setThemeState(String value) {
+    showLoading();
     theme = value;
     StorageManager.write(StorageKeys.theme.toString(), value);
 
@@ -34,5 +36,6 @@ class ThemeLogic extends GetxController {
         break;
     }
     update();
+    hideLoading();
   }
 }

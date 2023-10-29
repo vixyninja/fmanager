@@ -1,3 +1,3 @@
-import 'package:get/get.dart';
+import 'package:fmanager/core/core.dart';
 
-class ProblemRequestLogic extends GetxController {}
+class ProblemRequestLogic extends BaseController {}

@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:fmanager/core/core.dart';
 import 'package:fmanager/data/data.dart';
 import 'package:fmanager/helpers/helpers.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:get/get.dart';
 
-class ReportProblemLogic extends GetxController {
+class ReportProblemLogic extends BaseController {
   final FeedBackRepository feedBackRepository = Get.find<FeedBackRepository>();
 
   final TextEditingController roomController = TextEditingController();
