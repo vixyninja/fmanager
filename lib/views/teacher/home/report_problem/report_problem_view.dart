@@ -92,20 +92,89 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
               16.verticalSpace,
               Obx(
                 () {
-                  if (controller.categories!.isEmpty) {
-                    return const Center(child: CircularProgressIndicator());
+                  if (controller.categories.isEmpty) {
+                    return SizedBox(
+                      height: 50.h,
+                      width: double.infinity,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
                   }
-                  return DropdownMenu<CategoryModel>(
-                    initialSelection: controller.categories!.first,
-                    onSelected: (CategoryModel? value) {},
-                    dropdownMenuEntries:
-                        controller.categories!.map<DropdownMenuEntry<CategoryModel>>((CategoryModel value) {
-                      return DropdownMenuEntry<CategoryModel>(value: value, label: value.categoryName);
-                    }).toList(),
-                    textStyle: themeData.textTheme.displayLarge!.copyWith(
-                      fontSize: 16.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                  return LayoutBuilder(
+                    builder: (context, constraints) => DropdownMenu<CategoryModel>(
+                      enableFilter: true,
+                      width: constraints.maxWidth,
+                      onSelected: (CategoryModel? value) {},
+                      dropdownMenuEntries:
+                          controller.categories.map<DropdownMenuEntry<CategoryModel>>((CategoryModel value) {
+                        return DropdownMenuEntry<CategoryModel>(
+                          value: value,
+                          label: value.categoryName,
+                          enabled: true,
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.grey.shade200),
+                            foregroundColor: MaterialStateProperty.all(Colors.black),
+                            textStyle: MaterialStateProperty.all(
+                              themeData.textTheme.displayLarge!.copyWith(
+                                fontSize: 16.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            visualDensity: VisualDensity.compact,
+                          ),
+                        );
+                      }).toList(),
+                      textStyle: themeData.textTheme.displayLarge!.copyWith(
+                        fontSize: 16.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      requestFocusOnTap: true,
+                      selectedTrailingIcon: const Icon(Icons.check),
+                      leadingIcon: const Icon(Icons.category),
+                      trailingIcon: const Icon(Icons.arrow_drop_down),
+                      enableSearch: true,
+                      inputDecorationTheme: InputDecorationTheme(
+                        filled: true,
+                        fillColor: Colors.grey.shade200,
+                        hintStyle: themeData.textTheme.displayMedium!.copyWith(
+                          fontSize: 16.sp,
+                          color: Colors.grey.shade500,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.r),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.r),
+                          borderSide: const BorderSide(
+                            width: 0.5,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                        isDense: true,
+                        constraints: BoxConstraints(maxHeight: 50.h, maxWidth: double.infinity),
+                      ),
+                      hintText: 'Chọn danh mục',
+                      menuHeight: 200.h,
+                      menuStyle: const MenuStyle(
+                        elevation: MaterialStatePropertyAll(0),
+                        visualDensity: VisualDensity.comfortable,
+                        alignment: Alignment.bottomLeft,
+                        padding: MaterialStatePropertyAll(EdgeInsets.all(0)),
+                        backgroundColor: MaterialStatePropertyAll(Colors.deepOrange),
+                        shadowColor: MaterialStatePropertyAll(Colors.grey),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          side: BorderSide(color: Colors.grey),
+                        )),
+                      ),
                     ),
                   );
                 },

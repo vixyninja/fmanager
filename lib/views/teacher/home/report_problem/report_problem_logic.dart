@@ -11,9 +11,7 @@ class ReportProblemLogic extends GetxController {
   final TextEditingController roomController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  final RxList<CategoryModel>? categories = <CategoryModel>[].obs;
-
-  final List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+  final RxList<CategoryModel> categories = <CategoryModel>[].obs;
 
   @override
   void onInit() {
@@ -23,8 +21,6 @@ class ReportProblemLogic extends GetxController {
     });
     descriptionController.addListener(() {});
     getAllCategory();
-
-    print('ReportProblemLogic $feedBackRepository');
   }
 
   void onSearchRoom(String query) async {
@@ -36,6 +32,6 @@ class ReportProblemLogic extends GetxController {
 
   void getAllCategory() async {
     final Either<Exception, List<CategoryModel>> either = await feedBackRepository.getCategories();
-    either.fold((l) {}, (r) => categories!.addAll(r));
+    either.fold((l) {}, (r) => categories.addAll(r));
   }
 }
