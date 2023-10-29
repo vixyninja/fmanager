@@ -10,9 +10,9 @@ late final FirebaseApp firebaseApp;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   firebaseApp = await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await StorageManager.init();
   AppBinding().dependencies();
   FirebaseBinding().dependencies();
-  await StorageManager.init();
   runApp(const App());
 
   // Get.find<FirebaseMessagingSer>().pushNotification(

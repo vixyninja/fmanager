@@ -16,20 +16,17 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
   switch (setting.name) {
     case RouteKeys.teacherBottom:
       return GetPageRoute(
-          settings: setting,
-          routeName: RouteKeys.teacherBottom,
-          page: () => const TeacherBottomNavigation(),
-          bindings: [
-            TeacherBinding(),
-          ]);
+        settings: setting,
+        routeName: RouteKeys.teacherBottom,
+        page: () => const TeacherBottomNavigation(),
+        binding: TeacherBinding(),
+      );
     case RouteKeys.managerBottom:
       return GetPageRoute(
           settings: setting,
           routeName: RouteKeys.managerBottom,
           page: () => const ManagerBottomNavigation(),
-          bindings: [
-            ManagerBinding(),
-          ]);
+          bindings: [ManagerBinding()]);
     case RouteKeys.authScreen:
       return GetPageRoute(
         settings: setting,
@@ -47,7 +44,7 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.teacherReportProblemScreen,
-        page: () => ReportProblemView(),
+        page: () => const ReportProblemView(),
       );
     case RouteKeys.teacherNotificationScreen:
       return GetPageRoute(

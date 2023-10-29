@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/data/data.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_logic.dart';
@@ -8,15 +9,14 @@ import 'package:fmanager/views/widgets/base_button/base_button.dart';
 import 'package:get/get.dart';
 
 class ReportProblemView extends GetView<ReportProblemLogic> {
-  ReportProblemView({super.key});
-
-  final ReportProblemLogic logic = Get.put<ReportProblemLogic>(ReportProblemLogic());
-
-  List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+  const ReportProblemView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+
+    Get.put<ReportProblemLogic>(ReportProblemLogic());
+    Get.put<FeedBackRepository>(FeedbackRepositoryImpl(apiServices: Get.find<ApiServices>()));
 
     return Scaffold(
       backgroundColor: themeData.colorScheme.background,
@@ -90,12 +90,25 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                 cursorColor: Colors.black,
               ),
               16.verticalSpace,
-              DropdownMenu<CategoryModel>(
-                initialSelection: controller.categories.first,
-                onSelected: (CategoryModel? value) {},
-                dropdownMenuEntries: controller.categories.map<DropdownMenuEntry<CategoryModel>>((CategoryModel value) {
-                  return DropdownMenuEntry<CategoryModel>(value: value, label: value.categoryName);
-                }).toList(),
+              Obx(
+                () {
+                  if (controller.categories!.isEmpty) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return DropdownMenu<CategoryModel>(
+                    initialSelection: controller.categories!.first,
+                    onSelected: (CategoryModel? value) {},
+                    dropdownMenuEntries:
+                        controller.categories!.map<DropdownMenuEntry<CategoryModel>>((CategoryModel value) {
+                      return DropdownMenuEntry<CategoryModel>(value: value, label: value.categoryName);
+                    }).toList(),
+                    textStyle: themeData.textTheme.displayLarge!.copyWith(
+                      fontSize: 16.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  );
+                },
               ),
               16.verticalSpace,
               TextFormField(

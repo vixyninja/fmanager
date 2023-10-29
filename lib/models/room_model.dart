@@ -18,20 +18,15 @@ class RoomModel extends BaseModel {
   final int status;
 
   RoomModel({
-    required int id,
-    required String createdAt,
-    required String updatedAt,
-    String? deletedAt,
+    required super.id,
+    required super.createdAt,
+    required super.updatedAt,
+    super.deletedAt,
     required this.roomName,
     required this.floor,
     required this.building,
     required this.status,
-  }) : super(
-          id: id,
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-          deletedAt: deletedAt,
-        );
+  });
 
   factory RoomModel.fromJson(Map<String, dynamic> json) => _$RoomModelFromJson(json);
 
@@ -39,20 +34,16 @@ class RoomModel extends BaseModel {
   Map<String, dynamic> toJson() => _$RoomModelToJson(this);
 
   RoomModel copyWith({
-    int? id,
-    String? createdAt,
-    String? updatedAt,
-    String? deletedAt,
     String? roomName,
     int? floor,
     String? building,
     int? status,
   }) {
     return RoomModel(
-      id: id ?? this.id,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      deletedAt: deletedAt ?? this.deletedAt,
+      id: id,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      deletedAt: deletedAt,
       roomName: roomName ?? this.roomName,
       floor: floor ?? this.floor,
       building: building ?? this.building,

@@ -28,10 +28,10 @@ class UserModel extends BaseModel {
   final String department;
 
   UserModel({
-    required int id,
-    required String createdAt,
-    required String updatedAt,
-    String? deletedAt,
+    required super.id,
+    required super.createdAt,
+    required super.updatedAt,
+    super.deletedAt,
     required this.name,
     required this.email,
     required this.phoneNumber,
@@ -39,12 +39,7 @@ class UserModel extends BaseModel {
     required this.role,
     required this.position,
     required this.department,
-  }) : super(
-          id: id,
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-          deletedAt: deletedAt,
-        );
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
@@ -52,10 +47,6 @@ class UserModel extends BaseModel {
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   UserModel copyWith({
-    int? id,
-    String? createdAt,
-    String? updatedAt,
-    String? deletedAt,
     String? name,
     String? email,
     String? phoneNumber,
@@ -65,10 +56,10 @@ class UserModel extends BaseModel {
     String? department,
   }) {
     return UserModel(
-      id: id ?? this.id,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      deletedAt: deletedAt ?? this.deletedAt,
+      id: id,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      deletedAt: deletedAt,
       name: name ?? this.name,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,

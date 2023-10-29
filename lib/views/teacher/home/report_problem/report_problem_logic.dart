@@ -6,41 +6,36 @@ import 'package:fmanager/models/models.dart';
 import 'package:get/get.dart';
 
 class ReportProblemLogic extends GetxController {
-  final RoomRepository roomRepository = Get.find<RoomRepository>();
-  final CategoryRepository categoryRepository = Get.find<CategoryRepository>();
+  final FeedBackRepository feedBackRepository = Get.find<FeedBackRepository>();
 
-  late final TextEditingController roomController;
-  late final TextEditingController descriptionController;
+  final TextEditingController roomController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
-  late final RxList<CategoryModel> categories;
+  final RxList<CategoryModel>? categories = <CategoryModel>[].obs;
+
+  final List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
   @override
   void onInit() {
     super.onInit();
-    roomController = TextEditingController();
-    descriptionController = TextEditingController();
-  }
+    roomController.addListener(() {
+      onSearchRoom(roomController.text);
+    });
+    descriptionController.addListener(() {});
+    getAllCategory();
 
-  @override
-  void onClose() {
-    super.onClose();
-    roomController.dispose();
-    descriptionController.dispose();
+    print('ReportProblemLogic $feedBackRepository');
   }
 
   void onSearchRoom(String query) async {
     DebounceHelper.debounce('search-room', const Duration(milliseconds: 500), () async {
-      final Either<Exception, List<RoomModel>> either = await roomRepository.getRooms();
-
-      either.fold((l) async {}, (r) async {});
+      final Either<Exception, List<RoomModel>> either = await feedBackRepository.getRooms();
+      either.fold((l) {}, (r) {});
     });
   }
 
   void getAllCategory() async {
-    final Either<Exception, List<CategoryModel>> either = await categoryRepository.getCategories();
-
-    either.fold((l) async {}, (r) async {
-      categories = r.obs;
-    });
+    final Either<Exception, List<CategoryModel>> either = await feedBackRepository.getCategories();
+    either.fold((l) {}, (r) => categories!.addAll(r));
   }
 }

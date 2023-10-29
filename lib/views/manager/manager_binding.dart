@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 class ManagerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ManagerHomeLogic>(() => ManagerHomeLogic());
-    Get.lazyPut<ManagerHistoryLogic>(() => ManagerHistoryLogic());
-    Get.lazyPut<ManagerSettingLogic>(() => ManagerSettingLogic());
+    Get.lazyPut<ManagerHomeLogic>(() => ManagerHomeLogic(), fenix: true);
+    Get.lazyPut<ManagerHistoryLogic>(() => ManagerHistoryLogic(), fenix: true);
+    Get.lazyPut<ManagerSettingLogic>(() => ManagerSettingLogic(), fenix: true);
   }
 }

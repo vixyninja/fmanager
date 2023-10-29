@@ -151,7 +151,6 @@ class AuthLogic extends GetxController {
       StorageManager.clearKey(StorageKeys.biometric.toString());
       StorageManager.clearKey(StorageKeys.place.toString());
     } catch (e) {
-      print(e.toString());
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () {
