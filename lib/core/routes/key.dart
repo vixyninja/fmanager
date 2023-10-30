@@ -8,4 +8,6 @@ class RouteKeys {
 
   static const String managerProblemView = '/manager_problem_view';
   static const String managerProblemDetailView = '/manager_problem_detail_view';
+  static const String managerProblemDetailActiveView =
+      '/manager_problem_detail_active_view';
 }
