@@ -69,7 +69,7 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
                               AssetManager.getIconPath(IconManager.icEdit)),
                           title: 'Sự cố cần hỗ trợ',
                           onPressed: () =>
-                              Get.toNamed(RouteKeys.managerProblemScreen),
+                              Get.toNamed(RouteKeys.managerProblemView),
                         ),
                       ),
                       20.verticalSpace,

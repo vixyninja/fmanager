@@ -3,6 +3,7 @@ import 'package:fmanager/core/routes/key.dart';
 import 'package:fmanager/views/authentication/auth_binding.dart';
 import 'package:fmanager/views/authentication/auth_view.dart';
 import 'package:fmanager/views/manager/home/problem/manager_problem_view.dart';
+import 'package:fmanager/views/manager/home/problem_detail/manager_problem_detail_view.dart';
 import 'package:fmanager/views/manager/manager_binding.dart';
 import 'package:fmanager/views/manager/manager_bottom.dart';
 import 'package:fmanager/views/teacher/history/problem_request/problem_request_view.dart';
@@ -52,11 +53,17 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
         routeName: RouteKeys.reportProblemScreen,
         page: () => ReportProblemView(),
       );
-    case RouteKeys.managerProblemScreen:
+    case RouteKeys.managerProblemView:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemScreen,
+        routeName: RouteKeys.managerProblemView,
         page: () => const ManagerProblemView(),
+      );
+    case RouteKeys.managerProblemDetailView:
+      return GetPageRoute(
+        settings: setting,
+        routeName: RouteKeys.managerProblemDetailView,
+        page: () => const ManagerProblemDetailView(),
       );
     default:
       return GetPageRoute(settings: setting, page: () => const ErrorBoundary());

@@ -11,7 +11,7 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -28,18 +28,18 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      leading: _buildLeadingAppBar(),
+      leading: _buildLeadingAppBar(context),
       actions: _buildActionsAppBar(),
     );
   }
 
-  Widget _buildLeadingAppBar() {
+  Widget _buildLeadingAppBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: InkWell(
-        onTap: () => {},
+        onTap: () => Navigator.pop(context),
         borderRadius: BorderRadius.circular(999),
         child: const Padding(
           padding: EdgeInsets.all(2),

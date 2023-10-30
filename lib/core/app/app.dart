@@ -59,7 +59,7 @@ class _AppState extends State<App> {
             return LoadingView(child: child);
           },
           onGenerateRoute: onGenerateRoute,
-          initialRoute: RouteKeys.managerProblemScreen,
+          initialRoute: RouteKeys.managerProblemDetailView,
           transitionDuration: const Duration(milliseconds: 300),
           defaultTransition: Transition.topLevel,
         ),

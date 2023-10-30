@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmanager/core/core.dart';
+import 'package:get/get.dart';
 
 class ProblemCard extends StatefulWidget {
   const ProblemCard({super.key});
@@ -12,7 +14,7 @@ class _ProblemCardState extends State<ProblemCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Material(
         elevation: 2,
         shape: RoundedRectangleBorder(
@@ -24,7 +26,7 @@ class _ProblemCardState extends State<ProblemCard> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         type: MaterialType.card,
         child: InkWell(
-          onTap: () => {},
+          onTap: () => Get.toNamed(RouteKeys.managerProblemDetailView),
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Column(

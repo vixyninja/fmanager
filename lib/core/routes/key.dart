@@ -6,5 +6,6 @@ class RouteKeys {
   static const String problemRequestScreen = '/problemRequestScreen';
   static const String reportProblemScreen = '/reportProblemScreen';
 
-  static const String managerProblemScreen = '/manager_problem_screen';
+  static const String managerProblemView = '/manager_problem_view';
+  static const String managerProblemDetailView = '/manager_problem_detail_view';
 }
