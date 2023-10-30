@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:fmanager/data/data.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_logic.dart';
@@ -20,8 +19,6 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-
-    Get.put<FeedBackRepository>(FeedbackRepositoryImpl(apiServices: Get.find<ApiServices>()));
 
     return Scaffold(
       backgroundColor: themeData.colorScheme.background,
@@ -150,7 +147,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                     if (controller.categories.isEmpty) {
                       return LayoutBuilder(
                         builder: (context, constraints) => DropdownMenu<CategoryModel>(
-                          enableFilter: true,
+                          enableFilter: false,
                           width: constraints.maxWidth,
                           onSelected: (CategoryModel? value) {},
                           dropdownMenuEntries: const [],
@@ -163,7 +160,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                           selectedTrailingIcon: const Icon(Icons.check),
                           leadingIcon: const Icon(Icons.category),
                           trailingIcon: SizedBox(height: 20.h, width: 20.w, child: const CircularProgressIndicator()),
-                          enableSearch: true,
+                          enableSearch: false,
                           inputDecorationTheme: InputDecorationTheme(
                             filled: true,
                             fillColor: Colors.grey.shade200,
@@ -212,27 +209,30 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                         enableFilter: true,
                         width: constraints.maxWidth,
                         onSelected: (CategoryModel? value) => controller.categoryController.text = value!.categoryName,
-                        dropdownMenuEntries: controller.categories
-                            .map<DropdownMenuEntry<CategoryModel>>(
-                              (CategoryModel value) => DropdownMenuEntry<CategoryModel>(
-                                value: value,
-                                label: '${value.categoryName} - ${value.categoryType}',
-                                enabled: true,
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Colors.grey.shade200),
-                                  foregroundColor: MaterialStateProperty.all(Colors.black),
-                                  textStyle: MaterialStateProperty.all(
-                                    themeData.textTheme.displayLarge!.copyWith(
-                                      fontSize: 16.sp,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                        dropdownMenuEntries: controller.categories.map<DropdownMenuEntry<CategoryModel>>(
+                          (CategoryModel value) {
+                            final String label = '${value.categoryName} - ${value.categoryType}';
+                            return DropdownMenuEntry<CategoryModel>(
+                              value: value,
+                              label: label,
+                              enabled: true,
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Colors.grey.shade200),
+                                foregroundColor: MaterialStateProperty.all(Colors.black),
+                                textStyle: MaterialStateProperty.all(
+                                  themeData.textTheme.displayLarge!.copyWith(
+                                    fontSize: 16.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
                                   ),
-                                  visualDensity: VisualDensity.compact,
                                 ),
+                                visualDensity: VisualDensity.compact,
                               ),
-                            )
-                            .toList(),
+                            );
+                          },
+                        ).toList(),
                         textStyle: themeData.textTheme.displayLarge!.copyWith(
                           fontSize: 16.sp,
                           color: Colors.black,
@@ -275,12 +275,14 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                           visualDensity: VisualDensity.comfortable,
                           alignment: Alignment.bottomLeft,
                           padding: MaterialStatePropertyAll(EdgeInsets.all(0)),
-                          backgroundColor: MaterialStatePropertyAll(Colors.deepOrange),
+                          backgroundColor: MaterialStatePropertyAll(Colors.grey),
                           shadowColor: MaterialStatePropertyAll(Colors.grey),
-                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            side: BorderSide(color: Colors.grey),
-                          )),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              side: BorderSide(color: Colors.grey),
+                            ),
+                          ),
                         ),
                       ),
                     );

@@ -35,13 +35,7 @@ class ManagerHistoryView extends GetView<ManagerHistoryLogic> {
                     ListView.builder(
                       itemBuilder: (context, index) {
                         return Container(
-                          margin: EdgeInsets.only(top: 10.r, left: 16.r, right: 16.r),
-                          child: ProblemItem(
-                            title: 'A',
-                            subTitle: '$index',
-                            onTap: () {},
-                          ),
-                        );
+                            margin: EdgeInsets.only(top: 10.r, left: 16.r, right: 16.r), child: const SizedBox());
                       },
                       itemCount: 10,
                       shrinkWrap: true,

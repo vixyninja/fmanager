@@ -45,7 +45,9 @@ class ProfileUpdateView extends GetView<ProfileUpdateLogic> {
                   BaseCircleAvatar(
                     height: 160.h,
                     width: 160.w,
-                    imageUrl: controller.authLogic.userModel.value.url.toString(),
+                    imageUrl: controller.authLogic.userModel.value.url.toString() == ''
+                        ? IMAGE_URL
+                        : controller.authLogic.userModel.value.url.toString(),
                     onTap: () {},
                   ),
                   const Positioned(

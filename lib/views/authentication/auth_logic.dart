@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/data/data.dart';
 import 'package:fmanager/main.dart';
@@ -252,6 +253,22 @@ class AuthLogic extends BaseController {
                 department: updateProfileModel.department,
               );
               await getMyProfile();
+              Get.find<FirebaseMessagingSer>().pushNotification(
+                title: 'Thông báo',
+                body: 'Thông tin cá nhân của bạn đã được cập nhật',
+                bigText: 'Thông tin cá nhân của bạn đã được cập nhật',
+                id: 2003,
+                payload: 'Thông tin cá nhân của bạn đã được cập nhật',
+                showBigPicture: false,
+                actions: [
+                  const AndroidNotificationAction(
+                    'cancel',
+                    'Đóng',
+                    cancelNotification: true,
+                    showsUserInterface: true,
+                  ),
+                ],
+              );
             },
           ));
     } catch (e) {

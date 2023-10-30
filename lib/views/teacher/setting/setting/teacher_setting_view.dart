@@ -37,7 +37,8 @@ class TeacherSettingView extends GetView<TeacherSettingLogic> {
               width: 80.w,
               height: 80.h,
               onTap: () {},
-              imageUrl: authLogic.userModel.value.url.toString(),
+              imageUrl:
+                  authLogic.userModel.value.url.toString() == '' ? IMAGE_URL : authLogic.userModel.value.url.toString(),
             ),
           ),
           7.verticalSpace,

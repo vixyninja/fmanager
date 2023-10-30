@@ -8,12 +8,12 @@ part of 'category_model.dart';
 
 CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) =>
     CategoryModel(
-      id: json['ID'] as int,
+      categoryName: json['CategoryName'] as String? ?? '',
+      categoryType: json['CategoryType'] as String? ?? '',
       createdAt: json['CreatedAt'] as String,
       updatedAt: json['UpdatedAt'] as String,
       deletedAt: json['DeletedAt'] as String?,
-      categoryName: json['CategoryName'] as String? ?? '',
-      categoryType: json['CategoryType'] as String? ?? '',
+      id: json['ID'] as int,
     );
 
 Map<String, dynamic> _$CategoryModelToJson(CategoryModel instance) =>

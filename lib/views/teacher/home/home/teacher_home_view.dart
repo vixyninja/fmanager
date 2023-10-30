@@ -33,7 +33,9 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                   onTapTitle: () => Get.snackbar('Title', 'Title'),
                   pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
                   title: authLogic.userModel.value.name.toString(),
-                  urlAvatar: authLogic.userModel.value.url.toString(),
+                  urlAvatar: authLogic.userModel.value.url.toString() == ''
+                      ? IMAGE_URL
+                      : authLogic.userModel.value.url.toString(),
                   colorTitle: themeData.colorScheme.onPrimary,
                   colorSuffixIcon: themeData.colorScheme.onPrimary,
                 ),

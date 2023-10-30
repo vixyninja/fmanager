@@ -8,9 +8,10 @@ import 'package:get/get.dart';
 import 'package:timelines/timelines.dart';
 
 class ProblemRequestView extends GetView<ProblemRequestLogic> {
-  ProblemRequestView({super.key});
+  const ProblemRequestView({super.key});
 
-  final ProblemRequestLogic logic = Get.put<ProblemRequestLogic>(ProblemRequestLogic());
+  @override
+  ProblemRequestLogic get controller => Get.put<ProblemRequestLogic>(ProblemRequestLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +49,7 @@ class ProblemRequestView extends GetView<ProblemRequestLogic> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.r),
-                    child: const ProblemItem(
-                        title:
-                            'Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1Sự cố 1',
-                        subTitle:
-                            'Nguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van ANguyen Van A'),
-                  ),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 16.r), child: const SizedBox()),
                   20.verticalSpace,
                   Text('Trạng thái yêu cầu', style: themeData.textTheme.displayLarge!),
                   Timeline.tileBuilder(

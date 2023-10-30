@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmanager/models/feedback_model.dart';
 import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 
 class ProblemItem extends StatelessWidget {
-  const ProblemItem({super.key, required this.title, required this.subTitle, this.onTap});
+  const ProblemItem({
+    super.key,
+    this.onTap,
+    required this.feedBackModel,
+  });
 
-  final String title;
-  final String subTitle;
+  final FeedBackModel feedBackModel;
+
   final VoidCallback? onTap;
 
   @override
@@ -50,8 +55,7 @@ class ProblemItem extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        // title.length > 30 ? '${title.substring(0, 30)}...' : title.toString(),
-                        title,
+                        feedBackModel.category.categoryName.toString(),
                         style: themeData.textTheme.displayLarge,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -66,7 +70,7 @@ class ProblemItem extends StatelessWidget {
                           style: themeData.textTheme.displayMedium,
                           children: [
                             TextSpan(
-                              text: subTitle,
+                              text: 'Chưa xử lý',
                               style: themeData.textTheme.displayMedium!.copyWith(
                                 color: themeData.colorScheme.onBackground,
                                 overflow: TextOverflow.ellipsis,
@@ -78,7 +82,7 @@ class ProblemItem extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        'Sự cố thiết bị - Phòng: T1101',
+                        '${feedBackModel.category.categoryName.toString()} - Phòng ${feedBackModel.room.floor.toString()}',
                         style: themeData.textTheme.displayMedium,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

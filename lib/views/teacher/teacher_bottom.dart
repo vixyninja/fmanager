@@ -9,7 +9,7 @@ class TeacherBottomNavigation extends GetView<TeacherController> {
   const TeacherBottomNavigation({super.key});
 
   @override
-  TeacherController get controller => Get.put<TeacherController>(TeacherController(), permanent: true);
+  TeacherController get controller => Get.put<TeacherController>(TeacherController());
 
   @override
   Widget build(BuildContext context) {
