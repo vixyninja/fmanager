@@ -34,6 +34,7 @@ dependencies:
   build_runner: ^2.4.6
   flutter_typeahead: ^4.8.0
   image_picker: ^1.0.4
+  http_parser: ^4.0.2
 
 dev_dependencies:
   flutter_test:
