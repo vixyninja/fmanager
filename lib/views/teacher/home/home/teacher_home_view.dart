@@ -19,21 +19,24 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
     final AuthLogic authLogic = Get.find<AuthLogic>();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
-              child: BaseHeader(
-                onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
-                onTapSuffixIcon: () => controller.navigateToListNotification(),
-                onTapTitle: () => Get.snackbar('Title', 'Title'),
-                pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
-                title: authLogic.userModel!.name.toString(),
-                urlAvatar: authLogic.userModel!.url.toString(),
-                colorTitle: themeData.colorScheme.onPrimary,
-                colorSuffixIcon: themeData.colorScheme.onPrimary,
+              child: Obx(
+                () => BaseHeader(
+                  onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
+                  onTapSuffixIcon: () => controller.navigateToListNotification(),
+                  onTapTitle: () => Get.snackbar('Title', 'Title'),
+                  pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
+                  title: authLogic.userModel.value.name.toString(),
+                  urlAvatar: authLogic.userModel.value.url.toString(),
+                  colorTitle: themeData.colorScheme.onPrimary,
+                  colorSuffixIcon: themeData.colorScheme.onPrimary,
+                ),
               ),
             ),
           ),

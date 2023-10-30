@@ -96,9 +96,8 @@ class FirebaseMessagingSer extends GetxService {
 
   Future<void> setupLocalPushNotification() async {
     // ! This set up is for Android
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings(
-      'mipmap/ic_launcher',
-    );
+    const AndroidInitializationSettings androidInitializationSettings =
+        AndroidInitializationSettings('mipmap/ic_launcher');
     // ! This set up is for iOS :))
     const DarwinInitializationSettings darwinInitializationSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
@@ -123,22 +122,14 @@ class FirebaseMessagingSer extends GetxService {
     required String bigText,
     bool showBigPicture = false,
     String? payload,
+    List<AndroidNotificationAction>? actions,
   }) async {
     AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
       channel.id,
       channel.name,
       channelShowBadge: true,
       channelDescription: channel.description,
-      actions: [
-        const AndroidNotificationAction(
-          'action_1',
-          'Action 1',
-        ),
-        const AndroidNotificationAction(
-          'action_2',
-          'Action 2',
-        ),
-      ],
+      actions: actions,
       when: DateTime.now().millisecondsSinceEpoch,
       visibility: NotificationVisibility.public,
       importance: Importance.max,

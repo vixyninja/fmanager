@@ -6,4 +6,5 @@ class RouteKeys {
   static const String teacherProblemRequestScreen = '/teacherProblemRequestScreen';
   static const String teacherReportProblemScreen = '/teacherReportProblemScreen';
   static const String teacherNotificationScreen = '/teacherNotificationScreen';
+  static const String teacherUpdateProfile = '/teacherUpdateProfile';
 }

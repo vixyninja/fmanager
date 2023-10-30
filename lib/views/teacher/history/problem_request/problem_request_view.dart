@@ -17,6 +17,7 @@ class ProblemRequestView extends GetView<ProblemRequestLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange,
       body: CustomScrollView(
         physics: const NeverScrollableScrollPhysics(),

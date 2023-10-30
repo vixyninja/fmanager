@@ -11,22 +11,22 @@ class BaseController extends GetxController {
   void handleError(Exception e) {
     switch (e.runtimeType) {
       case ErrorExceptions:
-        CommonDialog.showDefault('Error', e.toString());
+        CommonDialog.showDefault('Error', e.toString(), () => Get.back());
         break;
       case FetchDataException:
-        CommonDialog.showDefault('Error', e.toString());
+        CommonDialog.showDefault('Error', e.toString(), () => Get.back());
         break;
       case BadRequestException:
-        CommonDialog.showDefault('Error', e.toString());
+        CommonDialog.showDefault('Error', e.toString(), () => Get.back());
         break;
       case UnauthorisedException:
-        CommonDialog.showDefault('Error', e.toString());
+        CommonDialog.showDefault('Error', e.toString(), () => Get.back());
         break;
       case InvalidInputException:
-        CommonDialog.showDefault('Error', e.toString());
+        CommonDialog.showDefault('Error', e.toString(), () => Get.back());
         break;
       default:
-        CommonDialog.showDefault('Error', e.toString());
+        CommonDialog.showDefault('Error', e.toString(), () => Get.back());
     }
   }
 

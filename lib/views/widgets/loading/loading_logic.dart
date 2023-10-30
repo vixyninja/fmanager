@@ -9,6 +9,7 @@ class LoadingLogic extends GetxController {
   }
 
   void hideLoading() {
+    loadingTitle.value = '';
     isLoading.value = false;
   }
 

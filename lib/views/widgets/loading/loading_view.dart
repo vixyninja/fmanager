@@ -32,7 +32,7 @@ class LoadingView extends GetView<LoadingLogic> {
                         ),
                         4.verticalSpace,
                         Text(
-                          controller.loadingTitle.value,
+                          controller.loadingTitle.value == '' ? 'Loading' : controller.loadingTitle.value,
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: 16.sp,

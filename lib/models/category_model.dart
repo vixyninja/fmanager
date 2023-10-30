@@ -39,6 +39,17 @@ class CategoryModel extends BaseModel {
     );
   }
 
+  factory CategoryModel.createEmpty() {
+    return CategoryModel(
+      categoryName: '',
+      categoryType: '',
+      id: -1,
+      createdAt: '',
+      updatedAt: '',
+      deletedAt: '',
+    );
+  }
+
   @override
   String toString() {
     return 'CategoryModel(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, categoryName: $categoryName, categoryType: $categoryType)';

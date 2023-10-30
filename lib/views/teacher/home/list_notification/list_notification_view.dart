@@ -14,6 +14,7 @@ class ListNotificationView extends GetView<ListNotificationLogic> {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Thông báo',

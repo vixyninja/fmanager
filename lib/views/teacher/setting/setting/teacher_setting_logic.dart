@@ -7,4 +7,8 @@ class TeacherSettingLogic extends BaseController {
   void changeNotification(bool value) {
     onNotification.value = value;
   }
+
+  void navigateToProfileUpdate() {
+    Get.toNamed(RouteKeys.teacherUpdateProfile);
+  }
 }

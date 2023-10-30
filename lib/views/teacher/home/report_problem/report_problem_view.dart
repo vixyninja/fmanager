@@ -61,7 +61,6 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                     textFieldConfiguration: TextFieldConfiguration(
                       controller: controller.roomController,
                       keyboardType: TextInputType.text,
-                      autofocus: true,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey.shade200,
@@ -92,32 +91,49 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    suggestionsCallback: (pattern) {
-                      if (controller.rooms.isEmpty) {
-                        return [];
-                      }
-                      return controller.rooms;
+                    suggestionsCallback: (pattern) async {
+                      final list = await controller.onSearchRoom(pattern);
+                      return list!
+                        ..where((element) => element.roomName.toLowerCase().contains(pattern.toLowerCase()))
+                        ..sort((a, b) => a.roomName.compareTo(b.roomName));
                     },
-                    noItemsFoundBuilder: (context) =>
-                        const SizedBox.shrink(child: Center(child: Text('Không có dữ liệu'))),
-                    loadingBuilder: (context) => const CircularProgressIndicator(),
+                    noItemsFoundBuilder: (context) => const SizedBox.shrink(
+                      child: SizedBox.shrink(
+                        child: Center(
+                          child: Text('Không có dữ liệu'),
+                        ),
+                      ),
+                    ),
+                    loadingBuilder: (context) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    animationDuration: const Duration(milliseconds: 300),
                     debounceDuration: const Duration(milliseconds: 500),
+                    errorBuilder: (context, error) => const SizedBox.shrink(),
                     itemBuilder: (context, suggestion) {
                       return ListTile(
                         leading: const Icon(Icons.meeting_room_sharp),
                         title: Text(
                           suggestion.roomName,
-                          style: themeData.textTheme.displayLarge!.copyWith(fontSize: 16.sp, color: Colors.black),
+                          style: themeData.textTheme.displayLarge!.copyWith(
+                            fontSize: 16.sp,
+                            color: Colors.black,
+                          ),
                         ),
                         subtitle: Text(
                           '${suggestion.building} - ${suggestion.floor}',
-                          style:
-                              themeData.textTheme.displayMedium!.copyWith(fontSize: 14.sp, color: Colors.grey.shade500),
+                          style: themeData.textTheme.displayMedium!.copyWith(
+                            fontSize: 14.sp,
+                            color: Colors.grey.shade500,
+                          ),
                         ),
                       );
                     },
                     itemSeparatorBuilder: (context, index) => const Divider(height: 1),
-                    onSuggestionSelected: (suggestion) => controller.roomController.text = suggestion.roomName,
+                    onSuggestionSelected: (suggestion) {
+                      controller.roomController.text = suggestion.roomName;
+                      controller.room.value = suggestion;
+                    },
                     suggestionsBoxDecoration: SuggestionsBoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       elevation: 8.0,

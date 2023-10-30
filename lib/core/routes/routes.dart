@@ -7,6 +7,7 @@ import 'package:fmanager/views/manager/manager_bottom.dart';
 import 'package:fmanager/views/teacher/history/problem_request/problem_request_view.dart';
 import 'package:fmanager/views/teacher/home/list_notification/list_notification_view.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_view.dart';
+import 'package:fmanager/views/teacher/setting/profile_update/profile_update_view.dart';
 import 'package:fmanager/views/teacher/teacher_binding.dart';
 import 'package:fmanager/views/teacher/teacher_bottom.dart';
 import 'package:fmanager/views/widgets/error_boundary/error_boundary.dart';
@@ -52,6 +53,12 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
         settings: setting,
         routeName: RouteKeys.teacherNotificationScreen,
         page: () => const ListNotificationView(),
+      );
+    case RouteKeys.teacherUpdateProfile:
+      return GetPageRoute(
+        settings: setting,
+        routeName: RouteKeys.teacherUpdateProfile,
+        page: () => const ProfileUpdateView(),
       );
     default:
       return GetPageRoute(settings: setting, page: () => const ErrorBoundary());

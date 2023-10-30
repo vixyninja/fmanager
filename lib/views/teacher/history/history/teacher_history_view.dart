@@ -12,6 +12,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange,
       body: SafeArea(
         child: SingleChildScrollView(

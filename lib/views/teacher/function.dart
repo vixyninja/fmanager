@@ -7,7 +7,7 @@ List<Map<String, dynamic>> teacherBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHomeIcon),
     'label': 'Trang chủ',
-    'screen': TeacherHomeView(),
+    'screen': const TeacherHomeView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),

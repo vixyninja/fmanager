@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:fmanager/core/core.dart';
@@ -6,6 +5,7 @@ import 'package:fmanager/data/data.dart';
 import 'package:fmanager/main.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/utils.dart';
+import 'package:fmanager/views/common/common.dart';
 import 'package:fmanager/views/common/common_alert.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -25,19 +25,11 @@ class AuthLogic extends BaseController {
   final LocalAuthentication auth = LocalAuthentication();
 
   // Repository
-  late UserModel? userModel;
   final ApiServices apiServices = Get.find<ApiServices>();
   final UserRepository userRepository = Get.find<UserRepository>();
 
-  late Rx<User?> user = Rx<User?>(null);
-
-  late RxString _place = RxString('');
-  RxString get place => _place;
-  set place(RxString value) {
-    _place = value;
-    StorageManager.write(StorageKeys.place.toString(), _place.value.toString());
-    update();
-  }
+  late final Rx<UserModel> userModel = UserModel.createEmptyInstance().obs;
+  late RxString place = RxString('');
 
   // !! Change this to true if you want to test teacher screen
   RxBool isTeacher = RxBool(true);
@@ -70,9 +62,9 @@ class AuthLogic extends BaseController {
 
   void initPlace() {
     if (StorageManager.read<String>(StorageKeys.place.toString(), '') != null) {
-      place = StorageManager.read<String>(StorageKeys.place.toString(), '')!.obs;
+      place.value = StorageManager.read<String>(StorageKeys.place.toString(), '')!;
     } else {
-      place = ''.obs;
+      place.value = '';
     }
   }
 
@@ -81,7 +73,8 @@ class AuthLogic extends BaseController {
       CommonAlert.showSnackBar('Thông báo', 'Vui lòng chọn cơ sở', position: SnackPosition.TOP);
       return;
     }
-    showLoadingWithTitle('Đang đăng nhập với Google ...');
+
+    showLoadingWithTitle('Đang đăng nhập...');
     try {
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
@@ -91,69 +84,65 @@ class AuthLogic extends BaseController {
       );
       await firebaseAuth.signInWithCredential(credential);
       final String? idToken = await firebaseAuth.currentUser!.getIdToken();
-      final Either<Exception, TokenModel> either =
-          await userRepository.loginGoogleGolang(idToken: idToken!, position: place.value);
-      either.fold(
-        (l) {
-          CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
-        },
-        (r) async {
-          await StorageManager.write(StorageKeys.accessToken.toString(), r.accessToken.toString());
-          await StorageManager.write(StorageKeys.refreshToken.toString(), r.refreshToken.toString());
-          await getMyProfile();
-        },
-      );
+      await userRepository.loginGoogleGolang(idToken: idToken!, position: place.value).then((value) => value
+        ..fold(
+          (l) => CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
+          (r) async {
+            await StorageManager.write(StorageKeys.place.toString(), place.toString());
+            await StorageManager.write(StorageKeys.accessToken.toString(), r.accessToken.toString());
+            await StorageManager.write(StorageKeys.refreshToken.toString(), r.refreshToken.toString());
+            await setStateRoute();
+          },
+        ));
     } catch (e) {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+      await signOutGoogle();
     } finally {
-      Future.delayed(const Duration(seconds: 2), () {
-        loadingLogic.hideLoading();
-      });
+      Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
   }
 
-  Future<void> getMyProfile() async {
+  Future<void> setStateRoute() async {
+    showLoadingWithTitle('Đang tải...');
     try {
-      final Either<Exception, UserModel> either = await userRepository.getMyProfile();
-      either.fold(
-        (l) {
-          CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
-        },
-        (r) {
-          if (RoleEnum.TEACHER.toString() == r.role.toString()) {
-            isTeacher.value = true;
-            userModel = r;
-            Get.offAllNamed(RouteKeys.teacherBottom);
-          } else {
-            userModel = r;
-            isTeacher.value = false;
-            Get.offAllNamed(RouteKeys.managerBottom);
-          }
-        },
-      );
+      await userRepository.getMyProfile().then((value) => value.fold(
+            (l) =>
+                CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
+            (r) {
+              if (RoleEnum.TEACHER.toString() == r.role.toString()) {
+                isTeacher.value = true;
+                userModel.value = r;
+                Get.offAllNamed(RouteKeys.teacherBottom);
+              } else {
+                userModel.value = r;
+                isTeacher.value = false;
+                Get.offAllNamed(RouteKeys.managerBottom);
+              }
+            },
+          ));
     } catch (e) {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+    } finally {
+      Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
   }
 
   Future<void> signOutGoogle() async {
-    showLoading();
+    showLoadingWithTitle('Đang đăng xuất...');
     try {
       await googleSignIn.signOut();
       await firebaseAuth.signOut().whenComplete(() {
-        userModel = UserModel.createEmptyInstance();
+        userModel.value = UserModel.createEmptyInstance();
         Get.offAllNamed(RouteKeys.authScreen);
+        enableBiometric = false;
+        place.value = '';
+        StorageManager.clearKey(StorageKeys.biometric.toString());
+        StorageManager.clearKey(StorageKeys.place.toString());
       });
-      enableBiometric = false;
-      place.value = '';
-      StorageManager.clearKey(StorageKeys.biometric.toString());
-      StorageManager.clearKey(StorageKeys.place.toString());
     } catch (e) {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
     } finally {
-      Future.delayed(const Duration(seconds: 2), () {
-        hideLoading();
-      });
+      Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
   }
 
@@ -229,6 +218,46 @@ class AuthLogic extends BaseController {
       }
     } catch (e) {
       print('other $e');
+    }
+  }
+
+  Future<void> getMyProfile() async {
+    showLoadingWithTitle('Đang tải...');
+    try {
+      await userRepository.getMyProfile().then((value) => value.fold(
+            (l) =>
+                CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
+            (r) {
+              userModel.value = r;
+            },
+          ));
+    } catch (e) {
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+    } finally {
+      Future.delayed(const Duration(seconds: 2), () => hideLoading());
+    }
+  }
+
+  Future<void> updateMyProfile(UpdateProfileModel updateProfileModel) async {
+    showLoadingWithTitle('Đang cập nhật...');
+    try {
+      await userRepository.updateMyProfile(updateProfileModel).then((value) => value.fold(
+            (l) =>
+                CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
+            (r) async {
+              CommonAlert.showSnackBar('Thông báo', 'Cập nhật thông tin thành công', position: SnackPosition.TOP);
+              userModel.value = userModel.value.copyWith(
+                phoneNumber: updateProfileModel.phoneNumber,
+                position: updateProfileModel.position,
+                department: updateProfileModel.department,
+              );
+              await getMyProfile();
+            },
+          ));
+    } catch (e) {
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+    } finally {
+      Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
   }
 }

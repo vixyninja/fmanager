@@ -16,6 +16,7 @@ class TeacherBottomNavigation extends GetView<TeacherController> {
     final ThemeData theme = Theme.of(context);
     return Obx(
       () => Scaffold(
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: BottomNavigationBar(
           items: [
             for (final screen in teacherBottomNavigation)
