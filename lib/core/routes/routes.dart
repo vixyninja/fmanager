@@ -70,7 +70,7 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.managerProblemDetailView,
-        page: () => const ManagerProblemDetailActiveView(),
+        page: () => ManagerProblemDetailActiveView(),
       );
     default:
       return GetPageRoute(settings: setting, page: () => const ErrorBoundary());

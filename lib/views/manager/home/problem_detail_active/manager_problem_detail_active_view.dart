@@ -4,7 +4,45 @@ import 'package:get/get.dart';
 
 class ManagerProblemDetailActiveView
     extends GetView<ManagerProblemDetailActiveLogic> {
-  const ManagerProblemDetailActiveView({Key? key}) : super(key: key);
+  ManagerProblemDetailActiveView({Key? key}) : super(key: key);
+
+  final List<Map<String, dynamic>> itemTypeList = [
+    {
+      'id': 0,
+      'title': 'Lỗi từ phía giảng viên',
+    },
+    {
+      'id': 1,
+      'title': 'Lỗi từ phía hệ thống',
+    },
+    {
+      'id': 2,
+      'title': 'Khác',
+    },
+  ];
+
+  final List<Map<String, dynamic>> itemTimeList = [
+    {
+      'id': 0,
+      'title': '15 phút',
+    },
+    {
+      'id': 1,
+      'title': '30 phút',
+    },
+    {
+      'id': 2,
+      'title': '1 tiếng',
+    },
+    {
+      'id': 3,
+      'title': '2 tiếng',
+    },
+    {
+      'id': 4,
+      'title': '1 ngày',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +163,7 @@ class ManagerProblemDetailActiveView
                 const Row(
                   children: <Widget>[
                     SizedBox(
-                      width: 100,
+                      width: 115,
                       child: Text(
                         'Thời gian:',
                         style: TextStyle(color: Colors.grey),
@@ -138,7 +176,7 @@ class ManagerProblemDetailActiveView
                 const Row(
                   children: <Widget>[
                     SizedBox(
-                      width: 100,
+                      width: 115,
                       child: Text(
                         'Phòng:',
                         style: TextStyle(color: Colors.grey),
@@ -152,7 +190,7 @@ class ManagerProblemDetailActiveView
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      width: 100,
+                      width: 115,
                       child: Text(
                         'Mô tả sự cố:',
                         style: TextStyle(color: Colors.grey),
@@ -168,88 +206,167 @@ class ManagerProblemDetailActiveView
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextFormField(
-              minLines: 5,
-              maxLines: 5,
-              keyboardType: TextInputType.multiline,
-              decoration: InputDecoration(
-                hintText: 'Ghi chú',
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey.shade400,
-                ),
-                filled: true,
-                fillColor: Colors.grey.shade100,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    width: 1,
-                    style: BorderStyle.solid,
-                    color: Colors.grey.shade200,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    width: 1,
-                    style: BorderStyle.solid,
-                    color: Colors.grey.shade200,
-                  ),
-                ),
-              ),
+            child: Column(
+              children: <Widget>[
+                _buildSelectorGroup(),
+                _buildTextArea(),
+              ],
             ),
           ),
           const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.48,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: () => {},
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.transparent,
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'Hoàn thành',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.48,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: () => {},
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.transparent,
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'Chưa xử lý được',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _buildButtonGroup(context),
         ],
       ),
+    );
+  }
+
+  Widget _buildSelectorGroup() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        DropdownButton(
+          value: 0,
+          items: itemTypeList
+              .map(
+                (e) => DropdownMenuItem(
+                  value: e['id'],
+                  child: SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        e['title'],
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged: (value) => {},
+          borderRadius: BorderRadius.circular(8),
+          underline: const SizedBox(),
+        ),
+        DropdownButton(
+          value: 0,
+          items: itemTimeList
+              .map(
+                (e) => DropdownMenuItem(
+                  value: e['id'],
+                  child: SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Text(
+                        e['title'],
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged: (value) => {},
+          borderRadius: BorderRadius.circular(8),
+          underline: const SizedBox(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTextArea() {
+    return TextFormField(
+      minLines: 4,
+      maxLines: 4,
+      keyboardType: TextInputType.multiline,
+      decoration: InputDecoration(
+        hintText: 'Ghi chú',
+        hintStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+          color: Colors.grey.shade400,
+        ),
+        filled: true,
+        fillColor: Colors.grey.shade100,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            width: 1,
+            style: BorderStyle.solid,
+            color: Colors.grey.shade200,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            width: 1,
+            style: BorderStyle.solid,
+            color: Colors.grey.shade200,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButtonGroup(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width * 0.48,
+          height: 48,
+          child: ElevatedButton(
+            onPressed: () => {},
+            style: ElevatedButton.styleFrom(
+              shadowColor: Colors.transparent,
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              'Hoàn thành',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width * 0.48,
+          height: 48,
+          child: ElevatedButton(
+            onPressed: () => {},
+            style: ElevatedButton.styleFrom(
+              shadowColor: Colors.transparent,
+              backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              'Chưa xử lý được',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
