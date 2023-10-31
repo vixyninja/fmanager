@@ -208,7 +208,9 @@ class ManagerProblemDetailActiveView
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: <Widget>[
+                const SizedBox(height: 12),
                 _buildSelectorGroup(),
+                const SizedBox(height: 12),
                 _buildTextArea(),
               ],
             ),
