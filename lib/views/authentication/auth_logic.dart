@@ -32,9 +32,6 @@ class AuthLogic extends BaseController {
   late final Rx<UserModel> userModel = UserModel.createEmptyInstance().obs;
   late RxString place = RxString('');
 
-  // !! Change this to true if you want to test teacher screen
-  RxBool isTeacher = RxBool(true);
-
   bool _enableBiometric = false;
   bool get enableBiometric => _enableBiometric;
   set enableBiometric(bool value) {
@@ -111,12 +108,10 @@ class AuthLogic extends BaseController {
                 CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
             (r) {
               if (RoleEnum.TEACHER.toString() == r.role.toString()) {
-                isTeacher.value = true;
                 userModel.value = r;
                 Get.offAllNamed(RouteKeys.teacherBottom);
               } else {
                 userModel.value = r;
-                isTeacher.value = false;
                 Get.offAllNamed(RouteKeys.managerBottom);
               }
             },
