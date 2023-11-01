@@ -39,9 +39,7 @@ class BaseCircleAvatar extends StatelessWidget {
               width: width ?? 48.w,
               height: height ?? 48.h,
               placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) {
-                return const Icon(Icons.error);
-              },
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               filterQuality: FilterQuality.high,
               fadeInCurve: Curves.easeIn,
               fadeInDuration: const Duration(milliseconds: 500),

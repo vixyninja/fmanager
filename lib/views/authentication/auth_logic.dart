@@ -228,9 +228,7 @@ class AuthLogic extends BaseController {
       await userRepository.getMyProfile().then((value) => value.fold(
             (l) =>
                 CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
-            (r) {
-              userModel.value = r;
-            },
+            (r) => userModel.value = r,
           ));
     } catch (e) {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);

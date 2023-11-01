@@ -43,8 +43,10 @@ class ProblemItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: BaseCircleAvatar(),
+              Center(
+                child: BaseCircleAvatar(
+                  imageUrl: feedBackModel.user.url.toString() == '' ? IMAGE_URL : feedBackModel.user.url.toString(),
+                ),
               ),
               16.horizontalSpace,
               Expanded(
@@ -82,7 +84,7 @@ class ProblemItem extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        '${feedBackModel.category.categoryName.toString()} - Phòng ${feedBackModel.room.floor.toString()}',
+                        'Tầng ${feedBackModel.room.floor.toString()} - Phòng ${feedBackModel.room.roomName.toString()}',
                         style: themeData.textTheme.displayMedium,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

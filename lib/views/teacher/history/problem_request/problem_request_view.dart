@@ -49,8 +49,9 @@ class ProblemRequestView extends GetView<ProblemRequestLogic> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(padding: EdgeInsets.symmetric(vertical: 16.r), child: const SizedBox()),
-                  20.verticalSpace,
+                  Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.r),
+                      child: ProblemItem(feedBackModel: controller.feedBack.value)),
                   Text('Trạng thái yêu cầu', style: themeData.textTheme.displayLarge!),
                   Timeline.tileBuilder(
                     shrinkWrap: true,
@@ -68,50 +69,48 @@ class ProblemRequestView extends GetView<ProblemRequestLogic> {
                       ),
                       nodePositionBuilder: (context, index) => 0.3,
                       itemCount: 3,
-                      indicatorBuilder: (context, index) {
-                        return Builder(
-                          builder: (context) {
-                            final color = index == 0 ? Colors.orange : themeData.colorScheme.tertiary;
-                            return Stack(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(99),
-                                  ),
-                                  child: DotIndicator(
-                                    size: 40,
-                                    color: color,
-                                    child: Center(
-                                      child: index == 0
-                                          ? SvgPicture.asset(
-                                              AssetManager.getIconPath(IconManager.icCheck),
-                                              width: 20,
-                                              height: 20,
-                                            )
-                                          : SvgPicture.asset(
-                                              AssetManager.getIconPath(IconManager.icReset),
-                                              width: 20,
-                                              height: 20,
-                                            ),
-                                    ),
+                      indicatorBuilder: (context, index) => Builder(
+                        builder: (context) {
+                          final color = index == 0 ? Colors.orange : themeData.colorScheme.tertiary;
+                          return Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(99),
+                                ),
+                                child: DotIndicator(
+                                  size: 40,
+                                  color: color,
+                                  child: Center(
+                                    child: index == 0
+                                        ? SvgPicture.asset(
+                                            AssetManager.getIconPath(IconManager.icCheck),
+                                            width: 20,
+                                            height: 20,
+                                          )
+                                        : SvgPicture.asset(
+                                            AssetManager.getIconPath(IconManager.icReset),
+                                            width: 20,
+                                            height: 20,
+                                          ),
                                   ),
                                 ),
-                                Positioned.fill(
-                                  child: Material(
-                                    color: Colors.transparent,
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(99),
+                                  child: InkWell(
+                                    onTap: () {},
                                     borderRadius: BorderRadius.circular(99),
-                                    child: InkWell(
-                                      onTap: () {},
-                                      borderRadius: BorderRadius.circular(99),
-                                      highlightColor: themeData.colorScheme.tertiary,
-                                    ),
+                                    highlightColor: themeData.colorScheme.tertiary,
                                   ),
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      },
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                       connectorBuilder: (context, index, type) {
                         return SolidLineConnector(
                           color: themeData.colorScheme.tertiary.withOpacity(0.5),

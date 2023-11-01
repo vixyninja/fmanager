@@ -27,38 +27,43 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
           ),
           color: themeData.colorScheme.background,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            27.verticalSpace,
-            Text(
-              'Lịch sử báo cáo sự cố',
-              style: themeData.textTheme.displayLarge!.copyWith(
-                color: themeData.colorScheme.onBackground,
-                fontSize: 20.sp,
-              ),
-            ),
-            Expanded(
-              child: Obx(
-                () => ListView.builder(
-                  itemBuilder: (context, index) {
-                    final FeedBackModel feedBackModel = controller.listFeedBack[index];
-                    return Container(
-                      margin: EdgeInsets.only(left: 16.r, right: 16.r),
-                      child: ProblemItem(
-                        feedBackModel: feedBackModel,
-                        onTap: () => controller.navigateToProblemRequest(),
-                      ),
-                    );
-                  },
-                  itemCount: controller.listFeedBack.length,
-                  shrinkWrap: true,
-                  physics: const AlwaysScrollableScrollPhysics(),
+        child: RefreshIndicator(
+          onRefresh: () async => controller.refreshLoading(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              27.verticalSpace,
+              Obx(
+                () => Text(
+                  'Lịch sử báo cáo sự cố (${controller.listFeedBack.length})',
+                  style: themeData.textTheme.displayLarge!.copyWith(
+                    color: themeData.colorScheme.onBackground,
+                    fontSize: 20.sp,
+                  ),
                 ),
               ),
-            ),
-            27.verticalSpace,
-          ],
+              Expanded(
+                child: Obx(
+                  () => ListView.builder(
+                    itemBuilder: (context, index) {
+                      final FeedBackModel feedBackModel = controller.listFeedBack[index];
+                      return Container(
+                        margin: EdgeInsets.only(left: 16.r, right: 16.r, top: 16.r),
+                        child: ProblemItem(
+                          feedBackModel: feedBackModel,
+                          onTap: () => controller.navigateToProblemRequest(feedBackModel),
+                        ),
+                      );
+                    },
+                    itemCount: controller.listFeedBack.length,
+                    shrinkWrap: true,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                  ),
+                ),
+              ),
+              27.verticalSpace,
+            ],
+          ),
         ),
       ),
     );

@@ -12,6 +12,6 @@ class TeacherBinding extends Bindings {
     Get.lazyPut<TeacherHistoryLogic>(() => TeacherHistoryLogic(), fenix: true);
     Get.lazyPut<TeacherSettingLogic>(() => TeacherSettingLogic(), fenix: true);
 
-    Get.lazyPut<FeedBackRepository>(() => FeedbackRepositoryImpl(apiServices: Get.find<ApiServices>()));
+    Get.lazyPut<FeedBackRepository>(() => FeedbackRepositoryImpl(apiServices: Get.find<ApiServices>()), fenix: true);
   }
 }

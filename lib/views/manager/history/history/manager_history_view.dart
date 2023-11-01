@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/views/manager/history/history/manager_history_logic.dart';
-import 'package:fmanager/views/widgets/problem_item/problem_item.dart';
 import 'package:get/get.dart';
 
 class ManagerHistoryView extends GetView<ManagerHistoryLogic> {

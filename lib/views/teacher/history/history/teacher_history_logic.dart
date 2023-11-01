@@ -20,14 +20,24 @@ class TeacherHistoryLogic extends BaseController {
     getAllHistoryFeedback();
   }
 
-  navigateToProblemRequest() {
-    Get.toNamed(RouteKeys.teacherProblemRequestScreen);
-  }
+  navigateToProblemRequest(FeedBackModel feedBackModel) =>
+      Get.toNamed(RouteKeys.teacherProblemRequestScreen, arguments: feedBackModel);
 
   getAllHistoryFeedback() async {
     showLoadingWithTitle('Đang tải dữ liệu');
     await feedBackRepository.getHistoryFeedback().then((value) {
       value.fold((l) => listFeedBack.addAll([]), (r) => listFeedBack.addAll(r));
+      return value;
+    }).whenComplete(() => hideLoading());
+  }
+
+  refreshLoading() async {
+    showLoadingWithTitle('Đang tải dữ liệu');
+    await feedBackRepository.getHistoryFeedback().then((value) {
+      value.fold((l) => listFeedBack.addAll([]), (r) {
+        listFeedBack.clear();
+        listFeedBack.addAll(r);
+      });
       return value;
     }).whenComplete(() => hideLoading());
   }
