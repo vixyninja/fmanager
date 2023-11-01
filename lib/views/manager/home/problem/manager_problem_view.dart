@@ -56,7 +56,7 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
   List<Widget> _buildActionsAppBar() {
     return <Widget>[
       InkWell(
-        onTap: () => {},
+        onTap: () => Get.defaultDialog(),
         borderRadius: BorderRadius.circular(999),
         child: Padding(
           padding: const EdgeInsets.all(6),

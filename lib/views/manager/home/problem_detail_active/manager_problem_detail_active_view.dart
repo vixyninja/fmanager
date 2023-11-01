@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fmanager/views/manager/home/problem_detail_active/manager_problem_detail_active_logic.dart';
+import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 import 'package:get/get.dart';
 
 class ManagerProblemDetailActiveView
@@ -49,7 +50,7 @@ class ManagerProblemDetailActiveView
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildBody(context),
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
     );
   }
 
@@ -80,13 +81,12 @@ class ManagerProblemDetailActiveView
       ),
       centerTitle: true,
       backgroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
+    return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           Padding(
@@ -110,14 +110,12 @@ class ManagerProblemDetailActiveView
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Container(
+                        BaseCircleAvatar(
                           width: 58,
                           height: 58,
-                          decoration: BoxDecoration(
-                              color: Colors.lightBlue,
-                              borderRadius: BorderRadius.circular(999)),
+                          onTap: () => Get.snackbar('Avatar', 'Avatar'),
                         ),
-                        const SizedBox(width: 24),
+                        const SizedBox(width: 42),
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -163,7 +161,7 @@ class ManagerProblemDetailActiveView
                 const Row(
                   children: <Widget>[
                     SizedBox(
-                      width: 115,
+                      width: 100,
                       child: Text(
                         'Thời gian:',
                         style: TextStyle(color: Colors.grey),
@@ -176,7 +174,7 @@ class ManagerProblemDetailActiveView
                 const Row(
                   children: <Widget>[
                     SizedBox(
-                      width: 115,
+                      width: 100,
                       child: Text(
                         'Phòng:',
                         style: TextStyle(color: Colors.grey),
@@ -190,9 +188,9 @@ class ManagerProblemDetailActiveView
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      width: 115,
+                      width: 100,
                       child: Text(
-                        'Mô tả sự cố:',
+                        'Mô tả:',
                         style: TextStyle(color: Colors.grey),
                       ),
                     ),
