@@ -67,7 +67,8 @@ class ManagerSettingView extends GetView<ManagerSettingLogic> {
                       color: themeData.colorScheme.background,
                     ),
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                    padding:
+                        EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,30 +77,44 @@ class ManagerSettingView extends GetView<ManagerSettingLogic> {
                         ItemSetting(
                           title: 'Chỉnh sửa tài khoản',
                           onTap: () {},
-                          suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icUser)),
-                          prefixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNext),
-                              colorFilter: ColorFilter.mode(themeData.colorScheme.onBackground, BlendMode.srcIn)),
+                          suffixIcon: SvgPicture.asset(
+                              AssetManager.getIconPath(IconManager.icUser)),
+                          prefixIcon: SvgPicture.asset(
+                              AssetManager.getIconPath(IconManager.icNext),
+                              colorFilter: ColorFilter.mode(
+                                  themeData.colorScheme.onBackground,
+                                  BlendMode.srcIn)),
                         ),
                         20.verticalSpace,
                         ItemSetting(
                             title: 'Tắt thông báo',
-                            onTap: () => controller.changeNotification(!controller.onNotification.value),
-                            suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
+                            onTap: () => controller.changeNotification(
+                                !controller.onNotification.value),
+                            suffixIcon: SvgPicture.asset(
+                                AssetManager.getIconPath(
+                                    IconManager.icNotification)),
                             prefixIcon: Obx(() => BaseSwitch(
                                   value: controller.onNotification.value,
-                                  onChanged: (value) => controller.changeNotification(!value),
+                                  onChanged: (value) =>
+                                      controller.changeNotification(!value),
                                 ))),
                         20.verticalSpace,
                         GetBuilder<ThemeLogic>(
                           builder: (controller) {
                             return ItemSetting(
                               title: 'Giao diện nền',
-                              suffixIcon: SvgPicture.asset(AssetManager.getIconPath(IconManager.icNotification)),
+                              suffixIcon: SvgPicture.asset(
+                                  AssetManager.getIconPath(
+                                      IconManager.icNotification)),
                               prefixIcon: BaseSwitch(
                                 value: controller.theme == 'dark',
-                                onChanged: (value) => controller.setThemeState(!value ? 'dark' : 'light'),
+                                onChanged: (value) => controller
+                                    .setThemeState(!value ? 'dark' : 'light'),
                               ),
-                              onTap: () => controller.setThemeState(controller.theme == 'dark' ? 'light' : 'dark'),
+                              onTap: () => controller.setThemeState(
+                                  controller.theme == 'dark'
+                                      ? 'light'
+                                      : 'dark'),
                             );
                           },
                         ),

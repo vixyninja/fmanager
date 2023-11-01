@@ -29,11 +29,13 @@ class _AppState extends State<App> {
           title: 'FManager',
           darkTheme: themeDataDark,
           theme: themeData,
-          scrollBehavior:
-              const MaterialScrollBehavior().copyWith(scrollbars: false, physics: const BouncingScrollPhysics()),
+          scrollBehavior: const MaterialScrollBehavior().copyWith(
+              scrollbars: false, physics: const BouncingScrollPhysics()),
           themeMode: getThemeMode(Get.find<ThemeLogic>().theme),
           onUnknownRoute: (RouteSettings settings) => MaterialPageRoute<void>(
-              settings: settings, builder: (BuildContext context) => const Scaffold(body: ErrorBoundary())),
+              settings: settings,
+              builder: (BuildContext context) =>
+                  const Scaffold(body: ErrorBoundary())),
           builder: (BuildContext context, Widget? child) {
             Widget error = const Text('...rendering error...');
             if (widget is Scaffold || widget is BottomNavigationBar) {
@@ -48,7 +50,8 @@ class _AppState extends State<App> {
               if (isDebug) {
                 return ErrorWidget(errorDetails.exception);
               }
-              return ErrorBoundary(errorMessage: errorDetails.exception.toString());
+              return ErrorBoundary(
+                  errorMessage: errorDetails.exception.toString());
             };
 
             // Set status bar color
@@ -56,7 +59,7 @@ class _AppState extends State<App> {
             return LoadingView(child: child);
           },
           onGenerateRoute: onGenerateRoute,
-          initialRoute: RouteKeys.authScreen,
+          initialRoute: RouteKeys.managerBottom,
           transitionDuration: const Duration(milliseconds: 300),
           defaultTransition: Transition.topLevel,
           initialBinding: AuthBinding(),
