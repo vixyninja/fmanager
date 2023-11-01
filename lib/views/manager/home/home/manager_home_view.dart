@@ -24,8 +24,7 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(
-                  left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
+              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
               child: BaseHeader(
                 onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
                 onTapSuffixIcon: () => Get.defaultDialog(),
@@ -65,19 +64,16 @@ class ManagerHomeView extends GetView<ManagerHomeLogic> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: FeatureButton(
-                          leading: SvgPicture.asset(
-                              AssetManager.getIconPath(IconManager.icEdit)),
+                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEdit)),
                           title: 'Sự cố cần hỗ trợ',
-                          onPressed: () =>
-                              Get.toNamed(RouteKeys.managerProblemView),
+                          onPressed: () => Get.toNamed(RouteKeys.managerProblemScreen),
                         ),
                       ),
                       20.verticalSpace,
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: FeatureButton(
-                          leading: SvgPicture.asset(
-                              AssetManager.getIconPath(IconManager.icEarth)),
+                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
                           title: 'Tính sẵn sàng phòng học',
                           onPressed: () {},
                         ),

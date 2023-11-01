@@ -26,7 +26,7 @@ class _ProblemCardState extends State<ProblemCard> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         type: MaterialType.card,
         child: InkWell(
-          onTap: () => Get.toNamed(RouteKeys.managerProblemDetailActiveView),
+          onTap: () => Get.toNamed(RouteKeys.managerProblemDetailActiveScreen),
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Column(
