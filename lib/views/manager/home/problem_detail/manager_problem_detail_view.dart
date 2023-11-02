@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fmanager/views/manager/home/problem_detail/manager_problem_detail_logic.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemDetailView extends GetView<ManagerProblemDetailLogic> {
-  const ManagerProblemDetailView({Key? key}) : super(key: key);
+class ManagerProblemDetailScreen extends GetView<ManagerProblemDetailLogic> {
+  const ManagerProblemDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +73,7 @@ class ManagerProblemDetailView extends GetView<ManagerProblemDetailLogic> {
                         Container(
                           width: 58,
                           height: 58,
-                          decoration: BoxDecoration(
-                              color: Colors.lightBlue,
-                              borderRadius: BorderRadius.circular(999)),
+                          decoration: BoxDecoration(color: Colors.lightBlue, borderRadius: BorderRadius.circular(999)),
                         ),
                         const SizedBox(width: 24),
                         const Column(

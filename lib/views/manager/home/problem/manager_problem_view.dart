@@ -5,8 +5,8 @@ import 'package:fmanager/views/manager/home/problem/manager_problem_logic.dart';
 import 'package:fmanager/views/manager/home/problem/widgets/problem_card.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemView extends GetView<ManagerProblemLogic> {
-  const ManagerProblemView({Key? key}) : super(key: key);
+class ManagerProblemScreen extends GetView<ManagerProblemLogic> {
+  const ManagerProblemScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

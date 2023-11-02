@@ -16,8 +16,7 @@ import 'package:fmanager/views/teacher/teacher_bottom.dart';
 import 'package:fmanager/views/widgets/error_boundary/error_boundary.dart';
 import 'package:get/get.dart';
 
-Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
-    (RouteSettings setting) {
+Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings setting) {
   switch (setting.name) {
     case RouteKeys.teacherBottom:
       return GetPageRoute(
@@ -44,7 +43,7 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.teacherProblemRequestScreen,
-        page: () => ProblemRequestView(),
+        page: () => const ProblemRequestView(),
       );
     case RouteKeys.teacherReportProblemScreen:
       return GetPageRoute(
@@ -64,23 +63,23 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
         routeName: RouteKeys.teacherUpdateProfile,
         page: () => const ProfileUpdateView(),
       );
-    case RouteKeys.managerProblemView:
+    case RouteKeys.managerProblemScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemView,
-        page: () => const ManagerProblemView(),
+        routeName: RouteKeys.managerProblemScreen,
+        page: () => const ManagerProblemScreen(),
       );
-    case RouteKeys.managerProblemDetailView:
+    case RouteKeys.managerProblemDetailScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemDetailView,
-        page: () => const ManagerProblemDetailView(),
+        routeName: RouteKeys.managerProblemDetailScreen,
+        page: () => const ManagerProblemDetailScreen(),
       );
-    case RouteKeys.managerProblemDetailActiveView:
+    case RouteKeys.managerProblemDetailActiveScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemDetailView,
-        page: () => ManagerProblemDetailActiveView(),
+        routeName: RouteKeys.managerProblemDetailScreen,
+        page: () => ManagerProblemDetailActiveScreen(),
       );
     default:
       return GetPageRoute(settings: setting, page: () => const ErrorBoundary());

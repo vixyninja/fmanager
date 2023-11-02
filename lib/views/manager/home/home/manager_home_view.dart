@@ -8,8 +8,8 @@ import 'package:fmanager/views/manager/home/home/manager_home_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
-class ManagerHomeView extends GetView<ManagerHomeLogic> {
-  ManagerHomeView({Key? key}) : super(key: key);
+class ManagerHomeScreen extends GetView<ManagerHomeLogic> {
+  ManagerHomeScreen({Key? key}) : super(key: key);
 
   final ManagerHomeLogic teacherLogic = Get.find<ManagerHomeLogic>();
   final AuthLogic authLogic = Get.find<AuthLogic>();
