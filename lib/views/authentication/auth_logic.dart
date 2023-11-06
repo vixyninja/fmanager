@@ -71,7 +71,6 @@ class AuthLogic extends BaseController {
       CommonAlert.showSnackBar('Thông báo', 'Vui lòng chọn cơ sở', position: SnackPosition.TOP);
       return;
     }
-
     showLoadingWithTitle('Đang đăng nhập...');
     try {
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
