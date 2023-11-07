@@ -44,7 +44,7 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.teacherProblemRequestScreen,
-        page: () => ProblemRequestView(),
+        page: () => const ProblemRequestView(),
       );
     case RouteKeys.teacherReportProblemScreen:
       return GetPageRoute(
@@ -68,7 +68,7 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.managerProblemScreen,
-        page: () => const ManagerProblemView(),
+        page: () =>  ManagerProblemView(),
       );
     case RouteKeys.managerProblemDetailScreen:
       return GetPageRoute(

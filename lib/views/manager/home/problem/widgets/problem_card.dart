@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/core/core.dart';
@@ -5,7 +7,12 @@ import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class ProblemCard extends StatefulWidget {
-  const ProblemCard({super.key});
+  const ProblemCard({
+    super.key,
+    required this.type,
+  });
+
+  final String type;
 
   @override
   State<ProblemCard> createState() => _ProblemCardState();
@@ -27,7 +34,15 @@ class _ProblemCardState extends State<ProblemCard> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         type: MaterialType.card,
         child: InkWell(
-          onTap: () => Get.toNamed(RouteKeys.managerProblemDetailActiveScreen),
+          onTap: () => {
+            Timer(const Duration(milliseconds: 400), () {
+              if (widget.type == 'unActive') {
+                Get.toNamed(RouteKeys.managerProblemDetailScreen);
+              } else {
+                Get.toNamed(RouteKeys.managerProblemDetailActiveScreen);
+              }
+            })
+          },
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Column(

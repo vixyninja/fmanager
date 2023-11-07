@@ -48,18 +48,18 @@ class ManagerProblemDetailActiveView
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: _buildBody(context),
       resizeToAvoidBottomInset: true,
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: IconButton(
-          onPressed: () => {},
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(
             Icons.arrow_back_ios,
             size: 24,

@@ -6,7 +6,10 @@ import 'package:fmanager/views/manager/home/problem/widgets/problem_card.dart';
 import 'package:get/get.dart';
 
 class ManagerProblemView extends GetView<ManagerProblemLogic> {
-  const ManagerProblemView({Key? key}) : super(key: key);
+  ManagerProblemView({Key? key}) : super(key: key);
+
+  final ManagerProblemLogic _managerProblemLogic =
+      Get.find<ManagerProblemLogic>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,24 +81,32 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               TextButton(
-                onPressed: () => {},
-                child: const Text(
-                  'Sự cố hiện có',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.orange,
+                onPressed: () => _managerProblemLogic.onUnactiveType(),
+                child: Obx(
+                  () => Text(
+                    'Sự cố hiện có',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: _managerProblemLogic.type.value == 'unActive'
+                          ? Colors.orange
+                          : Colors.black,
+                    ),
                   ),
                 ),
               ),
               TextButton(
-                onPressed: () => {},
-                child: const Text(
-                  'Đang tiếp nhận',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                onPressed: () => _managerProblemLogic.onActiveType(),
+                child: Obx(
+                  () => Text(
+                    'Đang tiếp nhận',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: _managerProblemLogic.type.value == 'active'
+                          ? Colors.orange
+                          : Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -111,9 +122,11 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return const Padding(
-                  padding: EdgeInsets.only(bottom: 24),
-                  child: ProblemCard(),
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 24),
+                  child: Obx(
+                    () => ProblemCard(type: _managerProblemLogic.type.value),
+                  ),
                 );
               },
               childCount: 20,

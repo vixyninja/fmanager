@@ -91,7 +91,7 @@ class AuthLogic extends BaseController {
       const String idTokenFake =
           'eyJhbGciOiJSUzI1NiIsImtpZCI6IjAzZDA3YmJjM2Q3NWM2OTQyNzUxMGY2MTc0ZWIyZjE2NTQ3ZDRhN2QiLCJ0eXAiOiJKV1QifQ';
       await userRepository
-          .loginGoogleGolang(idToken: idTokenFake, position: place.value)
+          .loginGoogleGolang(idToken: idToken!, position: place.value)
           .then((value) => value
             ..fold(
               (l) => CommonAlert.showSnackBar(
