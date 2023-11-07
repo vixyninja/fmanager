@@ -64,22 +64,22 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
         routeName: RouteKeys.teacherUpdateProfile,
         page: () => const ProfileUpdateView(),
       );
-    case RouteKeys.managerProblemView:
+    case RouteKeys.managerProblemScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemView,
+        routeName: RouteKeys.managerProblemScreen,
         page: () => const ManagerProblemView(),
       );
-    case RouteKeys.managerProblemDetailView:
+    case RouteKeys.managerProblemDetailScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemDetailView,
+        routeName: RouteKeys.managerProblemDetailScreen,
         page: () => const ManagerProblemDetailView(),
       );
-    case RouteKeys.managerProblemDetailActiveView:
+    case RouteKeys.managerProblemDetailActiveScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemDetailView,
+        routeName: RouteKeys.managerProblemDetailActiveScreen,
         page: () => ManagerProblemDetailActiveView(),
       );
     default:
