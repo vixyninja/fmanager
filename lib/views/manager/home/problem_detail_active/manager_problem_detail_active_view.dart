@@ -58,16 +58,12 @@ class ManagerProblemDetailActiveView
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.only(left: 10),
-        child: InkWell(
-          onTap: () => {},
-          borderRadius: BorderRadius.circular(999),
-          child: const Padding(
-            padding: EdgeInsets.all(2),
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 24,
-              color: Colors.black,
-            ),
+        child: IconButton(
+          onPressed: () => {},
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 24,
+            color: Colors.black,
           ),
         ),
       ),

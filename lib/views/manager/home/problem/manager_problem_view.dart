@@ -16,11 +16,11 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
           ),
+          color: Colors.white,
         ),
         child: _buildBody(),
       ),
@@ -71,12 +71,10 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
   }
 
   Widget _buildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 12),
-          child: Row(
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               TextButton(
@@ -103,16 +101,23 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
               ),
             ],
           ),
+          floating: true,
+          snap: true,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
         ),
-        const SizedBox(height: 24),
-        Expanded(
-          child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => const Padding(
-              padding: EdgeInsets.only(bottom: 12),
-              child: ProblemCard(),
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 24),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return const Padding(
+                  padding: EdgeInsets.only(bottom: 24),
+                  child: ProblemCard(),
+                );
+              },
+              childCount: 20,
             ),
-            itemCount: 20,
           ),
         ),
       ],

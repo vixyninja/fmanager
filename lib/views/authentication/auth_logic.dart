@@ -51,8 +51,10 @@ class AuthLogic extends BaseController {
   }
 
   void initBiometric() {
-    if (StorageManager.read<bool>(StorageKeys.biometric.toString(), false) != null) {
-      enableBiometric = StorageManager.read<bool>(StorageKeys.biometric.toString(), false)!;
+    if (StorageManager.read<bool>(StorageKeys.biometric.toString(), false) !=
+        null) {
+      enableBiometric =
+          StorageManager.read<bool>(StorageKeys.biometric.toString(), false)!;
     } else {
       enableBiometric = false;
     }
@@ -60,7 +62,8 @@ class AuthLogic extends BaseController {
 
   void initPlace() {
     if (StorageManager.read<String>(StorageKeys.place.toString(), '') != null) {
-      place.value = StorageManager.read<String>(StorageKeys.place.toString(), '')!;
+      place.value =
+          StorageManager.read<String>(StorageKeys.place.toString(), '')!;
     } else {
       place.value = '';
     }
@@ -68,32 +71,45 @@ class AuthLogic extends BaseController {
 
   Future<void> signInWithGoogle() async {
     if (place.value == '') {
-      CommonAlert.showSnackBar('Thông báo', 'Vui lòng chọn cơ sở', position: SnackPosition.TOP);
+      CommonAlert.showSnackBar('Thông báo', 'Vui lòng chọn cơ sở',
+          position: SnackPosition.TOP);
       return;
     }
 
     showLoadingWithTitle('Đang đăng nhập...');
     try {
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount!.authentication;
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
       await firebaseAuth.signInWithCredential(credential);
       final String? idToken = await firebaseAuth.currentUser!.getIdToken();
-      await userRepository.loginGoogleGolang(idToken: idToken!, position: place.value).then((value) => value
-        ..fold(
-          (l) => CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
-          (r) async {
-            await StorageManager.write(StorageKeys.place.toString(), place.toString());
-            await StorageManager.write(StorageKeys.accessToken.toString(), r.accessToken.toString());
-            await StorageManager.write(StorageKeys.refreshToken.toString(), r.refreshToken.toString());
-            await setStateRoute();
-          },
-        ));
+      const String idTokenFake =
+          'eyJhbGciOiJSUzI1NiIsImtpZCI6IjAzZDA3YmJjM2Q3NWM2OTQyNzUxMGY2MTc0ZWIyZjE2NTQ3ZDRhN2QiLCJ0eXAiOiJKV1QifQ';
+      await userRepository
+          .loginGoogleGolang(idToken: idTokenFake, position: place.value)
+          .then((value) => value
+            ..fold(
+              (l) => CommonAlert.showSnackBar(
+                  'Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+                  position: SnackPosition.TOP),
+              (r) async {
+                await StorageManager.write(
+                    StorageKeys.place.toString(), place.toString());
+                await StorageManager.write(StorageKeys.accessToken.toString(),
+                    r.accessToken.toString());
+                await StorageManager.write(StorageKeys.refreshToken.toString(),
+                    r.refreshToken.toString());
+                await setStateRoute();
+              },
+            ));
     } catch (e) {
-      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+          position: SnackPosition.TOP);
       await signOutGoogle();
     } finally {
       Future.delayed(const Duration(seconds: 2), () => hideLoading());
@@ -104,8 +120,9 @@ class AuthLogic extends BaseController {
     showLoadingWithTitle('Đang tải...');
     try {
       await userRepository.getMyProfile().then((value) => value.fold(
-            (l) =>
-                CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
+            (l) => CommonAlert.showSnackBar(
+                'Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+                position: SnackPosition.TOP),
             (r) {
               if (RoleEnum.TEACHER.toString() == r.role.toString()) {
                 userModel.value = r;
@@ -117,7 +134,8 @@ class AuthLogic extends BaseController {
             },
           ));
     } catch (e) {
-      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+          position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
@@ -136,7 +154,8 @@ class AuthLogic extends BaseController {
         StorageManager.clearKey(StorageKeys.place.toString());
       });
     } catch (e) {
-      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+          position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
@@ -144,9 +163,11 @@ class AuthLogic extends BaseController {
 
   Future<void> authenticate() async {
     final bool canCheckBiometrics = await auth.canCheckBiometrics;
-    final bool canAuthenticate = canCheckBiometrics || await auth.isDeviceSupported();
+    final bool canAuthenticate =
+        canCheckBiometrics || await auth.isDeviceSupported();
 
-    final List<BiometricType> availableBiometrics = await auth.getAvailableBiometrics();
+    final List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
 
     if (availableBiometrics.isNotEmpty) {
       MyLogger().i('availableBiometrics: $availableBiometrics');
@@ -221,12 +242,14 @@ class AuthLogic extends BaseController {
     showLoadingWithTitle('Đang tải...');
     try {
       await userRepository.getMyProfile().then((value) => value.fold(
-            (l) =>
-                CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
+            (l) => CommonAlert.showSnackBar(
+                'Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+                position: SnackPosition.TOP),
             (r) => userModel.value = r,
           ));
     } catch (e) {
-      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+          position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
@@ -235,37 +258,43 @@ class AuthLogic extends BaseController {
   Future<void> updateMyProfile(UpdateProfileModel updateProfileModel) async {
     showLoadingWithTitle('Đang cập nhật...');
     try {
-      await userRepository.updateMyProfile(updateProfileModel).then((value) => value.fold(
-            (l) =>
-                CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP),
-            (r) async {
-              CommonAlert.showSnackBar('Thông báo', 'Cập nhật thông tin thành công', position: SnackPosition.TOP);
-              userModel.value = userModel.value.copyWith(
-                phoneNumber: updateProfileModel.phoneNumber,
-                position: updateProfileModel.position,
-                department: updateProfileModel.department,
-              );
-              await getMyProfile();
-              Get.find<FirebaseMessagingSer>().pushNotification(
-                title: 'Thông báo',
-                body: 'Thông tin cá nhân của bạn đã được cập nhật',
-                bigText: 'Thông tin cá nhân của bạn đã được cập nhật',
-                id: 2003,
-                payload: 'Thông tin cá nhân của bạn đã được cập nhật',
-                showBigPicture: false,
-                actions: [
-                  const AndroidNotificationAction(
-                    'cancel',
-                    'Đóng',
-                    cancelNotification: true,
-                    showsUserInterface: true,
-                  ),
-                ],
-              );
-            },
-          ));
+      await userRepository
+          .updateMyProfile(updateProfileModel)
+          .then((value) => value.fold(
+                (l) => CommonAlert.showSnackBar(
+                    'Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+                    position: SnackPosition.TOP),
+                (r) async {
+                  CommonAlert.showSnackBar(
+                      'Thông báo', 'Cập nhật thông tin thành công',
+                      position: SnackPosition.TOP);
+                  userModel.value = userModel.value.copyWith(
+                    phoneNumber: updateProfileModel.phoneNumber,
+                    position: updateProfileModel.position,
+                    department: updateProfileModel.department,
+                  );
+                  await getMyProfile();
+                  Get.find<FirebaseMessagingSer>().pushNotification(
+                    title: 'Thông báo',
+                    body: 'Thông tin cá nhân của bạn đã được cập nhật',
+                    bigText: 'Thông tin cá nhân của bạn đã được cập nhật',
+                    id: 2003,
+                    payload: 'Thông tin cá nhân của bạn đã được cập nhật',
+                    showBigPicture: false,
+                    actions: [
+                      const AndroidNotificationAction(
+                        'cancel',
+                        'Đóng',
+                        cancelNotification: true,
+                        showsUserInterface: true,
+                      ),
+                    ],
+                  );
+                },
+              ));
     } catch (e) {
-      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại', position: SnackPosition.TOP);
+      CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
+          position: SnackPosition.TOP);
     } finally {
       Future.delayed(const Duration(seconds: 2), () => hideLoading());
     }
