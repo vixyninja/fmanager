@@ -47,26 +47,22 @@ class ManagerProblemDetailActiveScreen extends GetView<ManagerProblemDetailActiv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: _buildBody(context),
       resizeToAvoidBottomInset: true,
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.only(left: 10),
-        child: InkWell(
-          onTap: () => {},
-          borderRadius: BorderRadius.circular(999),
-          child: const Padding(
-            padding: EdgeInsets.all(2),
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 24,
-              color: Colors.black,
-            ),
+        child: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 24,
+            color: Colors.black,
           ),
         ),
       ),

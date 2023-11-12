@@ -67,19 +67,19 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (RouteSettings settin
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.managerProblemScreen,
-        page: () => const ManagerProblemScreen(),
+        page: () =>  ManagerProblemView(),
       );
     case RouteKeys.managerProblemDetailScreen:
       return GetPageRoute(
         settings: setting,
         routeName: RouteKeys.managerProblemDetailScreen,
-        page: () => const ManagerProblemDetailScreen(),
+        page: () => const ManagerProblemDetailView(),
       );
     case RouteKeys.managerProblemDetailActiveScreen:
       return GetPageRoute(
         settings: setting,
-        routeName: RouteKeys.managerProblemDetailScreen,
-        page: () => ManagerProblemDetailActiveScreen(),
+        routeName: RouteKeys.managerProblemDetailActiveScreen,
+        page: () => ManagerProblemDetailActiveView(),
       );
     default:
       return GetPageRoute(settings: setting, page: () => const ErrorBoundary());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fmanager/views/manager/home/problem_detail/manager_problem_detail_logic.dart';
+import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 import 'package:get/get.dart';
 
 class ManagerProblemDetailScreen extends GetView<ManagerProblemDetailLogic> {
@@ -8,25 +9,21 @@ class ManagerProblemDetailScreen extends GetView<ManagerProblemDetailLogic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: _buildBody(),
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.only(left: 10),
-        child: InkWell(
-          onTap: () => {},
-          borderRadius: BorderRadius.circular(999),
-          child: const Padding(
-            padding: EdgeInsets.all(2),
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 24,
-              color: Colors.black,
-            ),
+        child: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 24,
+            color: Colors.black,
           ),
         ),
       ),
@@ -68,15 +65,11 @@ class ManagerProblemDetailScreen extends GetView<ManagerProblemDetailLogic> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 58,
-                          height: 58,
-                          decoration: BoxDecoration(color: Colors.lightBlue, borderRadius: BorderRadius.circular(999)),
-                        ),
-                        const SizedBox(width: 24),
-                        const Column(
+                    const Row(
+                      children: [
+                        BaseCircleAvatar(),
+                        SizedBox(width: 42),
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
@@ -150,7 +143,7 @@ class ManagerProblemDetailScreen extends GetView<ManagerProblemDetailLogic> {
                     SizedBox(
                       width: 100,
                       child: Text(
-                        'Mô tả sự cố:',
+                        'Mô tả:',
                         style: TextStyle(color: Colors.grey),
                       ),
                     ),

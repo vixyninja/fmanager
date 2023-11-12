@@ -5,8 +5,11 @@ import 'package:fmanager/views/manager/home/problem/manager_problem_logic.dart';
 import 'package:fmanager/views/manager/home/problem/widgets/problem_card.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemScreen extends GetView<ManagerProblemLogic> {
-  const ManagerProblemScreen({Key? key}) : super(key: key);
+class ManagerProblemView extends GetView<ManagerProblemLogic> {
+  ManagerProblemView({Key? key}) : super(key: key);
+
+  final ManagerProblemLogic _managerProblemLogic =
+      Get.find<ManagerProblemLogic>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +19,11 @@ class ManagerProblemScreen extends GetView<ManagerProblemLogic> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
           ),
+          color: Colors.white,
         ),
         child: _buildBody(),
       ),
@@ -71,48 +74,63 @@ class ManagerProblemScreen extends GetView<ManagerProblemLogic> {
   }
 
   Widget _buildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 12),
-          child: Row(
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               TextButton(
-                onPressed: () => {},
-                child: const Text(
-                  'Sự cố hiện có',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.orange,
+                onPressed: () => _managerProblemLogic.onUnactiveType(),
+                child: Obx(
+                  () => Text(
+                    'Sự cố hiện có',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: _managerProblemLogic.type.value == 'unActive'
+                          ? Colors.orange
+                          : Colors.black,
+                    ),
                   ),
                 ),
               ),
               TextButton(
-                onPressed: () => {},
-                child: const Text(
-                  'Đang tiếp nhận',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                onPressed: () => _managerProblemLogic.onActiveType(),
+                child: Obx(
+                  () => Text(
+                    'Đang tiếp nhận',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: _managerProblemLogic.type.value == 'active'
+                          ? Colors.orange
+                          : Colors.black,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
+          floating: true,
+          snap: true,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
         ),
-        const SizedBox(height: 24),
-        Expanded(
-          child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => const Padding(
-              padding: EdgeInsets.only(bottom: 12),
-              child: ProblemCard(),
+        SliverPadding(
+          padding: const EdgeInsets.only(top: 24),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 24),
+                  child: Obx(
+                    () => ProblemCard(type: _managerProblemLogic.type.value),
+                  ),
+                );
+              },
+              childCount: 20,
             ),
-            itemCount: 20,
           ),
         ),
       ],

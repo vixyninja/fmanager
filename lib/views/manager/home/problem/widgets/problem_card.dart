@@ -1,10 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/core/core.dart';
+import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class ProblemCard extends StatefulWidget {
-  const ProblemCard({super.key});
+  const ProblemCard({
+    super.key,
+    required this.type,
+  });
+
+  final String type;
 
   @override
   State<ProblemCard> createState() => _ProblemCardState();
@@ -18,7 +26,7 @@ class _ProblemCardState extends State<ProblemCard> {
       child: Material(
         elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
         surfaceTintColor: Colors.transparent,
         animationDuration: const Duration(milliseconds: 400),
@@ -26,7 +34,15 @@ class _ProblemCardState extends State<ProblemCard> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         type: MaterialType.card,
         child: InkWell(
-          onTap: () => Get.toNamed(RouteKeys.managerProblemDetailActiveScreen),
+          onTap: () => {
+            Timer(const Duration(milliseconds: 400), () {
+              if (widget.type == 'unActive') {
+                Get.toNamed(RouteKeys.managerProblemDetailScreen);
+              } else {
+                Get.toNamed(RouteKeys.managerProblemDetailActiveScreen);
+              }
+            })
+          },
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -43,20 +59,18 @@ class _ProblemCardState extends State<ProblemCard> {
                         color: Colors.black,
                       ),
                     ),
-                    Text('10:02'),
+                    Text(
+                      '10:02',
+                      style: TextStyle(
+                        color: Colors.orange,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 12),
                 Row(
                   children: <Widget>[
-                    Container(
-                      width: 58,
-                      height: 58,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(999),
-                        color: Colors.purple,
-                      ),
-                    ),
+                    const BaseCircleAvatar(),
                     const SizedBox(width: 12),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
