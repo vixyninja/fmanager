@@ -208,10 +208,12 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                       builder: (context, constraints) => DropdownMenu<CategoryModel>(
                         enableFilter: true,
                         width: constraints.maxWidth,
+                        controller: controller.categoryController,
                         onSelected: (CategoryModel? value) => controller.categoryController.text = value!.categoryName,
                         dropdownMenuEntries: controller.categories.map<DropdownMenuEntry<CategoryModel>>(
                           (CategoryModel value) {
-                            final String label = '${value.categoryName} - ${value.categoryType}';
+                            final String index = controller.categories.indexOf(value).toString();
+                            final String label = '$index. ${value.categoryName} - ${value.categoryType}';
                             return DropdownMenuEntry<CategoryModel>(
                               value: value,
                               label: label,

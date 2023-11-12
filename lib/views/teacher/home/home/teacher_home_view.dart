@@ -81,7 +81,7 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                         child: FeatureButton(
                           leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
                           title: 'Yêu cầu hỗ trợ CNTT',
-                          onPressed: () {},
+                          onPressed: ()=> controller.navigateToRequestSupport()
                         ),
                       ),
                     ],

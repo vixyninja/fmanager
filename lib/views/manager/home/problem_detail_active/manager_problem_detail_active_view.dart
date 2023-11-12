@@ -3,8 +3,8 @@ import 'package:fmanager/views/manager/home/problem_detail_active/manager_proble
 import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemDetailActiveScreen extends GetView<ManagerProblemDetailActiveLogic> {
-  ManagerProblemDetailActiveScreen({Key? key}) : super(key: key);
+class ManagerProblemDetailActiveView extends GetView<ManagerProblemDetailActiveLogic> {
+  ManagerProblemDetailActiveView({Key? key}) : super(key: key);
 
   final List<Map<String, dynamic>> itemTypeList = [
     {

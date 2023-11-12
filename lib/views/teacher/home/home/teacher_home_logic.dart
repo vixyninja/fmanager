@@ -6,6 +6,10 @@ class TeacherHomeLogic extends BaseController {
     Get.toNamed(RouteKeys.teacherReportProblemScreen);
   }
 
+  navigateToRequestSupport(){
+    Get.toNamed(RouteKeys.teacherReportProblemScreen);
+  }
+
   navigateToListNotification() {
     Get.toNamed(RouteKeys.teacherNotificationScreen);
   }

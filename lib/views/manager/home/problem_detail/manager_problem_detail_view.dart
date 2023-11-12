@@ -3,8 +3,8 @@ import 'package:fmanager/views/manager/home/problem_detail/manager_problem_detai
 import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemDetailScreen extends GetView<ManagerProblemDetailLogic> {
-  const ManagerProblemDetailScreen({Key? key}) : super(key: key);
+class ManagerProblemDetailView extends GetView<ManagerProblemDetailLogic> {
+  const ManagerProblemDetailView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

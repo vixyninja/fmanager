@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class AuthView extends GetView<AuthLogic> {
-  const AuthView({Key? key}) : super(key: key);
+   const AuthView({Key? key}) : super(key: key);
 
   @override
   AuthLogic get controller => Get.find<AuthLogic>();

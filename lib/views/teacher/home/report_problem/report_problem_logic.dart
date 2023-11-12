@@ -13,8 +13,8 @@ class ReportProblemLogic extends BaseController {
   late final FeedBackRepository feedBackRepository;
 
   late final TextEditingController roomController;
-  late final TextEditingController descriptionController;
   late final TextEditingController categoryController;
+  late final TextEditingController descriptionController;
   late final RxList<XFile> images;
   late final RxList<CategoryModel> categories;
   late final Rx<RoomModel> room;
@@ -26,8 +26,8 @@ class ReportProblemLogic extends BaseController {
     feedBackRepository = Get.find<FeedBackRepository>();
 
     roomController = TextEditingController();
-    descriptionController = TextEditingController();
     categoryController = TextEditingController();
+    descriptionController = TextEditingController();
 
     imageScrollController = ScrollController();
 
@@ -59,9 +59,10 @@ class ReportProblemLogic extends BaseController {
         images.add(image);
       }
       await imageScrollController.animateTo(
-          imageScrollController.position.maxScrollExtent + imageScrollController.position.viewportDimension,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.ease);
+        imageScrollController.position.maxScrollExtent + imageScrollController.position.viewportDimension,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.ease,
+      );
     } catch (e) {
       handleError(e as Exception);
     }
@@ -72,55 +73,63 @@ class ReportProblemLogic extends BaseController {
       final List<XFile> list = await FileManager().pickMultipleImage();
       images.addAll(list);
       await imageScrollController.animateTo(
-          imageScrollController.position.maxScrollExtent + imageScrollController.position.viewportDimension,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.ease);
+        imageScrollController.position.maxScrollExtent + imageScrollController.position.viewportDimension,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.ease,
+      );
     } catch (e) {
       handleError(e as Exception);
     }
   }
 
   void postProblemRequest() async {
-    validateForm();
-    showLoadingWithTitle('Đang gửi phản hồi');
-    var category = categories.firstWhere((element) => element.categoryName == categoryController.value.text);
-    var user = 'Huynh Hong Vy';
+    if (validateForm()) {
+      showLoadingWithTitle('Đang gửi phản hồi');
+      var user = 'Huynh Hong Vy';
+      var categoryId =
+          categories.firstWhere((element) => element.categoryName.compareTo(categoryController.value.text) == 0).id;
+      var formData = dio.FormData.fromMap({
+        'name_feed_back': 'Phản hồi từ $user',
+        'room_id': room.value.id.toString(),
+        'category_id': categoryId.toString(),
+        'description': descriptionController.value.text.toString(),
+      });
 
-    var formData = dio.FormData.fromMap({
-      'name_feed_back': 'Phản hồi từ $user',
-      'room_id': room.value.id.toString(),
-      'category_id': category.id.toString(),
-      'description': descriptionController.value.text.toString(),
-    });
+      if (images.isNotEmpty) {
+        for (int i = 0; i < images.length; i++) {
+          formData.files.add(MapEntry(
+            'files',
+            dio.MultipartFile.fromBytes(
+              await images[i].readAsBytes(),
+              filename: images[i].name,
+              contentType: parser.MediaType('image', images[i].name.split('.').last),
+            ),
+          ));
+        }
+      }
 
-    for (int i = 0; i < images.length; i++) {
-      formData.files.add(MapEntry(
-        'files',
-        dio.MultipartFile.fromBytes(
-          await images[i].readAsBytes(),
-          filename: images[i].name,
-          contentType: parser.MediaType('image', images[i].name.split('.').last),
-        ),
-      ));
+      await feedBackRepository
+          .createFeedback(formData)
+          .then((value) => value.fold(
+              (l) => CommonDialog.showDefault(
+                  'Lỗi', l.toString(), () => Get.offNamedUntil(RouteKeys.teacherBottom, (route) => false)),
+              (r) => CommonDialog.showDefault('Thông báo', 'Gửi phản hồi thành công',
+                  () => Get.offNamedUntil(RouteKeys.teacherBottom, (route) => false))))
+          .whenComplete(() => hideLoading());
     }
-
-    await feedBackRepository
-        .createFeedback(formData)
-        .then((value) => value.fold((l) => handleError(l),
-            (r) => CommonDialog.showDefault('Thông báo', 'Gửi phản hồi thành công', () => Get.back())))
-        .whenComplete(() => hideLoading());
   }
 
-  validateForm() {
+  bool validateForm() {
     if (roomController.value.text.isEmpty) {
       CommonDialog.showDefault('Lưu ý', 'Vui lòng chọn phòng', () => Get.back());
-      return;
+      return false;
     } else if (categoryController.value.text.isEmpty) {
       CommonDialog.showDefault('Lưu ý', 'Vui lòng chọn danh mục', () => Get.back());
-      return;
+      return false;
     } else if (descriptionController.value.text.isEmpty) {
       CommonDialog.showDefault('Lưu ý', 'Vui lòng nhập mô tả', () => Get.back());
-      return;
+      return false;
     }
+    return true;
   }
 }
