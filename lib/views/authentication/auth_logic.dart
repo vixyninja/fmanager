@@ -88,8 +88,6 @@ class AuthLogic extends BaseController {
       );
       await firebaseAuth.signInWithCredential(credential);
       final String? idToken = await firebaseAuth.currentUser!.getIdToken();
-      const String idTokenFake =
-          'eyJhbGciOiJSUzI1NiIsImtpZCI6IjAzZDA3YmJjM2Q3NWM2OTQyNzUxMGY2MTc0ZWIyZjE2NTQ3ZDRhN2QiLCJ0eXAiOiJKV1QifQ';
       await userRepository
           .loginGoogleGolang(idToken: idToken!, position: place.value)
           .then((value) => value
