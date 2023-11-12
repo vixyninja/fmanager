@@ -1,5 +1,5 @@
 import 'package:fmanager/data/error_exceptions.dart';
-import 'package:fmanager/views/common/common.dart';
+import 'package:fmanager/views/widgets/common/common.dart';
 import 'package:fmanager/views/widgets/loading/loading_logic.dart';
 import 'package:get/get.dart';
 
@@ -33,8 +33,6 @@ class BaseController extends GetxController {
   void showLoading() => loadingLogic.showLoading();
 
   void hideLoading() => loadingLogic.hideLoading();
-
-  void showLoadingWithTitle(String title) => loadingLogic.showLoadingWithTitle(title: title);
 
   void showLoadingWith(Function function) {
     showLoading();

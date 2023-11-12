@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fmanager/core/theme/light_color.dart';
+import 'package:fmanager/utils/utils.dart';
 
 // ignore: constant_identifier_names
 const String IMAGE_URL = 'https://res.cloudinary.com/dhwzs1m4l/image/upload/v1697453686/notion-avatar_sxmijk.png';
@@ -13,12 +15,14 @@ class BaseCircleAvatar extends StatelessWidget {
     this.imageUrl,
     this.width,
     this.height,
+    this.pathSuffixIcon,
   });
 
   final String? imageUrl;
   final VoidCallback? onTap;
   final double? width;
   final double? height;
+  final String? pathSuffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,24 @@ class BaseCircleAvatar extends StatelessWidget {
               highlightColor: LightColors.highlightColor,
             ),
           ),
-        )
+        ),
+        if (pathSuffixIcon != null)
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(99),
+                ),
+                child: SvgPicture.asset(
+                  AssetManager.getIconPath(pathSuffixIcon!),
+                  width: 20.h,
+                  height: 20.h,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

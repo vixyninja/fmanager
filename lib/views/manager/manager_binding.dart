@@ -4,6 +4,7 @@ import 'package:fmanager/views/manager/home/problem/manager_problem_logic.dart';
 import 'package:fmanager/views/manager/home/problem_detail/manager_problem_detail_logic.dart';
 import 'package:fmanager/views/manager/home/problem_detail_active/manager_problem_detail_active_logic.dart';
 import 'package:fmanager/views/manager/setting/setting/manager_setting_logic.dart';
+import 'package:fmanager/views/shared/shared.dart';
 import 'package:get/get.dart';
 
 class ManagerBinding extends Bindings {
@@ -13,10 +14,8 @@ class ManagerBinding extends Bindings {
     Get.lazyPut<ManagerHistoryLogic>(() => ManagerHistoryLogic(), fenix: true);
     Get.lazyPut<ManagerSettingLogic>(() => ManagerSettingLogic(), fenix: true);
     Get.lazyPut<ManagerProblemLogic>(() => ManagerProblemLogic(), fenix: true);
-    Get.lazyPut<ManagerProblemDetailLogic>(() => ManagerProblemDetailLogic(),
-        fenix: true);
-    Get.lazyPut<ManagerProblemDetailActiveLogic>(
-        () => ManagerProblemDetailActiveLogic(),
-        fenix: true);
+    Get.lazyPut<ManagerProblemDetailLogic>(() => ManagerProblemDetailLogic(), fenix: true);
+    Get.lazyPut<ManagerProblemDetailActiveLogic>(() => ManagerProblemDetailActiveLogic(), fenix: true);
+    Get.lazyPut<ListNotificationLogic>(() => ListNotificationLogic(), fenix: true);
   }
 }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/authentication/function.dart';
-import 'package:fmanager/views/common/common_alert.dart';
+import 'package:fmanager/views/widgets/common/common_alert.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class AuthView extends GetView<AuthLogic> {
-   const AuthView({Key? key}) : super(key: key);
+  const AuthView({Key? key}) : super(key: key);
 
   @override
   AuthLogic get controller => Get.find<AuthLogic>();
@@ -18,7 +19,7 @@ class AuthView extends GetView<AuthLogic> {
 
     return Obx(
       () => Material(
-        color: item['id'] == controller.place.value ? Colors.orange : themeData.colorScheme.background,
+        color: item['id'] == controller.place.value ? Colors.grey : themeData.colorScheme.background,
         borderRadius: BorderRadius.all(Radius.circular(8.r)),
         child: InkWell(
           onTap: () {
@@ -57,8 +58,8 @@ class AuthView extends GetView<AuthLogic> {
     CommonAlert.showCustom(
       Center(
         child: Container(
-          width: 500,
-          height: 500,
+          width: 500.w,
+          height: 500.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(12.r),
@@ -113,7 +114,10 @@ class AuthView extends GetView<AuthLogic> {
         child: CustomScrollView(
           slivers: <Widget>[
             const SliverAppBar(
-              backgroundColor: Colors.orange,
+              backgroundColor: Colors.orangeAccent,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Colors.orangeAccent,
+              ),
               automaticallyImplyLeading: false,
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(0),
@@ -133,7 +137,7 @@ class AuthView extends GetView<AuthLogic> {
                             bottomLeft: Radius.circular(24.r),
                             bottomRight: Radius.circular(24.r),
                           ),
-                          color: Colors.orange,
+                          color: Colors.orangeAccent,
                         ),
                       ),
                       Align(
@@ -152,7 +156,7 @@ class AuthView extends GetView<AuthLogic> {
                       ),
                       Center(
                         child: Material(
-                          elevation: 10,
+                          elevation: 5,
                           borderRadius: BorderRadius.circular(24.r),
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 37.w),

@@ -4,7 +4,7 @@ import 'package:fmanager/core/core.dart';
 import 'package:fmanager/data/data.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/utils.dart';
-import 'package:fmanager/views/common/common.dart';
+import 'package:fmanager/views/widgets/common/common.dart';
 import 'package:get/get.dart';
 import 'package:http_parser/http_parser.dart' as parser;
 import 'package:image_picker/image_picker.dart';
@@ -84,7 +84,7 @@ class ReportProblemLogic extends BaseController {
 
   void postProblemRequest() async {
     if (validateForm()) {
-      showLoadingWithTitle('Đang gửi phản hồi');
+      showLoading();
       var user = 'Huynh Hong Vy';
       var categoryId =
           categories.firstWhere((element) => element.categoryName.compareTo(categoryController.value.text) == 0).id;

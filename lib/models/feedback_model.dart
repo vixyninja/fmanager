@@ -43,9 +43,9 @@ class FeedBackModel {
   factory FeedBackModel.createEmpty() {
     return FeedBackModel(
       id: 0,
-      nameFeedback: '',
+      nameFeedback: 'Test mode',
       room: RoomModel.createEmpty(),
-      description: '',
+      description: 'Test mode',
       category: CategoryModel.createEmpty(),
       user: UserModel.createEmptyInstance(),
       url: [],

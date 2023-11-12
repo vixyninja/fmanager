@@ -2,37 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fmanager/core/core.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/utils/asset_manager.dart';
-import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/manager/home/home/manager_home_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
-class ManagerHomeScreen extends GetView<ManagerHomeLogic> {
-  ManagerHomeScreen({Key? key}) : super(key: key);
+class ManagerHomeView extends GetView<ManagerHomeLogic> {
+  ManagerHomeView({Key? key}) : super(key: key);
 
-  final ManagerHomeLogic teacherLogic = Get.find<ManagerHomeLogic>();
-  final AuthLogic authLogic = Get.find<AuthLogic>();
+  @override
+  final ManagerHomeLogic controller = Get.find<ManagerHomeLogic>();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: LightColors.managerColor,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 112.h, bottom: 16.h),
-              child: BaseHeader(
-                onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
-                onTapSuffixIcon: () => Get.defaultDialog(),
-                onTapTitle: () => Get.snackbar('Title', 'Title'),
-                pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
-                title: 'Synx',
-                colorTitle: themeData.colorScheme.onPrimary,
-                colorSuffixIcon: themeData.colorScheme.onPrimary,
+              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 92.h, bottom: 16.h),
+              child: Obx(
+                () => BaseHeader(
+                  onTapAvatarIcon: () => Get.snackbar('Avatar', 'Avatar'),
+                  onTapSuffixIcon: () => controller.navigateToNotification(),
+                  onTapTitle: () => Get.snackbar('Title', 'Title'),
+                  pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
+                  title: controller.authLogic.userModel.value.name,
+                  colorTitle: themeData.colorScheme.onPrimary,
+                  colorSuffixIcon: themeData.colorScheme.onPrimary,
+                  urlAvatar: controller.authLogic.userModel.value.url,
+                  subtitle: 'Manager',
+                  colorSubtitle: themeData.colorScheme.onPrimary.withOpacity(0.8),
+                  pathAvatarIcon: IconManager.icManager,
+                ),
               ),
             ),
           ),
@@ -52,7 +58,7 @@ class ManagerHomeScreen extends GetView<ManagerHomeLogic> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      27.verticalSpace,
+                      20.verticalSpace,
                       Text(
                         'Dịch vụ trực tuyến',
                         style: themeData.textTheme.displayLarge!.copyWith(

@@ -5,6 +5,9 @@ class LightColors {
   static const Color primaryColor = Color.fromRGBO(0, 0, 0, 1);
   static const Color secondaryColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color tertiaryColor = Color.fromRGBO(169, 169, 169, 1);
+  static const Color teacherColor = Colors.orangeAccent;
+  static const Color managerColor = Colors.blue;
+  static const Color adminColor = Colors.red;
 
   // BACKGROUND
   static const Color backgroundColor = Color.fromRGBO(255, 255, 255, 1);

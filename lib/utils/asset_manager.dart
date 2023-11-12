@@ -43,22 +43,24 @@ class IconManager {
   static const String bottomHistoryIcon = 'bottom/ic_history.svg';
   static const String bottomSettingIcon = 'bottom/ic_setting.svg';
 
-  static const String icBack = 'teacher/ic_back.svg';
-  static const String icBell = 'teacher/ic_bell.svg';
-  static const String icCamera = 'teacher/ic_camera.svg';
-  static const String icEdit = 'teacher/ic_edit.svg';
-  static const String icLogout = 'teacher/ic_logout.svg';
-  static const String icNext = 'teacher/ic_next.svg';
-  static const String icRateEmpty = 'teacher/ic_rate_empty.svg';
-  static const String icRate = 'teacher/ic_rate.svg';
-  static const String icUser = 'teacher/ic_user.svg';
-  static const String icEarth = 'teacher/ic_earth.svg';
-  static const String icFeed = 'teacher/ic_feed.svg';
-  static const String icNotification = 'teacher/ic_notification.svg';
-  static const String icCheck = 'teacher/ic_check.svg';
-  static const String icReset = 'teacher/ic_reset.svg';
-  static const String icImage = 'teacher/ic_image.svg';
-  static const String icUnion = 'teacher/ic_union.svg';
+  static const String icBack = 'common/ic_back.svg';
+  static const String icBell = 'common/ic_bell.svg';
+  static const String icCamera = 'common/ic_camera.svg';
+  static const String icEdit = 'common/ic_edit.svg';
+  static const String icLogout = 'common/ic_logout.svg';
+  static const String icNext = 'common/ic_next.svg';
+  static const String icRateEmpty = 'common/ic_rate_empty.svg';
+  static const String icRate = 'common/ic_rate.svg';
+  static const String icUser = 'common/ic_user.svg';
+  static const String icEarth = 'common/ic_earth.svg';
+  static const String icFeed = 'common/ic_feed.svg';
+  static const String icNotification = 'common/ic_notification.svg';
+  static const String icCheck = 'common/ic_check.svg';
+  static const String icReset = 'common/ic_reset.svg';
+  static const String icImage = 'common/ic_image.svg';
+  static const String icUnion = 'common/ic_union.svg';
+  static const String icManager = 'common/ic_manager.svg';
+  static const String icTeacher = 'common/ic_teacher.svg';
 }
 
 class ImageManager {

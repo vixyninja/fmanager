@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmanager/views/manager/home/problem_detail/manager_problem_detail_logic.dart';
 import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 import 'package:get/get.dart';
@@ -27,10 +28,10 @@ class ManagerProblemDetailView extends GetView<ManagerProblemDetailLogic> {
           ),
         ),
       ),
-      title: const Text(
+      title: Text(
         'Sự cố về cơ sở vật chất',
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 18.sp,
           fontWeight: FontWeight.w700,
           color: Colors.black,
         ),

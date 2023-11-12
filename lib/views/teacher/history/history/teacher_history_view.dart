@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/views/teacher/history/history/teacher_history_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
-  const TeacherHistoryView({Key? key}) : super(key: key);
+  TeacherHistoryView({Key? key}) : super(key: key);
 
   @override
-  TeacherHistoryLogic get controller => Get.put<TeacherHistoryLogic>(TeacherHistoryLogic());
+  final TeacherHistoryLogic controller = Get.find<TeacherHistoryLogic>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.orange,
+      backgroundColor: LightColors.teacherColor,
       body: Container(
         margin: EdgeInsets.only(top: 40.h),
         decoration: BoxDecoration(
@@ -32,7 +33,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              27.verticalSpace,
+              20.verticalSpace,
               Obx(
                 () => Text(
                   'Lịch sử báo cáo sự cố (${controller.listFeedBack.length})',
@@ -48,7 +49,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
                     itemBuilder: (context, index) {
                       final FeedBackModel feedBackModel = controller.listFeedBack[index];
                       return Container(
-                        margin: EdgeInsets.only(left: 16.r, right: 16.r, top: 16.r),
+                        margin: EdgeInsets.only(left: 16.r, right: 16.r, top: 8.r),
                         child: ProblemItem(
                           feedBackModel: feedBackModel,
                           onTap: () => controller.navigateToProblemRequest(feedBackModel),
@@ -61,7 +62,7 @@ class TeacherHistoryView extends GetView<TeacherHistoryLogic> {
                   ),
                 ),
               ),
-              27.verticalSpace,
+              20.verticalSpace,
             ],
           ),
         ),

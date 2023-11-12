@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/manager/home/problem/manager_problem_logic.dart';
 import 'package:fmanager/views/manager/home/problem/widgets/problem_card.dart';
@@ -8,33 +9,35 @@ import 'package:get/get.dart';
 class ManagerProblemView extends GetView<ManagerProblemLogic> {
   ManagerProblemView({Key? key}) : super(key: key);
 
-  final ManagerProblemLogic _managerProblemLogic =
-      Get.find<ManagerProblemLogic>();
+  final ManagerProblemLogic _managerProblemLogic = Get.find<ManagerProblemLogic>();
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
     return Scaffold(
       appBar: _buildAppBar(context),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
           ),
-          color: Colors.white,
+          color: themeData.colorScheme.background,
         ),
-        child: _buildBody(),
+        child: _buildBody(context),
       ),
-      backgroundColor: Colors.orange,
+      backgroundColor: LightColors.managerColor,
     );
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: _buildLeadingAppBar(context),
-      actions: _buildActionsAppBar(),
+      actions: _buildActionsAppBar(context),
+      backgroundColor: LightColors.managerColor,
+      surfaceTintColor: Colors.transparent,
     );
   }
 
@@ -44,19 +47,19 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
       child: InkWell(
         onTap: () => Navigator.pop(context),
         borderRadius: BorderRadius.circular(999),
-        child: const Padding(
-          padding: EdgeInsets.all(2),
+        child: Padding(
+          padding: const EdgeInsets.all(2),
           child: Icon(
             Icons.arrow_back_ios,
             size: 24,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.background,
           ),
         ),
       ),
     );
   }
 
-  List<Widget> _buildActionsAppBar() {
+  List<Widget> _buildActionsAppBar(BuildContext context) {
     return <Widget>[
       InkWell(
         onTap: () => Get.defaultDialog(),
@@ -65,7 +68,7 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
           padding: const EdgeInsets.all(6),
           child: SvgPicture.asset(
             AssetManager.getIconPath(IconManager.icNotification),
-            color: Colors.white,
+            colorFilter: ColorFilter.mode(Theme.of(context).colorScheme.background, BlendMode.srcIn),
           ),
         ),
       ),
@@ -73,7 +76,7 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
     ];
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -90,7 +93,7 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
                       fontWeight: FontWeight.w600,
                       color: _managerProblemLogic.type.value == 'unActive'
                           ? Colors.orange
-                          : Colors.black,
+                          : Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                 ),
@@ -105,17 +108,25 @@ class ManagerProblemView extends GetView<ManagerProblemLogic> {
                       fontWeight: FontWeight.w600,
                       color: _managerProblemLogic.type.value == 'active'
                           ? Colors.orange
-                          : Colors.black,
+                          : Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                 ),
               ),
             ],
           ),
-          floating: true,
-          snap: true,
+          pinned: true,
+          floating: false,
+          snap: false,
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          surfaceTintColor: Colors.transparent,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
+            ),
+          ),
         ),
         SliverPadding(
           padding: const EdgeInsets.only(top: 24),

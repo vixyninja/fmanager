@@ -6,7 +6,7 @@ import 'package:fmanager/core/constants/system_constant.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
-import 'package:fmanager/views/common/common.dart';
+import 'package:fmanager/views/widgets/common/common.dart';
 import 'package:get/get.dart' as ls;
 
 class ApiServices {

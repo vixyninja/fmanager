@@ -24,11 +24,8 @@ final ThemeData themeData = ThemeData(
     ),
   ),
   appBarTheme: const AppBarTheme(
-    surfaceTintColor: Colors.orange,
     centerTitle: true,
-    color: Colors.orange,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.orange,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.light,
     ),
@@ -55,11 +52,8 @@ final ThemeData themeDataDark = ThemeData(
     ),
   ),
   appBarTheme: const AppBarTheme(
-    surfaceTintColor: Colors.orange,
     centerTitle: true,
-    color: Colors.orange,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.orange,
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark,
     ),

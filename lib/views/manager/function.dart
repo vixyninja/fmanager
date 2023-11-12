@@ -7,16 +7,16 @@ List<Map<String, dynamic>> managerBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHomeIcon),
     'label': 'Trang chủ',
-    'screen': ManagerHomeScreen(),
+    'screen': ManagerHomeView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),
     'label': 'Lịch sử',
-    'screen': const ManagerHistoryScreen(),
+    'screen': ManagerHistoryView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),
     'label': 'Cài đặt',
-    'screen': ManagerSettingScreen(),
+    'screen': ManagerSettingView(),
   },
 ];

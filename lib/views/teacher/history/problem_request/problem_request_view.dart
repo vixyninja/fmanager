@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/history/problem_request/problem_request_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 import 'package:timelines/timelines.dart';
 
-class ProblemRequestView extends GetView<ProblemRequestLogic> {
-  const ProblemRequestView({super.key});
+class TeacherProblemRequestView extends GetView<ProblemRequestLogic> {
+  TeacherProblemRequestView({super.key});
 
   @override
-  ProblemRequestLogic get controller => Get.put<ProblemRequestLogic>(ProblemRequestLogic());
+  final ProblemRequestLogic controller = Get.find<ProblemRequestLogic>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,14 @@ class ProblemRequestView extends GetView<ProblemRequestLogic> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.orange,
+      backgroundColor: LightColors.teacherColor,
       body: CustomScrollView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.orange,
+            backgroundColor: LightColors.teacherColor,
             toolbarHeight: kBottomNavigationBarHeight,
             title: Text(
               'Thông tin sự cố',
