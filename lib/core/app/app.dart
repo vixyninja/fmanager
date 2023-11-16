@@ -59,7 +59,7 @@ class _AppState extends State<App> {
             return LoadingView(child: child);
           },
           onGenerateRoute: onGenerateRoute,
-          initialRoute: RouteKeys.managerBottom,
+          initialRoute: RouteKeys.authScreen,
           transitionDuration: const Duration(milliseconds: 300),
           defaultTransition: Transition.topLevel,
           initialBinding: AuthBinding(),
