@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/utils/asset_manager.dart';
-import 'package:fmanager/views/authentication/auth_logic.dart';
 import 'package:fmanager/views/teacher/home/home/teacher_home_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
@@ -11,16 +11,16 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
   const TeacherHomeView({Key? key}) : super(key: key);
 
   @override
+  // TODO: implement controller
   TeacherHomeLogic get controller => Get.find<TeacherHomeLogic>();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final AuthLogic authLogic = Get.find<AuthLogic>();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.orange,
+      backgroundColor: LightColors.teacherColor,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
@@ -32,12 +32,13 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                   onTapSuffixIcon: () => controller.navigateToListNotification(),
                   onTapTitle: () => Get.snackbar('Title', 'Title'),
                   pathSuffixIcon: AssetManager.getIconPath(IconManager.icBell),
-                  title: authLogic.userModel.value.name.toString(),
-                  urlAvatar: authLogic.userModel.value.url.toString() == ''
-                      ? IMAGE_URL
-                      : authLogic.userModel.value.url.toString(),
+                  title: controller.authLogic.userModel.value.name,
                   colorTitle: themeData.colorScheme.onPrimary,
                   colorSuffixIcon: themeData.colorScheme.onPrimary,
+                  urlAvatar: controller.authLogic.userModel.value.url,
+                  subtitle: 'Teacher',
+                  colorSubtitle: themeData.colorScheme.onPrimary.withOpacity(0.8),
+                  pathAvatarIcon: IconManager.icTeacher,
                 ),
               ),
             ),
@@ -58,7 +59,7 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      27.verticalSpace,
+                      20.verticalSpace,
                       Text(
                         'Dịch vụ trực tuyến',
                         style: themeData.textTheme.displayLarge!.copyWith(
@@ -79,10 +80,9 @@ class TeacherHomeView extends GetView<TeacherHomeLogic> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: FeatureButton(
-                          leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
-                          title: 'Yêu cầu hỗ trợ CNTT',
-                          onPressed: () {},
-                        ),
+                            leading: SvgPicture.asset(AssetManager.getIconPath(IconManager.icEarth)),
+                            title: 'Yêu cầu hỗ trợ CNTT',
+                            onPressed: () => controller.navigateToRequestSupport()),
                       ),
                     ],
                   ),

@@ -53,14 +53,11 @@ class _AppState extends State<App> {
               return ErrorBoundary(
                   errorMessage: errorDetails.exception.toString());
             };
-
-            // Set status bar color
-
             return LoadingView(child: child);
           },
           onGenerateRoute: onGenerateRoute,
           initialRoute: RouteKeys.authScreen,
-          transitionDuration: const Duration(milliseconds: 300),
+          transitionDuration: const Duration(milliseconds: 500),
           defaultTransition: Transition.topLevel,
           initialBinding: AuthBinding(),
         ),

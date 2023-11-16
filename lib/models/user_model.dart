@@ -79,12 +79,12 @@ class UserModel extends BaseModel {
         createdAt: '',
         updatedAt: '',
         deletedAt: '',
-        name: '',
-        email: '',
-        phoneNumber: '',
+        name: 'Test Mode',
+        email: 'Test Mode',
+        phoneNumber: 'Test Mode',
         url: '',
         role: RoleEnum.NONE,
-        position: '',
-        department: '',
+        position: 'Test Mode',
+        department: 'Test Mode',
       );
 }

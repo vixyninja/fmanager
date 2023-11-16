@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fmanager/views/teacher/setting/profile_update/profile_update_logic.dart';
+import 'package:fmanager/views/shared/profile_update/profile_update_logic.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
@@ -16,21 +16,24 @@ class ProfileUpdateView extends GetView<ProfileUpdateLogic> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Colors.orange,
-          toolbarHeight: kBottomNavigationBarHeight,
+          backgroundColor: themeData.colorScheme.background,
           title: Obx(
             () => Text(
               controller.authLogic.userModel.value.name.toString(),
               style: themeData.textTheme.displayLarge!.copyWith(
-                color: themeData.colorScheme.background,
-                fontSize: 20.sp,
+                color: themeData.colorScheme.onBackground,
+                fontSize: 18.sp,
               ),
             ),
           ),
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Icons.arrow_back_ios, color: themeData.colorScheme.background),
+            icon: Icon(Icons.arrow_back_ios, color: themeData.colorScheme.onBackground),
           ),
+          centerTitle: true,
+          elevation: 0.0,
+          automaticallyImplyLeading: true,
+          surfaceTintColor: Colors.transparent,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -16,6 +16,9 @@ class BaseHeader extends StatelessWidget {
     this.width,
     this.colorTitle,
     this.colorSuffixIcon,
+    this.subtitle,
+    this.colorSubtitle,
+    this.pathAvatarIcon,
   });
 
   final String? title;
@@ -25,9 +28,12 @@ class BaseHeader extends StatelessWidget {
   final String? pathSuffixIcon;
   final Color? colorSuffixIcon;
   final String? urlAvatar;
+  final String? subtitle;
+  final Color? colorSubtitle;
   final VoidCallback? onTapSuffixIcon;
   final VoidCallback? onTapAvatarIcon;
   final VoidCallback? onTapTitle;
+  final String? pathAvatarIcon;
 
   Widget suffixIcon(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -56,17 +62,36 @@ class BaseHeader extends StatelessWidget {
           imageUrl: urlAvatar,
           height: height ?? 48.h,
           width: width ?? 48.w,
+          pathSuffixIcon: pathAvatarIcon,
         ),
         12.horizontalSpace,
-        InkWell(
-          onTap: onTapTitle,
-          child: Text(
-            title ?? '',
-            style:
-                Theme.of(context).textTheme.displayLarge!.copyWith(color: colorTitle ?? theme.colorScheme.onBackground),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              onTap: onTapTitle,
+              child: Text(
+                title ?? '',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(color: colorTitle ?? theme.colorScheme.onBackground),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              subtitle ?? '',
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(color: colorSubtitle ?? theme.colorScheme.onBackground),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            )
+          ],
         ),
         const Spacer(),
         pathSuffixIcon != null ? suffixIcon(context) : const SizedBox(),

@@ -1,6 +1,7 @@
+import 'package:fmanager/core/core.dart';
 import 'package:get/get.dart';
 
-class ManagerController extends GetxController {
+class ManagerController extends BaseController {
   final RxInt currentIndex = 0.obs;
 
   void navigateTo(int index) {

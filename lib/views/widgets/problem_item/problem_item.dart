@@ -22,10 +22,8 @@ class ProblemItem extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      surfaceTintColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 400),
       color: themeData.colorScheme.background,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
       type: MaterialType.card,
       child: InkWell(
         onTap: onTap,

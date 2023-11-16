@@ -6,7 +6,7 @@ import 'package:fmanager/core/constants/system_constant.dart';
 import 'package:fmanager/core/core.dart';
 import 'package:fmanager/utils/utils.dart';
 import 'package:fmanager/views/authentication/auth_logic.dart';
-import 'package:fmanager/views/common/common.dart';
+import 'package:fmanager/views/widgets/common/common.dart';
 import 'package:get/get.dart' as ls;
 
 class ApiServices {
@@ -14,14 +14,7 @@ class ApiServices {
 
   ApiServices() {
     dio.options = baseOptions;
-    dio.interceptors.add(LogInterceptor(
-      responseBody: true,
-      requestBody: true,
-      error: true,
-      requestHeader: false,
-      request: false,
-      responseHeader: false,
-    ));
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true, error: true));
     dio.interceptors.add(interceptorsWrapper);
   }
 
@@ -51,11 +44,8 @@ class ApiServices {
     },
     onError: (DioException e, handler) async {
       if (e.response?.statusCode == HttpStatus.unauthorized) {
-        CommonDialog.showDefault(
-          'Thông báo',
-          'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại',
-          () async => await ls.Get.find<AuthLogic>().signOutGoogle(),
-        );
+        CommonDialog.showDefault('Thông báo', 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại',
+            () async => await ls.Get.find<AuthLogic>().signOutGoogle());
       } else if (e.response?.statusCode == HttpStatus.internalServerError) {
         CommonDialog.showDefault(
           'Thông báo',

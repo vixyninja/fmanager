@@ -29,5 +29,3 @@ get:
 	@echo "Getting..."
 	@flutter pub get
 	@echo "Done"
-abc:
-	@echo "abc"

@@ -24,7 +24,7 @@ class TeacherHistoryLogic extends BaseController {
       Get.toNamed(RouteKeys.teacherProblemRequestScreen, arguments: feedBackModel);
 
   getAllHistoryFeedback() async {
-    showLoadingWithTitle('Đang tải dữ liệu');
+    showLoading();
     await feedBackRepository.getHistoryFeedback().then((value) {
       value.fold((l) => listFeedBack.addAll([]), (r) => listFeedBack.addAll(r));
       return value;
@@ -32,7 +32,7 @@ class TeacherHistoryLogic extends BaseController {
   }
 
   refreshLoading() async {
-    showLoadingWithTitle('Đang tải dữ liệu');
+    showLoading();
     await feedBackRepository.getHistoryFeedback().then((value) {
       value.fold((l) => listFeedBack.addAll([]), (r) {
         listFeedBack.clear();

@@ -1,3 +1,3 @@
-import 'package:get/get.dart';
+import 'package:fmanager/core/core.dart';
 
-class ManagerHistoryLogic extends GetxController {}
+class ManagerHistoryLogic extends BaseController {}

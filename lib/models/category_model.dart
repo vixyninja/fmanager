@@ -41,8 +41,8 @@ class CategoryModel extends BaseModel {
 
   factory CategoryModel.createEmpty() {
     return CategoryModel(
-      categoryName: '',
-      categoryType: '',
+      categoryName: 'Test Mode',
+      categoryType: 'Test Mode',
       id: -1,
       createdAt: '',
       updatedAt: '',

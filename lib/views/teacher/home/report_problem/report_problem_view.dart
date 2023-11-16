@@ -1,27 +1,29 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/asset_manager.dart';
 import 'package:fmanager/views/teacher/home/report_problem/report_problem_logic.dart';
 import 'package:fmanager/views/widgets/base_button/base_button.dart';
 import 'package:get/get.dart';
 
-class ReportProblemView extends GetView<ReportProblemLogic> {
-  const ReportProblemView({super.key});
+class TeacherReportProblemView extends GetView<ReportProblemLogic> {
+  TeacherReportProblemView({super.key});
 
   @override
-  ReportProblemLogic get controller => Get.put<ReportProblemLogic>(ReportProblemLogic());
+  final ReportProblemLogic controller = Get.find<ReportProblemLogic>();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: themeData.colorScheme.background,
+      backgroundColor: LightColors.teacherColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
@@ -37,7 +39,8 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
             Navigator.pop(context);
           },
         ),
-        titleTextStyle: themeData.textTheme.displayLarge!.copyWith(color: Colors.white, fontSize: 20.sp),
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: LightColors.teacherColor,
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -87,6 +90,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
+                      cursorColor: Colors.black,
                     ),
                     suggestionsCallback: (pattern) async {
                       final list = await controller.onSearchRoom(pattern);
@@ -101,9 +105,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                         ),
                       ),
                     ),
-                    loadingBuilder: (context) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                    loadingBuilder: (context) => const Center(child: CupertinoActivityIndicator()),
                     animationDuration: const Duration(milliseconds: 300),
                     debounceDuration: const Duration(milliseconds: 500),
                     errorBuilder: (context, error) => const SizedBox.shrink(),
@@ -114,18 +116,19 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                           suggestion.roomName,
                           style: themeData.textTheme.displayLarge!.copyWith(
                             fontSize: 16.sp,
-                            color: Colors.black,
+                            color: themeData.colorScheme.onBackground,
                           ),
                         ),
                         subtitle: Text(
                           '${suggestion.building} - ${suggestion.floor}',
                           style: themeData.textTheme.displayMedium!.copyWith(
                             fontSize: 14.sp,
-                            color: Colors.grey.shade500,
+                            color: themeData.colorScheme.onBackground,
                           ),
                         ),
                       );
                     },
+                    keepSuggestionsOnLoading: false,
                     itemSeparatorBuilder: (context, index) => const Divider(height: 1),
                     onSuggestionSelected: (suggestion) {
                       controller.roomController.text = suggestion.roomName;
@@ -134,7 +137,7 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                     suggestionsBoxDecoration: SuggestionsBoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       elevation: 8.0,
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.background,
                     ),
                   ),
                 ),
@@ -157,9 +160,12 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                             fontWeight: FontWeight.w500,
                           ),
                           requestFocusOnTap: true,
-                          selectedTrailingIcon: const Icon(Icons.check),
-                          leadingIcon: const Icon(Icons.category),
-                          trailingIcon: SizedBox(height: 20.h, width: 20.w, child: const CircularProgressIndicator()),
+                          selectedTrailingIcon: const Icon(Icons.check, color: Colors.deepOrange),
+                          leadingIcon: const Icon(Icons.category, color: Colors.deepOrange),
+                          trailingIcon: SizedBox(
+                              height: 20.h,
+                              width: 20.w,
+                              child: const CircularProgressIndicator(color: Colors.deepOrange)),
                           enableSearch: false,
                           inputDecorationTheme: InputDecorationTheme(
                             filled: true,
@@ -208,10 +214,12 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                       builder: (context, constraints) => DropdownMenu<CategoryModel>(
                         enableFilter: true,
                         width: constraints.maxWidth,
+                        controller: controller.categoryController,
                         onSelected: (CategoryModel? value) => controller.categoryController.text = value!.categoryName,
                         dropdownMenuEntries: controller.categories.map<DropdownMenuEntry<CategoryModel>>(
                           (CategoryModel value) {
-                            final String label = '${value.categoryName} - ${value.categoryType}';
+                            final String index = controller.categories.indexOf(value).toString();
+                            final String label = '$index. ${value.categoryName} - ${value.categoryType}';
                             return DropdownMenuEntry<CategoryModel>(
                               value: value,
                               label: label,
@@ -239,9 +247,9 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                           fontWeight: FontWeight.w500,
                         ),
                         requestFocusOnTap: true,
-                        selectedTrailingIcon: const Icon(Icons.check),
-                        leadingIcon: const Icon(Icons.category),
-                        trailingIcon: const Icon(Icons.arrow_drop_down),
+                        selectedTrailingIcon: const Icon(Icons.check, color: Colors.deepOrange),
+                        leadingIcon: const Icon(Icons.category, color: Colors.deepOrange),
+                        trailingIcon: const Icon(Icons.arrow_drop_down, color: Colors.deepOrange),
                         enableSearch: true,
                         inputDecorationTheme: InputDecorationTheme(
                           filled: true,
@@ -402,7 +410,6 @@ class ReportProblemView extends GetView<ReportProblemLogic> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.r),
                                       border: Border.all(color: Colors.grey.shade200, width: 1),
                                     ),
                                     child: Image.file(

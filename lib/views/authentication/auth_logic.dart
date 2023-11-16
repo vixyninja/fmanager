@@ -6,8 +6,8 @@ import 'package:fmanager/data/data.dart';
 import 'package:fmanager/main.dart';
 import 'package:fmanager/models/models.dart';
 import 'package:fmanager/utils/utils.dart';
-import 'package:fmanager/views/common/common.dart';
-import 'package:fmanager/views/common/common_alert.dart';
+import 'package:fmanager/views/widgets/common/common.dart';
+import 'package:fmanager/views/widgets/common/common_alert.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
@@ -75,8 +75,7 @@ class AuthLogic extends BaseController {
           position: SnackPosition.TOP);
       return;
     }
-
-    showLoadingWithTitle('Đang đăng nhập...');
+    showLoading();
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await googleSignIn.signIn();
@@ -115,7 +114,8 @@ class AuthLogic extends BaseController {
   }
 
   Future<void> setStateRoute() async {
-    showLoadingWithTitle('Đang tải...');
+    showLoading();
+
     try {
       await userRepository.getMyProfile().then((value) => value.fold(
             (l) => CommonAlert.showSnackBar(
@@ -140,16 +140,16 @@ class AuthLogic extends BaseController {
   }
 
   Future<void> signOutGoogle() async {
-    showLoadingWithTitle('Đang đăng xuất...');
     try {
+      showLoading();
       await googleSignIn.signOut();
       await firebaseAuth.signOut().whenComplete(() {
         userModel.value = UserModel.createEmptyInstance();
-        Get.offAllNamed(RouteKeys.authScreen);
         enableBiometric = false;
         place.value = '';
         StorageManager.clearKey(StorageKeys.biometric.toString());
         StorageManager.clearKey(StorageKeys.place.toString());
+        Get.offNamedUntil(RouteKeys.authScreen, (route) => false);
       });
     } catch (e) {
       CommonAlert.showSnackBar('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại',
@@ -237,7 +237,7 @@ class AuthLogic extends BaseController {
   }
 
   Future<void> getMyProfile() async {
-    showLoadingWithTitle('Đang tải...');
+    showLoading();
     try {
       await userRepository.getMyProfile().then((value) => value.fold(
             (l) => CommonAlert.showSnackBar(
@@ -254,7 +254,7 @@ class AuthLogic extends BaseController {
   }
 
   Future<void> updateMyProfile(UpdateProfileModel updateProfileModel) async {
-    showLoadingWithTitle('Đang cập nhật...');
+    showLoading();
     try {
       await userRepository
           .updateMyProfile(updateProfileModel)
@@ -276,7 +276,7 @@ class AuthLogic extends BaseController {
                     title: 'Thông báo',
                     body: 'Thông tin cá nhân của bạn đã được cập nhật',
                     bigText: 'Thông tin cá nhân của bạn đã được cập nhật',
-                    id: 2003,
+                    id: 00011,
                     payload: 'Thông tin cá nhân của bạn đã được cập nhật',
                     showBigPicture: false,
                     actions: [

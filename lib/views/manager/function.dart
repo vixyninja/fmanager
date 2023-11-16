@@ -12,7 +12,7 @@ List<Map<String, dynamic>> managerBottomNavigation = [
   {
     'icon': AssetManager.getIconPath(IconManager.bottomHistoryIcon),
     'label': 'Lịch sử',
-    'screen': const ManagerHistoryView(),
+    'screen': ManagerHistoryView(),
   },
   {
     'icon': AssetManager.getIconPath(IconManager.bottomSettingIcon),

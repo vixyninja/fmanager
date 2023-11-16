@@ -1,3 +1,3 @@
-import 'package:get/get.dart';
+import 'package:fmanager/core/core.dart';
 
-class ManagerProblemDetailActiveLogic extends GetxController {}
+class ManagerProblemDetailActiveLogic extends BaseController {}

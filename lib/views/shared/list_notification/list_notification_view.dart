@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fmanager/views/teacher/home/list_notification/list_notification_logic.dart';
+import 'package:fmanager/views/shared/shared.dart';
 import 'package:fmanager/views/widgets/widget.dart';
 import 'package:get/get.dart';
 
 class ListNotificationView extends GetView<ListNotificationLogic> {
-  const ListNotificationView({super.key});
+  ListNotificationView({super.key});
 
   @override
-  ListNotificationLogic get controller => Get.put(ListNotificationLogic());
+  final ListNotificationLogic controller = Get.find<ListNotificationLogic>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +18,17 @@ class ListNotificationView extends GetView<ListNotificationLogic> {
       appBar: AppBar(
         title: Text(
           'Thông báo',
-          style: themeData.textTheme.displayLarge!.copyWith(color: themeData.colorScheme.background, fontSize: 20.sp),
+          style: themeData.textTheme.displayLarge!.copyWith(color: themeData.colorScheme.onBackground, fontSize: 20.sp),
         ),
         centerTitle: true,
         elevation: 0.0,
         automaticallyImplyLeading: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: themeData.colorScheme.background),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(Icons.arrow_back_ios, color: themeData.colorScheme.onBackground),
+          onPressed: () => Navigator.pop(context),
         ),
-        titleTextStyle: themeData.textTheme.displayLarge!.copyWith(color: Colors.white, fontSize: 20.sp),
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: themeData.colorScheme.background,
       ),
       body: RefreshIndicator(
         onRefresh: () async => Future.delayed(const Duration(milliseconds: 300)),
@@ -38,8 +37,7 @@ class ListNotificationView extends GetView<ListNotificationLogic> {
             return Container(
               margin: EdgeInsets.only(top: 10.r, left: 16.r, right: 16.r),
               child: const ItemNotification(
-                  title:
-                      'Sua may giat, tiviSua may giat, tiviSua may giat, tiviSua may giat, tiviSua may giat, tivitivitivitivitivitivitivitivitivitivitivitivitivitivitivitivitivitivitivitivis',
+                  title: 'Thông báo về việc nộp hồ sơ xét tuyển đại học, cao đẳng năm 2021',
                   subTitle: 'Mai Hoang Duc Khai'),
             );
           },

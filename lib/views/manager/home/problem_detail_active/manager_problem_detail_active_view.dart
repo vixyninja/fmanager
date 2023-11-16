@@ -1,49 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmanager/views/manager/home/problem_detail_active/function.dart';
 import 'package:fmanager/views/manager/home/problem_detail_active/manager_problem_detail_active_logic.dart';
 import 'package:fmanager/views/widgets/base_circle_avatar/base_circle_avatar.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemDetailActiveView
-    extends GetView<ManagerProblemDetailActiveLogic> {
-  ManagerProblemDetailActiveView({Key? key}) : super(key: key);
-
-  final List<Map<String, dynamic>> itemTypeList = [
-    {
-      'id': 0,
-      'title': 'Lỗi từ phía giảng viên',
-    },
-    {
-      'id': 1,
-      'title': 'Lỗi từ phía hệ thống',
-    },
-    {
-      'id': 2,
-      'title': 'Khác',
-    },
-  ];
-
-  final List<Map<String, dynamic>> itemTimeList = [
-    {
-      'id': 0,
-      'title': '15 phút',
-    },
-    {
-      'id': 1,
-      'title': '30 phút',
-    },
-    {
-      'id': 2,
-      'title': '1 tiếng',
-    },
-    {
-      'id': 3,
-      'title': '2 tiếng',
-    },
-    {
-      'id': 4,
-      'title': '1 ngày',
-    },
-  ];
+class ManagerProblemDetailActiveView extends GetView<ManagerProblemDetailActiveLogic> {
+  const ManagerProblemDetailActiveView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +30,10 @@ class ManagerProblemDetailActiveView
           ),
         ),
       ),
-      title: const Text(
+      title: Text(
         'Sự cố về cơ sở vật chất',
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 18.sp,
           fontWeight: FontWeight.w700,
           color: Colors.black,
         ),

@@ -1,6 +1,7 @@
+import 'package:fmanager/core/core.dart';
 import 'package:get/get.dart';
 
-class ManagerProblemLogic extends GetxController {
+class ManagerProblemLogic extends BaseController {
   RxString type = RxString('unActive');
 
   void onUnactiveType() => type.value = 'unActive';

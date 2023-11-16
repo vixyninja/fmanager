@@ -45,7 +45,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/bottom/
-    - assets/icons/teacher/
+    - assets/icons/common/
     - assets/images/
     - assets/anim/
   fonts:

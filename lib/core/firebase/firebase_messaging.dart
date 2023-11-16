@@ -4,7 +4,7 @@ import 'dart:math' as Math;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fmanager/utils/utils.dart';
-import 'package:fmanager/views/common/common_alert.dart';
+import 'package:fmanager/views/widgets/common/common_alert.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -23,7 +23,7 @@ class FirebaseMessagingSer extends GetxService {
     channel = const AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
-      importance: Importance.max,
+      importance: Importance.defaultImportance,
       description: 'This channel is used for important notifications.',
       enableLights: true,
       enableVibration: true,
@@ -120,6 +120,7 @@ class FirebaseMessagingSer extends GetxService {
     required String title,
     required String body,
     required String bigText,
+    String subtext = '',
     bool showBigPicture = false,
     String? payload,
     List<AndroidNotificationAction>? actions,
@@ -132,16 +133,15 @@ class FirebaseMessagingSer extends GetxService {
       actions: actions,
       when: DateTime.now().millisecondsSinceEpoch,
       visibility: NotificationVisibility.public,
-      importance: Importance.max,
+      importance: Importance.defaultImportance,
       channelAction: AndroidNotificationChannelAction.createIfNotExists,
       playSound: true,
       sound: const RawResourceAndroidNotificationSound('notification'),
-      enableLights: true,
       showWhen: true,
       showProgress: true,
-      subText: 'This is a subText',
+      subText: subtext,
       styleInformation: await bigPictureStyleInformation(title, body, bigText, showBigPicture),
-      priority: Priority.max,
+      priority: Priority.defaultPriority,
       icon: 'mipmap/ic_launcher',
       largeIcon: const DrawableResourceAndroidBitmap('mipmap/ic_launcher'),
       fullScreenIntent: true,

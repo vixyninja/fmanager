@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/views/teacher/function.dart';
 import 'package:fmanager/views/teacher/teacher_controller.dart';
 import 'package:fmanager/views/widgets/widget.dart';
@@ -9,14 +11,16 @@ class TeacherBottomNavigation extends GetView<TeacherController> {
   const TeacherBottomNavigation({super.key});
 
   @override
-  TeacherController get controller => Get.put<TeacherController>(TeacherController());
-
-  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    Get.put<TeacherController>(TeacherController());
     return Obx(
       () => Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: LightColors.teacherColor),
+          toolbarHeight: 0,
+        ),
         bottomNavigationBar: BottomNavigationBar(
           items: [
             for (final screen in teacherBottomNavigation)

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 import 'package:fmanager/views/manager/function.dart';
 import 'package:fmanager/views/manager/manager_controller.dart';
 import 'package:fmanager/views/widgets/widget.dart';
@@ -9,13 +11,15 @@ class ManagerBottomNavigation extends GetView<ManagerController> {
   const ManagerBottomNavigation({super.key});
 
   @override
-  ManagerController get controller => Get.put<ManagerController>(ManagerController(), permanent: true);
-
-  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    Get.put<ManagerController>(ManagerController());
     return Obx(
       () => Scaffold(
+        appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: LightColors.managerColor),
+          toolbarHeight: 0,
+        ),
         bottomNavigationBar: BottomNavigationBar(
           items: [
             for (final screen in managerBottomNavigation)
