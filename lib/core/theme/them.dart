@@ -1,50 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:fmanager/core/theme/colors.dart';
+import 'package:flutter/services.dart';
+import 'package:fmanager/core/theme/dark_color.dart';
+import 'package:fmanager/core/theme/font.dart';
+import 'package:fmanager/core/theme/light_color.dart';
 
-const TextTheme textTheme = TextTheme(
-  displaySmall: TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-  ),
-  displayMedium: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-  ),
-  displayLarge: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-  ),
-  labelSmall: TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
-  ),
-  labelMedium: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-  ),
-  labelLarge: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-  ),
-);
-
-final themeData = ThemeData(
+final ThemeData themeData = ThemeData(
   useMaterial3: true,
-  primaryColor: AppColors.primary,
   textTheme: textTheme,
   colorScheme: const ColorScheme.light(
-    primary: AppColors.primary,
+    background: LightColors.backgroundColor,
+    onBackground: LightColors.onBackgroundColor,
+    primary: LightColors.primaryColor,
+    secondary: LightColors.secondaryColor,
+    surface: LightColors.surfaceColor,
+    onSurface: LightColors.onSurfaceColor,
+    shadow: LightColors.shadowColor,
+    tertiary: LightColors.tertiaryColor,
+    onTertiary: LightColors.selectedItemColor,
   ),
-  fontFamily: 'Poppins',
+  iconButtonTheme: const IconButtonThemeData(
+    style: ButtonStyle(
+      visualDensity: VisualDensity.compact,
+    ),
+  ),
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ),
+  ),
 );
 
-final themeDataDark = ThemeData(
+final ThemeData themeDataDark = ThemeData(
   useMaterial3: true,
-  primaryColor: AppColors.primary,
-  textTheme: textTheme,
+  textTheme: textThemeDark,
   colorScheme: const ColorScheme.dark(
-    primary: AppColors.primary,
-    secondary: AppColors.primary,
+    background: DarkColors.backgroundColor,
+    onBackground: DarkColors.onBackgroundColor,
+    primary: DarkColors.primaryColor,
+    secondary: DarkColors.secondaryColor,
+    surface: DarkColors.surfaceColor,
+    onSurface: DarkColors.onSurfaceColor,
+    shadow: DarkColors.shadowColor,
+    tertiary: DarkColors.tertiaryColor,
+    onTertiary: DarkColors.selectedItemColor,
   ),
-  fontFamily: 'Poppins',
+  iconButtonTheme: const IconButtonThemeData(
+    style: ButtonStyle(
+      visualDensity: VisualDensity.compact,
+    ),
+  ),
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
+    ),
+  ),
 );

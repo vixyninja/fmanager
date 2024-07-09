@@ -1,3 +1,26 @@
 {
-  "cSpell.words": ["cupertino", "fmanager", "prefs", "scrollbars"]
+  "cSpell.words": [
+    "appbar",
+    "ARGB",
+    "autocorrect",
+    "Autovalidate",
+    "cupertino",
+    "dartz",
+    "fenix",
+    "fluttertoast",
+    "fmanager",
+    "Getx",
+    "mipmap",
+    "Phòng",
+    "prefs",
+    "RGBO",
+    "screenutil",
+    "scrollbars",
+    "Todos",
+    "typeahead",
+    "Unauthorised",
+    "unfocus"
+  ],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
